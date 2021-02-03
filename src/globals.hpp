@@ -2,9 +2,6 @@
 
 // controllers
 extern Controller controller;
-extern std::shared_ptr<ChassisController> drive;
-extern ControllerButton rollerLeftBotton;
-extern ControllerButton rollerRightBotton;
 
 // drive motors
 extern int FRONT_LEFT_MOTOR_PORT;
@@ -29,3 +26,6 @@ extern Motor MTR_shooter;
 // pushup
 extern int PUSHUP_MOTOR_PORT;
 extern Motor MTR_pushup;
+
+// chassis
+extern std::shared_ptr<ChassisController> drive;

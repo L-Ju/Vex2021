@@ -2,8 +2,6 @@
 
 // controllers
 Controller controller;
-ControllerButton rollerLeftBotton(ControllerDigital::A);
-ControllerButton rollerRightBotton(ControllerDigital::B);
 
 // drive motors
 int FRONT_LEFT_MOTOR_PORT  =  13;

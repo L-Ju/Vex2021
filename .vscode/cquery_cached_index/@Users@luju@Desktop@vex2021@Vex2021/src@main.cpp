@@ -84,15 +84,4 @@ void opcontrol() {
 																 controller.getAnalog(ControllerAnalog::rightY));
 		pros::delay(10);
 	}
-
-	if(rollerLeftBotton.isPressed()) {
-		MTR_rollerLeft.moveVoltage(12000);
-	}
-	else if(rollerLeftBotton.isPressed()) {
-		MTR_rollerLeft.moveVoltage(-12000);
-	}
-	else{
-		MTR_rollerLeft.moveVoltage(0);
-	}
-
 }
