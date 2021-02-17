@@ -68,7 +68,7 @@ void autonomous() {
  * with the default priority and stack size whenever the robot is enabled via
  * the Field Management System or the VEX Competition Switch in the operator
  * control mode.
- *
+ *Git
  * If no competition control is connected, this function will run immediately
  * following initialize().
  *
@@ -83,10 +83,16 @@ void opcontrol() {
 		drive -> getModel() -> tank(controller.getAnalog(ControllerAnalog::leftY),
 																 controller.getAnalog(ControllerAnalog::rightY));
 		if (controller.getDigital(okapi::ControllerDigital::X))  {
-			MTR_shooter.moveVelocity(1200);
+			MTR_shooter.moveVelocity(-600);
 		}
 		else{
 			MTR_shooter.moveVelocity(0);
+		}
+
+		if(controller.getDigital(okapi::ControllerDigital::A)) {
+			MTR_pushup.moveVelocity(-600);
+		} else {
+			MTR_pushup.moveVelocity(0);
 		}
 		pros::delay(10);
 	}
