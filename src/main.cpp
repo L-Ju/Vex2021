@@ -83,16 +83,10 @@ void opcontrol() {
 		drive -> getModel() -> tank(controller.getAnalog(ControllerAnalog::leftY),
 																 controller.getAnalog(ControllerAnalog::rightY));
 		if (controller.getDigital(okapi::ControllerDigital::X))  {
-			MTR_shooter.moveVelocity(-600);
+			MTR_shooter.moveVelocity(1200);
 		}
 		else{
 			MTR_shooter.moveVelocity(0);
-		}
-
-		if(controller.getDigital(okapi::ControllerDigital::A)) {
-			MTR_pushup.moveVelocity(-600);
-		} else {
-			MTR_pushup.moveVelocity(0);
 		}
 		pros::delay(10);
 	}
