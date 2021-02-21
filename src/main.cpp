@@ -54,6 +54,9 @@ void driveFeet (double distanceInFeet) {
         MTR_backLeft.moveVelocity(rightVelocity);
         MTR_backRight.moveVelocity(rightVelocity);
         
+        // FOR TUNING THE P LOOP
+        std::cout << error << ",";
+        
         pros::delay(10);
     }
     
