@@ -4,27 +4,27 @@
 Controller controller;
 
 // drive motors
-int FRONT_LEFT_MOTOR_PORT  =  13;
-int FRONT_RIGHT_MOTOR_PORT  =  18;
-int BACK_LEFT_MOTOR_PORT  =  14;
-int BACK_RIGHT_MOTOR_PORT  =  17;
+int FRONT_LEFT_MOTOR_PORT  =  15;
+int FRONT_RIGHT_MOTOR_PORT  =  16;
+int BACK_LEFT_MOTOR_PORT  =  11;
+int BACK_RIGHT_MOTOR_PORT  =  20;
 Motor MTR_frontLeft(FRONT_LEFT_MOTOR_PORT);
 Motor MTR_frontRight(FRONT_RIGHT_MOTOR_PORT);
 Motor MTR_backLeft(BACK_LEFT_MOTOR_PORT);
 Motor MTR_backRight(BACK_RIGHT_MOTOR_PORT);
 
 // roller motors
-int LEFT_ROLLER_MOTOR_PORT = 11;
-int RIGHT_ROLLER_MOTOR_PORT = 20;
+int LEFT_ROLLER_MOTOR_PORT = 1;
+int RIGHT_ROLLER_MOTOR_PORT = 10;
 Motor MTR_rollerLeft(LEFT_ROLLER_MOTOR_PORT);
 Motor MTR_rollerRight(RIGHT_ROLLER_MOTOR_PORT);
 
 // shooter
-int SHOOTER_MOTOR_PORT = 15;
+int SHOOTER_MOTOR_PORT = 6;
 Motor MTR_shooter(SHOOTER_MOTOR_PORT);
 
 // pushup
-int PUSHUP_MOTOR_PORT = 12;
+int PUSHUP_MOTOR_PORT = 5;
 Motor MTR_pushup(PUSHUP_MOTOR_PORT);
 
 // chassis

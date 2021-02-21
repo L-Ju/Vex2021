@@ -84,7 +84,7 @@ void opcontrol() {
 
 //tank drive
 		drive -> getModel() -> tank(controller.getAnalog(ControllerAnalog::leftY),
-																 controller.getAnalog(ControllerAnalog::rightY));
+                                    controller.getAnalog(ControllerAnalog::rightY));
 //shooter
 		if (controller.getDigital(okapi::ControllerDigital::L1))  {
 			MTR_shooter.moveVelocity(600);
@@ -118,7 +118,7 @@ void opcontrol() {
 
 //whole system ejects
 		if (controller.getDigital(okapi::ControllerDigital::L2)) {
-			MTR_rollerLeft.moveVelocity(-500);
+            MTR_rollerLeft.moveVelocity(-500);
 			MTR_rollerRight.moveVelocity(-500);
 			MTR_pushup.moveVelocity(-500);
 		}
