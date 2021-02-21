@@ -28,6 +28,7 @@ void initialize() {
 	pros::lcd::set_text(1, "Hello OperationNightFury!");
 
 	pros::lcd::register_btn1_cb(on_center_button);
+
 }
 
 /**
@@ -60,7 +61,31 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
-
+    bool test_dist = true;
+    
+    if (test_dist){
+        drive->setMaxVelocity(50);
+        drive->moveDistance(1_m);
+    } else {
+        drive->setMaxVelocity(100);
+        drive->moveDistance(1.6_m);
+        drive->stop();
+        MTR_rollerLeft.moveVelocity(-600);
+        MTR_rollerRight.moveVelocity(600);
+        MTR_pushup.moveVelocity(-300);
+        drive->setMaxVelocity(20);
+        drive->moveDistance(0.2_m);
+        pros::delay(2000);
+        MTR_rollerLeft.moveVelocity(-100);
+        MTR_rollerRight.moveVelocity(100);
+        MTR_pushup.moveVelocity(0);
+        drive->setMaxVelocity(100);
+        drive->moveDistance(-0.2_m);
+        drive->turnAngle(180_deg);
+        drive->moveDistance(0.715_m);
+        drive->turnAngle(45_deg);
+        drive->moveDistance(1_m);
+    }
 }
 
 /**
@@ -87,42 +112,30 @@ void opcontrol() {
                                     controller.getAnalog(ControllerAnalog::rightY));
 //shooter
 		if (controller.getDigital(okapi::ControllerDigital::L1))  {
+			MTR_shooter.moveVelocity(-600);
+		} else if (controller.getDigital(okapi::ControllerDigital::L2)) {
 			MTR_shooter.moveVelocity(600);
-		}
-		else{
+		} else {
 			MTR_shooter.moveVelocity(0);
 		}
 
-//intake
 		if (controller.getDigital(okapi::ControllerDigital::R1)) {
-			MTR_rollerLeft.moveVelocity(500);
-			MTR_rollerRight.moveVelocity(500);
-			MTR_pushup.moveVelocity(500);
-		}
-		else{
-			MTR_rollerLeft.moveVelocity(0);
-			MTR_rollerRight.moveVelocity(0);
-			MTR_pushup.moveVelocity(0);
-		}
-
-//intake ejcts
-		if (controller.getDigital(okapi::ControllerDigital::R2)) {
-			MTR_rollerLeft.moveVelocity(-500);
-			MTR_rollerRight.moveVelocity(-500);
-		}
-		else{
-			MTR_rollerLeft.moveVelocity(0);
-			MTR_rollerRight.moveVelocity(0);
-			MTR_pushup.moveVelocity(0);
-		}
-
-//whole system ejects
-		if (controller.getDigital(okapi::ControllerDigital::L2)) {
-            MTR_rollerLeft.moveVelocity(-500);
-			MTR_rollerRight.moveVelocity(-500);
-			MTR_pushup.moveVelocity(-500);
-		}
-		else{
+            //intake
+			MTR_rollerLeft.moveVelocity(-600);
+			MTR_rollerRight.moveVelocity(600);
+			MTR_pushup.moveVelocity(-600);
+		} 
+// 		else if (controller.getDigital(okapi::ControllerDigital::L2)) {
+//             whole system eject
+//             MTR_rollerLeft.moveVelocity(600);
+// 			MTR_rollerRight.moveVelocity(-600);
+// 			MTR_pushup.moveVelocity(600);
+// 		} 
+		else if (controller.getDigital(okapi::ControllerDigital::R2)) {
+			MTR_rollerLeft.moveVelocity(600);
+			MTR_rollerRight.moveVelocity(-600);
+            MTR_pushup.moveVelocity(600);
+		} else {
 			MTR_rollerLeft.moveVelocity(0);
 			MTR_rollerRight.moveVelocity(0);
 			MTR_pushup.moveVelocity(0);
