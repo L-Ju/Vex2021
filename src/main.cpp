@@ -25,7 +25,7 @@ void on_center_button() {
  */
 void initialize() {
 	pros::lcd::initialize();
-	pros::lcd::set_text(1, "Hello TEAM!");
+	pros::lcd::set_text(1, "Hello OperationNightFury!");
 
 	pros::lcd::register_btn1_cb(on_center_button);
 }
@@ -79,15 +79,55 @@ void autonomous() {
 
 
 void opcontrol() {
+
 	while(1){
+
+//tank drive
 		drive -> getModel() -> tank(controller.getAnalog(ControllerAnalog::leftY),
 																 controller.getAnalog(ControllerAnalog::rightY));
-		if (controller.getDigital(okapi::ControllerDigital::X))  {
-			MTR_shooter.moveVelocity(1200);
+//shooter
+		if (controller.getDigital(okapi::ControllerDigital::L1))  {
+			MTR_shooter.moveVelocity(600);
 		}
 		else{
 			MTR_shooter.moveVelocity(0);
 		}
+
+//intake
+		if (controller.getDigital(okapi::ControllerDigital::R1)) {
+			MTR_rollerLeft.moveVelocity(500);
+			MTR_rollerRight.moveVelocity(500);
+			MTR_pushup.moveVelocity(500);
+		}
+		else{
+			MTR_rollerLeft.moveVelocity(0);
+			MTR_rollerRight.moveVelocity(0);
+			MTR_pushup.moveVelocity(0);
+		}
+
+//intake ejcts
+		if (controller.getDigital(okapi::ControllerDigital::R2)) {
+			MTR_rollerLeft.moveVelocity(-500);
+			MTR_rollerRight.moveVelocity(-500);
+		}
+		else{
+			MTR_rollerLeft.moveVelocity(0);
+			MTR_rollerRight.moveVelocity(0);
+			MTR_pushup.moveVelocity(0);
+		}
+
+//whole system ejects
+		if (controller.getDigital(okapi::ControllerDigital::L2)) {
+			MTR_rollerLeft.moveVelocity(-500);
+			MTR_rollerRight.moveVelocity(-500);
+			MTR_pushup.moveVelocity(-500);
+		}
+		else{
+			MTR_rollerLeft.moveVelocity(0);
+			MTR_rollerRight.moveVelocity(0);
+			MTR_pushup.moveVelocity(0);
+		}
 		pros::delay(10);
 	}
+
 }
