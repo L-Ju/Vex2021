@@ -17,6 +17,52 @@ void on_center_button() {
 	}
 }
 
+double ticksPerInch = 88.14887;
+double kP = 0;
+double kI = 0;
+double kD = 0;
+
+void driveFeet (double distanceInFeet) {
+    double distanceInTicks = distanceInFeet * ticksPerInch;
+    
+    MTR_frontLeft.tarePosition();
+    MTR_frontRight.tarePosition();
+    MTR_backLeft.tarePosition();
+    MTR_backRight.tarePosition();
+    
+    double error = 0;
+    double lastError = 0;
+    double integral = 0;
+    double derivative = 0;
+    
+    double leftVelocity = 100;
+    double rightVelocity = 100;
+    MTR_frontLeft.moveVelocity(leftVelocity);
+    MTR_frontRight.moveVelocity(leftVelocity);
+    MTR_backLeft.moveVelocity(rightVelocity);
+    MTR_backRight.moveVelocity(rightVelocity);
+    
+    while ( MTR_frontLeft.getPosition() + MTR_backLeft.getPosition() < distanceInTicks*2) {
+        error = MTR_frontLeft.getPosition() + MTR_backLeft.getPosition() - MTR_frontRight.getPosition() + MTR_backRight.getPosition();
+        integral = integral + error;
+        derivative = error - lastError;
+        
+        rightVelocity = leftVelocity + (error * kP)
+                                     + (integral * kI)
+                                     + (derivative * kD);
+                                     
+        MTR_backLeft.moveVelocity(rightVelocity);
+        MTR_backRight.moveVelocity(rightVelocity);
+        
+        pros::delay(10);
+    }
+    
+    MTR_frontLeft.moveVelocity(0);
+    MTR_frontRight.moveVelocity(0);
+    MTR_backLeft.moveVelocity(0);
+    MTR_backRight.moveVelocity(0);
+}
+
 void pickUpBalls() {
     MTR_rollerLeft.moveVelocity(-600);
     MTR_rollerRight.moveVelocity(600);
@@ -92,8 +138,7 @@ void autonomous() {
     int test_dist = 2;
     
     if (test_dist == 0){
-        drive->setMaxVelocity(50);
-        drive->moveDistance(1_m);
+        driveFeet(1);
     } else if (test_dist == 1) {
         drive->setMaxVelocity(100);
         drive->moveDistance(1.6_m);
