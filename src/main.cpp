@@ -25,9 +25,18 @@ void on_center_button() {
  */
 void initialize() {
 	pros::lcd::initialize();
-	pros::lcd::set_text(1, "Hello TEAM!");
+	pros::lcd::set_text(1, "Hello OperationNightFury!");
 
 	pros::lcd::register_btn1_cb(on_center_button);
+
+    pros::Motor MTR_1(13);
+    MTR_1.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    pros::Motor MTR_2(14);
+    MTR_2.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    pros::Motor MTR_3(17);
+    MTR_3.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    pros::Motor MTR_4(1);
+    MTR_4.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
 }
 
 /**
@@ -60,7 +69,31 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
-
+    bool test_dist = true;
+    
+    if (test_dist){
+        drive->setMaxVelocity(50);
+        drive->moveDistance(1_m);
+    } else {
+        drive->setMaxVelocity(100);
+        drive->moveDistance(1.6_m);
+        drive->stop();
+        MTR_rollerLeft.moveVelocity(-600);
+        MTR_rollerRight.moveVelocity(600);
+        MTR_pushup.moveVelocity(-300);
+        drive->setMaxVelocity(20);
+        drive->moveDistance(0.2_m);
+        pros::delay(2000);
+        MTR_rollerLeft.moveVelocity(-100);
+        MTR_rollerRight.moveVelocity(100);
+        MTR_pushup.moveVelocity(0);
+        drive->setMaxVelocity(100);
+        drive->moveDistance(-0.2_m);
+        drive->turnAngle(180_deg);
+        drive->moveDistance(0.715_m);
+        drive->turnAngle(45_deg);
+        drive->moveDistance(1_m);
+    }
 }
 
 /**
@@ -79,21 +112,43 @@ void autonomous() {
 
 
 void opcontrol() {
+
 	while(1){
+
+//tank drive
 		drive -> getModel() -> tank(controller.getAnalog(ControllerAnalog::leftY),
-																 controller.getAnalog(ControllerAnalog::rightY));
-		if (controller.getDigital(okapi::ControllerDigital::X))  {
+                                    controller.getAnalog(ControllerAnalog::rightY));
+//shooter
+		if (controller.getDigital(okapi::ControllerDigital::L1))  {
 			MTR_shooter.moveVelocity(-600);
-		}
-		else{
+		} else if (controller.getDigital(okapi::ControllerDigital::L2)) {
+			MTR_shooter.moveVelocity(600);
+		} else {
 			MTR_shooter.moveVelocity(0);
 		}
 
-		if(controller.getDigital(okapi::ControllerDigital::A)) {
+		if (controller.getDigital(okapi::ControllerDigital::R1)) {
+            //intake
+			MTR_rollerLeft.moveVelocity(-600);
+			MTR_rollerRight.moveVelocity(600);
 			MTR_pushup.moveVelocity(-600);
+		} 
+// 		else if (controller.getDigital(okapi::ControllerDigital::L2)) {
+//             whole system eject
+//             MTR_rollerLeft.moveVelocity(600);
+// 			MTR_rollerRight.moveVelocity(-600);
+// 			MTR_pushup.moveVelocity(600);
+// 		} 
+		else if (controller.getDigital(okapi::ControllerDigital::R2)) {
+			MTR_rollerLeft.moveVelocity(600);
+			MTR_rollerRight.moveVelocity(-600);
+            MTR_pushup.moveVelocity(600);
 		} else {
+			MTR_rollerLeft.moveVelocity(0);
+			MTR_rollerRight.moveVelocity(0);
 			MTR_pushup.moveVelocity(0);
 		}
 		pros::delay(10);
 	}
+
 }
