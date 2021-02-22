@@ -23,13 +23,22 @@ double kI = 0;
 double kD = 0;
 
 void driveFeet (double distanceInFeet) {
-    double distanceInTicks = distanceInFeet * ticksPerInch;
+    double ticksPerInch = 88.14887;
+    double kP = 0;
+    double kI = 0;
+    double kD = 0;
+
+    double distanceInTicks = distanceInFeet * 12 * ticksPerInch;
     
     MTR_frontLeft.tarePosition();
     MTR_frontRight.tarePosition();
     MTR_backLeft.tarePosition();
     MTR_backRight.tarePosition();
     
+    std::cout << "FrontLeft: " << MTR_frontLeft.getPosition() << std::endl;
+    std::cout << "BackLeft: " << MTR_backLeft.getPosition() << std::endl;
+    std::cout << "FrontRight: " << MTR_frontRight.getPosition() << std::endl;
+    std::cout << "BackRight: " << MTR_backRight.getPosition() << std::endl;
     double error = 0;
     double lastError = 0;
     double integral = 0;
@@ -38,28 +47,40 @@ void driveFeet (double distanceInFeet) {
     double leftVelocity = 100;
     double rightVelocity = 100;
     MTR_frontLeft.moveVelocity(leftVelocity);
-    MTR_frontRight.moveVelocity(leftVelocity);
-    MTR_backLeft.moveVelocity(rightVelocity);
+    MTR_frontRight.moveVelocity(rightVelocity);
+    MTR_backLeft.moveVelocity(leftVelocity);
     MTR_backRight.moveVelocity(rightVelocity);
     
     while ( MTR_frontLeft.getPosition() + MTR_backLeft.getPosition() < distanceInTicks*2) {
-        error = MTR_frontLeft.getPosition() + MTR_backLeft.getPosition() - MTR_frontRight.getPosition() + MTR_backRight.getPosition();
+        
+        std::cout << "FrontLeft: " << MTR_frontLeft.getPosition() << std::endl;
+        std::cout << "BackLeft: " << MTR_backLeft.getPosition() << std::endl;
+        std::cout << "FrontRight: " << MTR_frontRight.getPosition() << std::endl;
+        std::cout << "BackRight: " << MTR_backRight.getPosition() << std::endl;
+        
+        error = (MTR_frontLeft.getPosition() + MTR_backLeft.getPosition()) - (MTR_frontRight.getPosition() + MTR_backRight.getPosition());
         integral = integral + error;
         derivative = error - lastError;
         
         rightVelocity = leftVelocity + (error * kP)
                                      + (integral * kI)
                                      + (derivative * kD);
-                                     
-        MTR_backLeft.moveVelocity(rightVelocity);
+                                    
+        std::cout << "right " << rightVelocity << std::endl;
+        std::cout << "left " << leftVelocity << std::endl;
+        MTR_frontRight.moveVelocity(rightVelocity);
         MTR_backRight.moveVelocity(rightVelocity);
         
-        // FOR TUNING THE P LOOP
-        std::cout << error << ",";
         
-        pros::delay(10);
+        // FOR TUNING THE P LOOP
+        std::cout << "ERROR: " << error << ",";
+        
+        pros::delay(50);
     }
-    
+    std::cout << "FrontLeft End: " << MTR_frontLeft.getPosition() << std::endl;
+    std::cout << "BackLeft End: " << MTR_backLeft.getPosition() << std::endl;
+    std::cout << "FrontRight End: " << MTR_frontRight.getPosition() << std::endl;
+    std::cout << "BackRight End: " << MTR_backRight.getPosition() << std::endl;
     MTR_frontLeft.moveVelocity(0);
     MTR_frontRight.moveVelocity(0);
     MTR_backLeft.moveVelocity(0);
@@ -138,10 +159,10 @@ void autonomous() {
     // 0 = move a metre
     // 1 = original auto plan (back of notebook)
     // 2 = Jem's youtube video
-    int test_dist = 2;
+    int test_dist = 0;
     
     if (test_dist == 0){
-        driveFeet(1);
+        driveFeet(2);
     } else if (test_dist == 1) {
         drive->setMaxVelocity(100);
         drive->moveDistance(1.6_m);
@@ -226,7 +247,7 @@ void opcontrol() {
 			MTR_shooter.moveVelocity(600);
 		} else {
 			MTR_shooter.moveVelocity(0);
-		}
+		} 
 
 		if (controller.getDigital(okapi::ControllerDigital::R1)) {
 			pickUpBalls();

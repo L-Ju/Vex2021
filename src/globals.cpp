@@ -1,12 +1,12 @@
-#include "main.h"
+ #include "main.h"
 
 // controllers
 Controller controller;
 
 // drive motors
-int FRONT_LEFT_MOTOR_PORT  =  15;
-int FRONT_RIGHT_MOTOR_PORT  =  16;
-int BACK_LEFT_MOTOR_PORT  =  11;
+int FRONT_LEFT_MOTOR_PORT  =  17;
+int FRONT_RIGHT_MOTOR_PORT  =  18;
+int BACK_LEFT_MOTOR_PORT  =  14;
 int BACK_RIGHT_MOTOR_PORT  =  20;
 Motor MTR_frontLeft(FRONT_LEFT_MOTOR_PORT);
 Motor MTR_frontRight(FRONT_RIGHT_MOTOR_PORT);
