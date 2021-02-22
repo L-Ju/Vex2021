@@ -3,6 +3,11 @@
 // controllers
 extern Controller controller;
 
+extern double ticksPerInch;
+extern double kP;
+extern double kI;
+extern double kD;
+
 // drive motors
 extern int FRONT_LEFT_MOTOR_PORT;
 extern int FRONT_RIGHT_MOTOR_PORT;
