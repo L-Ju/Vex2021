@@ -112,14 +112,17 @@ void initialize() {
 
 	pros::lcd::register_btn1_cb(on_center_button);
 
-    pros::Motor MTR_1(13);
+    pros::Motor MTR_1(FRONT_LEFT_MOTOR_PORT);
     MTR_1.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-    pros::Motor MTR_2(14);
+    pros::Motor MTR_2(FRONT_RIGHT_MOTOR_PORT);
     MTR_2.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-    pros::Motor MTR_3(17);
+    pros::Motor MTR_3(BACK_LEFT_MOTOR_PORT);
     MTR_3.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-    pros::Motor MTR_4(1);
+    pros::Motor MTR_4(BACK_RIGHT_MOTOR_PORT);
     MTR_4.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    
+    pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
+    MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 }
 
 /**
@@ -155,7 +158,7 @@ void autonomous() {
     // 0 = move a metre
     // 1 = original auto plan (back of notebook)
     // 2 = Jem's youtube video
-    int test_dist = 0;
+    int test_dist = 2;
 
     if (test_dist == 0){
         driveFeet(2);
@@ -181,13 +184,13 @@ void autonomous() {
     } else if (test_dist == 2){
         drive->moveDistance(2_ft);
         drive->turnAngle(135_deg);
-        drive->moveDistance(2_ft);
         pickUpBalls();
+        drive->moveDistance(3_ft);
+        stopIntake();
         MTR_shooter.moveVelocity(-600);
         pros::delay(500);
         MTR_shooter.moveVelocity(0);
         pros::delay(500);
-        stopIntake();
         drive->moveDistance(-2_ft);
         drive->turnAngle(135_deg);
         drive->moveDistance(3_ft);
@@ -200,9 +203,8 @@ void autonomous() {
         MTR_shooter.moveVelocity(0);
         drive->moveDistance(-3_ft);
         drive->turnAngle(56_deg);
-        drive->moveDistance(6.04_ft);
         pickUpBalls();
-        pros::delay(500);
+        drive->moveDistance(6.04_ft);
         stopIntake();
         MTR_pushup.moveVelocity(-600);
         MTR_shooter.moveVelocity(-600);
