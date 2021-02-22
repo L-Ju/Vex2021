@@ -17,14 +17,10 @@ void on_center_button() {
 	}
 }
 
-double ticksPerInch = 88.14887;
-double kP = 0;
-double kI = 0;
-double kD = 0;
 
 void driveFeet (double distanceInFeet) {
     double ticksPerInch = 88.14887;
-    double kP = 0;
+    double kP = 0.11;
     double kI = 0;
     double kD = 0;
 
@@ -58,7 +54,7 @@ void driveFeet (double distanceInFeet) {
 //         std::cout << "FrontRight: " << MTR_frontRight.getPosition() << std::endl;
 //         std::cout << "BackRight: " << MTR_backRight.getPosition() << std::endl;
         
-        error = (MTR_frontLeft.getPosition() + MTR_backLeft.getPosition()) - (MTR_frontRight.getPosition() + MTR_backRight.getPosition());
+        error = (MTR_frontLeft.getPosition() + MTR_backLeft.getPosition()) - (MTR_frontRight.getPosition()*-1 + MTR_backRight.getPosition()*-1);
         integral = integral + error;
         derivative = error - lastError;
         
