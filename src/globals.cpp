@@ -31,4 +31,4 @@ Motor MTR_pushup(PUSHUP_MOTOR_PORT);
 std::shared_ptr<ChassisController> drive =
 ChassisControllerBuilder()
   .withMotors({FRONT_LEFT_MOTOR_PORT, BACK_LEFT_MOTOR_PORT},{-FRONT_RIGHT_MOTOR_PORT, -BACK_RIGHT_MOTOR_PORT})
-  .withDimensions(AbstractMotor::gearset::green, {{3.2_in, 10_in}, imev5GreenTPR}).build();
+  .withDimensions(AbstractMotor::gearset::green, {{3.25_in, 10_in}, imev5GreenTPR}).build();

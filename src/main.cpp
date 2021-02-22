@@ -17,6 +17,23 @@ void on_center_button() {
 	}
 }
 
+void pickUpBalls() {
+    MTR_rollerLeft.moveVelocity(-600);
+    MTR_rollerRight.moveVelocity(600);
+    MTR_pushup.moveVelocity(-600);
+}
+
+void ejectBalls() {
+    MTR_rollerLeft.moveVelocity(600);
+    MTR_rollerRight.moveVelocity(-600);
+    MTR_pushup.moveVelocity(600);
+}
+
+void stopIntake() {
+    MTR_rollerLeft.moveVelocity(0);
+    MTR_rollerRight.moveVelocity(0);
+    MTR_pushup.moveVelocity(0);
+}
 /**
  * Runs initialization code. This occurs as soon as the program is started.
  *
@@ -29,6 +46,14 @@ void initialize() {
 
 	pros::lcd::register_btn1_cb(on_center_button);
 
+    pros::Motor MTR_1(13);
+    MTR_1.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    pros::Motor MTR_2(14);
+    MTR_2.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    pros::Motor MTR_3(17);
+    MTR_3.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    pros::Motor MTR_4(1);
+    MTR_4.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
 }
 
 /**
@@ -61,12 +86,15 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
-    bool test_dist = true;
+    // 0 = move a metre
+    // 1 = original auto plan (back of notebook)
+    // 2 = Jem's youtube video
+    int test_dist = 2;
     
-    if (test_dist){
+    if (test_dist == 0){
         drive->setMaxVelocity(50);
         drive->moveDistance(1_m);
-    } else {
+    } else if (test_dist == 1) {
         drive->setMaxVelocity(100);
         drive->moveDistance(1.6_m);
         drive->stop();
@@ -85,7 +113,41 @@ void autonomous() {
         drive->moveDistance(0.715_m);
         drive->turnAngle(45_deg);
         drive->moveDistance(1_m);
-    }
+    } else if (test_dist == 2){
+        drive->moveDistance(2_ft);
+        drive->turnAngle(135_deg);
+        drive->moveDistance(2_ft);
+        pickUpBalls();
+        MTR_shooter.moveVelocity(-600);
+        pros::delay(500);
+        MTR_shooter.moveVelocity(0);
+        pros::delay(500);
+        stopIntake();
+        drive->moveDistance(-2_ft);
+        drive->turnAngle(135_deg);
+        drive->moveDistance(3_ft);
+        drive->turnAngle(-90_deg);
+        drive->moveDistance(1_ft);
+        MTR_pushup.moveVelocity(-600);
+        MTR_shooter.moveVelocity(-600);
+        pros::delay(500);
+        MTR_pushup.moveVelocity(0);
+        MTR_shooter.moveVelocity(0);
+        drive->moveDistance(-3_ft);
+        drive->turnAngle(56_deg);
+        drive->moveDistance(6.04_ft);
+        pickUpBalls();
+        pros::delay(500);
+        stopIntake();
+        MTR_pushup.moveVelocity(-600);
+        MTR_shooter.moveVelocity(-600);
+        pros::delay(1000);
+        MTR_pushup.moveVelocity(0);
+        MTR_shooter.moveVelocity(0);
+        drive->moveDistance(-1_ft);
+    } else {
+        drive->moveDistance(2_ft);
+    } 
 }
 
 /**
@@ -110,7 +172,6 @@ void opcontrol() {
 //tank drive
 		drive -> getModel() -> tank(controller.getAnalog(ControllerAnalog::leftY),
                                     controller.getAnalog(ControllerAnalog::rightY));
-//shooter
 		if (controller.getDigital(okapi::ControllerDigital::L1))  {
 			MTR_shooter.moveVelocity(-600);
 		} else if (controller.getDigital(okapi::ControllerDigital::L2)) {
@@ -120,26 +181,13 @@ void opcontrol() {
 		}
 
 		if (controller.getDigital(okapi::ControllerDigital::R1)) {
-            //intake
-			MTR_rollerLeft.moveVelocity(-600);
-			MTR_rollerRight.moveVelocity(600);
-			MTR_pushup.moveVelocity(-600);
-		} 
-// 		else if (controller.getDigital(okapi::ControllerDigital::L2)) {
-//             whole system eject
-//             MTR_rollerLeft.moveVelocity(600);
-// 			MTR_rollerRight.moveVelocity(-600);
-// 			MTR_pushup.moveVelocity(600);
-// 		} 
-		else if (controller.getDigital(okapi::ControllerDigital::R2)) {
-			MTR_rollerLeft.moveVelocity(600);
-			MTR_rollerRight.moveVelocity(-600);
-            MTR_pushup.moveVelocity(600);
+			pickUpBalls();
+		} else if (controller.getDigital(okapi::ControllerDigital::R2)) {
+			ejectBalls();
 		} else {
-			MTR_rollerLeft.moveVelocity(0);
-			MTR_rollerRight.moveVelocity(0);
-			MTR_pushup.moveVelocity(0);
+			stopIntake();
 		}
+		
 		pros::delay(10);
 	}
 
