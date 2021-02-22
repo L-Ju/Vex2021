@@ -19,11 +19,6 @@ void on_center_button() {
 
 
 void driveFeet (double distanceInFeet) {
-    double ticksPerInch = 88.14887;
-    double kP = 0.11;
-    double kI = 0;
-    double kD = 0;
-
     double distanceInTicks = distanceInFeet * 12 * ticksPerInch;
 
     MTR_frontLeft.tarePosition();
@@ -31,10 +26,10 @@ void driveFeet (double distanceInFeet) {
     MTR_backLeft.tarePosition();
     MTR_backRight.tarePosition();
 
-    std::cout << "FrontLeft: " << MTR_frontLeft.getPosition() << std::endl;
-    std::cout << "BackLeft: " << MTR_backLeft.getPosition() << std::endl;
-    std::cout << "FrontRight: " << MTR_frontRight.getPosition() << std::endl;
-    std::cout << "BackRight: " << MTR_backRight.getPosition() << std::endl;
+//     std::cout << "FrontLeft: " << MTR_frontLeft.getPosition() << std::endl;
+//     std::cout << "BackLeft: " << MTR_backLeft.getPosition() << std::endl;
+//     std::cout << "FrontRight: " << MTR_frontRight.getPosition() << std::endl;
+//     std::cout << "BackRight: " << MTR_backRight.getPosition() << std::endl;
     double error = 0;
     double lastError = 0;
     double integral = 0;
@@ -69,19 +64,20 @@ void driveFeet (double distanceInFeet) {
 
 
         // FOR TUNING THE P LOOP
-        std::cout << error << ",";
+//         std::cout << error << ",";
 
         pros::delay(50);
     }
-    std::cout << "FrontLeft End: " << MTR_frontLeft.getPosition() << std::endl;
-    std::cout << "BackLeft End: " << MTR_backLeft.getPosition() << std::endl;
-    std::cout << "FrontRight End: " << MTR_frontRight.getPosition() << std::endl;
-    std::cout << "BackRight End: " << MTR_backRight.getPosition() << std::endl;
+//     std::cout << "FrontLeft End: " << MTR_frontLeft.getPosition() << std::endl;
+//     std::cout << "BackLeft End: " << MTR_backLeft.getPosition() << std::endl;
+//     std::cout << "FrontRight End: " << MTR_frontRight.getPosition() << std::endl;
+//     std::cout << "BackRight End: " << MTR_backRight.getPosition() << std::endl;
     MTR_frontLeft.moveVelocity(0);
     MTR_frontRight.moveVelocity(0);
     MTR_backLeft.moveVelocity(0);
     MTR_backRight.moveVelocity(0);
 }
+
 
 void pickUpBalls() {
     MTR_rollerLeft.moveVelocity(-600);
@@ -158,10 +154,10 @@ void autonomous() {
     // 0 = move a metre
     // 1 = original auto plan (back of notebook)
     // 2 = Jem's youtube video
-    int test_dist = 2;
+    int test_dist = 0;
 
     if (test_dist == 0){
-        driveFeet(2);
+        drive->turnAngle(90_deg); 
     } else if (test_dist == 1) {
         drive->setMaxVelocity(100);
         drive->moveDistance(1.6_m);
