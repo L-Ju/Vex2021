@@ -201,7 +201,7 @@ void autonomous() {
 			pros::delay(500);
 			MTR_pushup.moveVelocity(0);
 			MTR_shooter.moveVelocity(0);
-			drive->moveDistance(51.8_in);
+			drive->moveDistance(-51.8_in);
 			drive->turnAngle(56_deg);
 			drive->moveDistance(83.5_in);
 			pickUpBalls();
