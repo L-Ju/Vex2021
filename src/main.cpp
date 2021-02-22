@@ -19,8 +19,8 @@ void on_center_button() {
 
 
 void driveFeet (double distanceInFeet) {
-    double ticksPerInch = 88.14887;
-    double kP = 0.11;
+    double ticksPerInch = 86; // final tuned value = 86
+    double kP = 0.09; // final tuned value = 0.09
     double kI = 0;
     double kD = 0;
 
@@ -158,7 +158,7 @@ void autonomous() {
     // 0 = move a metre
     // 1 = original auto plan (back of notebook)
     // 2 = Jem's youtube video
-    int test_dist = 2;
+    int test_dist = 0;
 
     if (test_dist == 0){
         driveFeet(2);
