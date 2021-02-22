@@ -154,7 +154,7 @@ void autonomous() {
     // 0 = move a metre
     // 1 = original auto plan (back of notebook)
     // 2 = Jem's youtube video
-    int test_dist = 0;
+    int test_dist = 2;
 
     if (test_dist == 0){
         drive->turnAngle(90_deg); 
