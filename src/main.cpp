@@ -53,10 +53,10 @@ void driveFeet (double distanceInFeet) {
     
     while ( MTR_frontLeft.getPosition() + MTR_backLeft.getPosition() < distanceInTicks*2) {
         
-        std::cout << "FrontLeft: " << MTR_frontLeft.getPosition() << std::endl;
-        std::cout << "BackLeft: " << MTR_backLeft.getPosition() << std::endl;
-        std::cout << "FrontRight: " << MTR_frontRight.getPosition() << std::endl;
-        std::cout << "BackRight: " << MTR_backRight.getPosition() << std::endl;
+//         std::cout << "FrontLeft: " << MTR_frontLeft.getPosition() << std::endl;
+//         std::cout << "BackLeft: " << MTR_backLeft.getPosition() << std::endl;
+//         std::cout << "FrontRight: " << MTR_frontRight.getPosition() << std::endl;
+//         std::cout << "BackRight: " << MTR_backRight.getPosition() << std::endl;
         
         error = (MTR_frontLeft.getPosition() + MTR_backLeft.getPosition()) - (MTR_frontRight.getPosition() + MTR_backRight.getPosition());
         integral = integral + error;
@@ -66,14 +66,14 @@ void driveFeet (double distanceInFeet) {
                                      + (integral * kI)
                                      + (derivative * kD);
                                     
-        std::cout << "right " << rightVelocity << std::endl;
-        std::cout << "left " << leftVelocity << std::endl;
-        MTR_frontRight.moveVelocity(rightVelocity);
-        MTR_backRight.moveVelocity(rightVelocity);
+//         std::cout << "right " << rightVelocity << std::endl;
+//         std::cout << "left " << leftVelocity << std::endl;
+        MTR_frontRight.moveVelocity(-rightVelocity);
+        MTR_backRight.moveVelocity(-rightVelocity);
         
         
         // FOR TUNING THE P LOOP
-        std::cout << "ERROR: " << error << ",";
+        std::cout << error << ",";
         
         pros::delay(50);
     }
