@@ -1,5 +1,6 @@
 
-*.o
-*.o
+*.json
+*.bin
 *.bin
 *.elf
+*.o

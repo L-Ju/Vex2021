@@ -112,14 +112,17 @@ void initialize() {
 
 	pros::lcd::register_btn1_cb(on_center_button);
 
-    pros::Motor MTR_1(13);
+    pros::Motor MTR_1(FRONT_LEFT_MOTOR_PORT);
     MTR_1.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-    pros::Motor MTR_2(14);
+    pros::Motor MTR_2(FRONT_RIGHT_MOTOR_PORT);
     MTR_2.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-    pros::Motor MTR_3(17);
+    pros::Motor MTR_3(BACK_LEFT_MOTOR_PORT);
     MTR_3.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-    pros::Motor MTR_4(1);
+    pros::Motor MTR_4(BACK_RIGHT_MOTOR_PORT);
     MTR_4.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+
+    pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
+    MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 }
 
 /**
@@ -155,7 +158,7 @@ void autonomous() {
     // 0 = move a metre
     // 1 = original auto plan (back of notebook)
     // 2 = Jem's youtube video
-    int test_dist = 0;
+    int test_dist = 2;
 
     if (test_dist == 0){
         driveFeet(2);
@@ -179,6 +182,38 @@ void autonomous() {
         drive->turnAngle(45_deg);
         drive->moveDistance(1_m);
     } else if (test_dist == 2){
+			drive->moveDistance(23.5_in);
+			drive->turnAngle(135_deg);
+			drive->moveDistance(27.3_in);
+			pickUpBalls();
+			MTR_shooter.moveVelocity(-600);
+			pros::delay(500);
+			MTR_shooter.moveVelocity(0);
+			pros::delay(500);
+			stopIntake();
+			drive->moveDistance(-27.3_in);
+			drive->turnAngle(135_deg);
+			drive->moveDistance(41.5_in);
+			drive->turnAngle(-90_deg);
+			drive->moveDistance(12.9_in);
+			MTR_pushup.moveVelocity(-600);
+			MTR_shooter.moveVelocity(-600);
+			pros::delay(500);
+			MTR_pushup.moveVelocity(0);
+			MTR_shooter.moveVelocity(0);
+			drive->moveDistance(51.8_in);
+			drive->turnAngle(56_deg);
+			drive->moveDistance(83.5_in);
+			pickUpBalls();
+			pros::delay(500);
+			stopIntake();
+			MTR_pushup.moveVelocity(-600);
+			MTR_shooter.moveVelocity(-600);
+			pros::delay(1000);
+			MTR_pushup.moveVelocity(0);
+			MTR_shooter.moveVelocity(0);
+			drive->moveDistance(-12_in);
+	/*
         drive->moveDistance(2_ft);
         drive->turnAngle(135_deg);
         drive->moveDistance(2_ft);
@@ -210,6 +245,7 @@ void autonomous() {
         MTR_pushup.moveVelocity(0);
         MTR_shooter.moveVelocity(0);
         drive->moveDistance(-1_ft);
+		*/
     } else {
         drive->moveDistance(2_ft);
     }
@@ -246,7 +282,6 @@ void opcontrol() {
 			MTR_pushup.moveVelocity(-600);
 		}else {
 			MTR_shooter.moveVelocity(0);
-			MTR_pushup.moveVelocity(0);
 		}
 
 		if (controller.getDigital(okapi::ControllerDigital::R1)) {
@@ -254,7 +289,11 @@ void opcontrol() {
 		} else if (controller.getDigital(okapi::ControllerDigital::R2)) {
 			ejectBalls();
 		} else {
-			stopIntake();
+			MTR_rollerLeft.moveVelocity(0);
+	    MTR_rollerRight.moveVelocity(0);
+			if(!controller.getDigital(okapi::ControllerDigital::X)){
+				MTR_pushup.moveVelocity(0);
+			}
 		}
 
 		pros::delay(10);
