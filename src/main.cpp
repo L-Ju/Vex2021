@@ -98,7 +98,7 @@ void ejectBalls() {
 void stopIntake() {
     MTR_rollerLeft.moveVelocity(0);
     MTR_rollerRight.moveVelocity(0);
-    //MTR_pushup.moveVelocity(0);
+    MTR_pushup.moveVelocity(0);
 }
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -120,7 +120,7 @@ void initialize() {
     MTR_3.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
     pros::Motor MTR_4(BACK_RIGHT_MOTOR_PORT);
     MTR_4.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-    
+
     pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
     MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 }
@@ -182,15 +182,47 @@ void autonomous() {
         drive->turnAngle(45_deg);
         drive->moveDistance(1_m);
     } else if (test_dist == 2){
+			drive->moveDistance(23.5_in);
+			drive->turnAngle(135_deg);
+			drive->moveDistance(27.3_in);
+			pickUpBalls();
+			MTR_shooter.moveVelocity(-600);
+			pros::delay(500);
+			MTR_shooter.moveVelocity(0);
+			pros::delay(500);
+			stopIntake();
+			drive->moveDistance(-27.3_in);
+			drive->turnAngle(135_deg);
+			drive->moveDistance(41.5_in);
+			drive->turnAngle(-90_deg);
+			drive->moveDistance(12.9_in);
+			MTR_pushup.moveVelocity(-600);
+			MTR_shooter.moveVelocity(-600);
+			pros::delay(500);
+			MTR_pushup.moveVelocity(0);
+			MTR_shooter.moveVelocity(0);
+			drive->moveDistance(51.8_in);
+			drive->turnAngle(56_deg);
+			drive->moveDistance(83.5_in);
+			pickUpBalls();
+			pros::delay(500);
+			stopIntake();
+			MTR_pushup.moveVelocity(-600);
+			MTR_shooter.moveVelocity(-600);
+			pros::delay(1000);
+			MTR_pushup.moveVelocity(0);
+			MTR_shooter.moveVelocity(0);
+			drive->moveDistance(-12_in);
+	/*
         drive->moveDistance(2_ft);
         drive->turnAngle(135_deg);
+        drive->moveDistance(2_ft);
         pickUpBalls();
-        drive->moveDistance(3_ft);
-        stopIntake();
         MTR_shooter.moveVelocity(-600);
         pros::delay(500);
         MTR_shooter.moveVelocity(0);
         pros::delay(500);
+        stopIntake();
         drive->moveDistance(-2_ft);
         drive->turnAngle(135_deg);
         drive->moveDistance(3_ft);
@@ -203,8 +235,9 @@ void autonomous() {
         MTR_shooter.moveVelocity(0);
         drive->moveDistance(-3_ft);
         drive->turnAngle(56_deg);
-        pickUpBalls();
         drive->moveDistance(6.04_ft);
+        pickUpBalls();
+        pros::delay(500);
         stopIntake();
         MTR_pushup.moveVelocity(-600);
         MTR_shooter.moveVelocity(-600);
@@ -212,6 +245,7 @@ void autonomous() {
         MTR_pushup.moveVelocity(0);
         MTR_shooter.moveVelocity(0);
         drive->moveDistance(-1_ft);
+		*/
     } else {
         drive->moveDistance(2_ft);
     }
@@ -235,7 +269,7 @@ void autonomous() {
 void opcontrol() {
 
 	while(1){
-		
+
 //tank drive
 		drive -> getModel() -> tank(controller.getAnalog(ControllerAnalog::leftY),
                                     controller.getAnalog(ControllerAnalog::rightY));
@@ -255,7 +289,8 @@ void opcontrol() {
 		} else if (controller.getDigital(okapi::ControllerDigital::R2)) {
 			ejectBalls();
 		} else {
-			stopIntake();
+			MTR_rollerLeft.moveVelocity(0);
+	    MTR_rollerRight.moveVelocity(0);
 			if(!controller.getDigital(okapi::ControllerDigital::X)){
 				MTR_pushup.moveVelocity(0);
 			}
