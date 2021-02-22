@@ -27,11 +27,11 @@
             "-funwind-tables",
             "--std=gnu++17",
             "-o",
-            "/var/folders/m3/yyr2bxvj4yd5kj5nf_sj4bcr0000gn/T/tmp6crm06n2/main.cpp.o",
-            "src/main.cpp"
+            "/var/folders/m3/yyr2bxvj4yd5kj5nf_sj4bcr0000gn/T/tmp6crm06n2/globals.cpp.o",
+            "src/globals.cpp"
         ],
         "directory": "/Users/luju/Desktop/vex2021/Vex2021",
-        "file": "src/main.cpp"
+        "file": "src/globals.cpp"
     },
     {
         "arguments": [
@@ -61,10 +61,10 @@
             "-funwind-tables",
             "--std=gnu++17",
             "-o",
-            "/var/folders/m3/yyr2bxvj4yd5kj5nf_sj4bcr0000gn/T/tmp6crm06n2/globals.cpp.o",
-            "src/globals.cpp"
+            "bin/main.cpp.o",
+            "src/main.cpp"
         ],
         "directory": "/Users/luju/Desktop/vex2021/Vex2021",
-        "file": "src/globals.cpp"
+        "file": "src/main.cpp"
     }
 ]

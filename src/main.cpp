@@ -25,12 +25,12 @@ void driveFeet (double distanceInFeet) {
     double kD = 0;
 
     double distanceInTicks = distanceInFeet * 12 * ticksPerInch;
-    
+
     MTR_frontLeft.tarePosition();
     MTR_frontRight.tarePosition();
     MTR_backLeft.tarePosition();
     MTR_backRight.tarePosition();
-    
+
     std::cout << "FrontLeft: " << MTR_frontLeft.getPosition() << std::endl;
     std::cout << "BackLeft: " << MTR_backLeft.getPosition() << std::endl;
     std::cout << "FrontRight: " << MTR_frontRight.getPosition() << std::endl;
@@ -39,38 +39,38 @@ void driveFeet (double distanceInFeet) {
     double lastError = 0;
     double integral = 0;
     double derivative = 0;
-    
+
     double leftVelocity = 100;
     double rightVelocity = 100;
     MTR_frontLeft.moveVelocity(leftVelocity);
     MTR_frontRight.moveVelocity(rightVelocity);
     MTR_backLeft.moveVelocity(leftVelocity);
     MTR_backRight.moveVelocity(rightVelocity);
-    
+
     while ( MTR_frontLeft.getPosition() + MTR_backLeft.getPosition() < distanceInTicks*2) {
-        
+
 //         std::cout << "FrontLeft: " << MTR_frontLeft.getPosition() << std::endl;
 //         std::cout << "BackLeft: " << MTR_backLeft.getPosition() << std::endl;
 //         std::cout << "FrontRight: " << MTR_frontRight.getPosition() << std::endl;
 //         std::cout << "BackRight: " << MTR_backRight.getPosition() << std::endl;
-        
+
         error = (MTR_frontLeft.getPosition() + MTR_backLeft.getPosition()) - (MTR_frontRight.getPosition()*-1 + MTR_backRight.getPosition()*-1);
         integral = integral + error;
         derivative = error - lastError;
-        
+
         rightVelocity = leftVelocity + (error * kP)
                                      + (integral * kI)
                                      + (derivative * kD);
-                                    
+
 //         std::cout << "right " << rightVelocity << std::endl;
 //         std::cout << "left " << leftVelocity << std::endl;
         MTR_frontRight.moveVelocity(-rightVelocity);
         MTR_backRight.moveVelocity(-rightVelocity);
-        
-        
+
+
         // FOR TUNING THE P LOOP
         std::cout << error << ",";
-        
+
         pros::delay(50);
     }
     std::cout << "FrontLeft End: " << MTR_frontLeft.getPosition() << std::endl;
@@ -98,7 +98,7 @@ void ejectBalls() {
 void stopIntake() {
     MTR_rollerLeft.moveVelocity(0);
     MTR_rollerRight.moveVelocity(0);
-    MTR_pushup.moveVelocity(0);
+    //MTR_pushup.moveVelocity(0);
 }
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -156,7 +156,7 @@ void autonomous() {
     // 1 = original auto plan (back of notebook)
     // 2 = Jem's youtube video
     int test_dist = 0;
-    
+
     if (test_dist == 0){
         driveFeet(2);
     } else if (test_dist == 1) {
@@ -212,7 +212,7 @@ void autonomous() {
         drive->moveDistance(-1_ft);
     } else {
         drive->moveDistance(2_ft);
-    } 
+    }
 }
 
 /**
@@ -233,7 +233,7 @@ void autonomous() {
 void opcontrol() {
 
 	while(1){
-
+		
 //tank drive
 		drive -> getModel() -> tank(controller.getAnalog(ControllerAnalog::leftY),
                                     controller.getAnalog(ControllerAnalog::rightY));
@@ -241,9 +241,12 @@ void opcontrol() {
 			MTR_shooter.moveVelocity(-600);
 		} else if (controller.getDigital(okapi::ControllerDigital::L2)) {
 			MTR_shooter.moveVelocity(600);
-		} else {
+		}else if (controller.getDigital(okapi::ControllerDigital::X)) {
+			MTR_shooter.moveVelocity(-600);
+			MTR_pushup.moveVelocity(-600);
+		}else {
 			MTR_shooter.moveVelocity(0);
-		} 
+		}
 
 		if (controller.getDigital(okapi::ControllerDigital::R1)) {
 			pickUpBalls();
@@ -251,8 +254,11 @@ void opcontrol() {
 			ejectBalls();
 		} else {
 			stopIntake();
+			if(!controller.getDigital(okapi::ControllerDigital::X)){
+				MTR_pushup.moveVelocity(0);
+			}
 		}
-		
+
 		pros::delay(10);
 	}
 
