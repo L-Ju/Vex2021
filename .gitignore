@@ -4,3 +4,8 @@
 *.bin
 *.elf
 *.o
+bin/_pros_ld_timestamp.o
+bin/globals.cpp.o
+bin/hot.package.bin
+bin/hot.package.elf
+bin/main.cpp.o

@@ -7,6 +7,7 @@ extern double ticksPerInch;
 extern double kP;
 extern double kI;
 extern double kD;
+extern int autoRoutine;
 
 // drive motors
 extern int FRONT_LEFT_MOTOR_PORT;
