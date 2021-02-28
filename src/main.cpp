@@ -123,6 +123,46 @@ void turnAngleRIGHT(double angleInDegrees){
     MTR_backRight.moveVelocity(0);
 }
 
+void turnAngleLEFT(double angleInDegrees){
+    MTR_frontLeft.tarePosition();
+    MTR_frontRight.tarePosition();
+    MTR_backLeft.tarePosition();
+    MTR_backRight.tarePosition();
+
+    double angleinTicks = 0;
+    double error = 0;
+    double lastError = 0;
+    double integral = 0;
+    double derivative = 0;
+
+    while(angleinTicks < angleInDegrees){
+      double allVelocity;
+      double circleticks = MTR_frontLeft.getPosition() + MTR_backLeft.getPosition() + MTR_frontRight.getPosition() + MTR_backRight.getPosition();
+      circleticks  =  circleticks / 4.0;
+
+      angleinTicks = circleticks /8.547499;
+
+      error = angleInDegrees - angleinTicks;
+      integral = integral + error;
+      derivative = error - lastError;
+
+       allVelocity = (error * gP)
+                     +(integral * gI)
+                     +(derivative * gD);
+
+      MTR_frontLeft.moveVelocity(-allVelocity);
+      MTR_frontRight.moveVelocity(-allVelocity);
+      MTR_backLeft.moveVelocity(-allVelocity);
+      MTR_backRight.moveVelocity(-allVelocity);
+      pros::delay(20);
+    }
+    MTR_frontLeft.moveVelocity(0);
+    MTR_frontRight.moveVelocity(0);
+    MTR_backLeft.moveVelocity(0);
+    MTR_backRight.moveVelocity(0);
+}
+
+
 void driveFeet (double distanceInFeet) {
     double distanceInTicks = distanceInFeet * 12 * ticksPerInch;
 
@@ -333,21 +373,18 @@ MTR_shooter.moveVelocity(0);
 MTR_pushup.moveVelocity(0);
 drive->moveDistance(-27.3_in);
 */
-  if(autoRoutine == 1){// test my tuning
-    double Pi =  3.14159265358979323846;
-    turnAngleRIGHT(Pi/2.0);
-  }
-  else if(autoRoutine == 2){
     pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
     MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-    MTR_shooter.moveVelocity(600);
+//    MTR_shooter.moveVelocity(600);
     drive->setMaxVelocity(200);
     pickUpBalls();
     drive->moveDistance(55_in);
-    pros::delay(1200);
-    drive->turnAngle(135_deg);
+    pros::delay(600);
+    stopIntake();
+    turnAngleRIGHT(135);
+/*
     drive->moveDistance(49.5_in);
-    drive->turnAngle(45_deg);
+    turnAngleRIGHT(45);
     drive->moveDistance(20_in);
     pickUpBalls();
     MTR_pushup.moveVelocity(-600);
@@ -358,7 +395,7 @@ drive->moveDistance(-27.3_in);
     pros::delay(2000);
     MTR_shooter.moveVelocity(0);
     MTR_pushup.moveVelocity(0);
-  }
+  */
 }
 
 /**
@@ -396,8 +433,6 @@ void opcontrol() {
     std::cout << "backLeft =" <<  MTR_backLeft.getPosition() << std::endl;
     std::cout << "backRight =" <<  MTR_backRight.getPosition() << std::endl;
   */
-
-  turnAngleRIGHT(45);
 
 	while(1){
 
