@@ -3,7 +3,7 @@
 // controllers
 Controller controller;
 
-double ticksPerInch = 86; // final tuned value = 86
+double ticksPerInch = 87.7604166667; // final tuned value = 86
 double kP = 0.09; // final tuned value = 0.09
 double kI = 0;
 double kD = 0;
