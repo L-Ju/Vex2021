@@ -158,6 +158,16 @@ void stopIntake() {
  * All other competition modes are blocked by initialize; it is recommended
  * to keep execution time for this mode under a few seconds.
  */
+
+static void event_handler(lv_obj_t * obj, lv_event_t event)
+{
+    if(event == LV_EVENT_VALUE_CHANGED) {
+        char buf[32];
+        lv_dropdown_get_selected_str(obj, buf, sizeof(buf));
+        printf("Option: %s\n", buf);
+    }
+}
+
 void initialize() {
 // 	pros::lcd::initialize();
 // 	pros::lcd::set_text(1, "Hello OperationNightFury!");
@@ -171,19 +181,36 @@ void initialize() {
     lv_scr_load(scr);
     
     lv_obj_t * btn1 = lv_btn_create(scr, NULL);
-    lv_btn_set_fit(btn1, true, true); // auto set size according to content
-    lv_obj_set_pos(btn1, 60, 40);
+    lv_btn_set_fit(btn1, false, true); // auto set size according to content
+    lv_obj_set_pos(btn1, 340, 0);
     
     lv_obj_t * btn2 = lv_btn_create(scr, btn1);
-    lv_obj_set_pos(btn2, 180, 80);
+    lv_obj_set_pos(btn2, 340, 78);
+    
+    lv_obj_t * btn3 = lv_btn_create(scr, btn1);
+    lv_obj_set_pos(btn3, 340, 156);
     
     lv_obj_t * label1 = lv_label_create(btn1, NULL);
-    lv_label_set_text(label1, "Button 1");
+    lv_label_set_text(label1, "Params");
     
     lv_obj_t * label2 = lv_label_create(btn2, NULL);
-    lv_label_set_text(label2, "Button 2");
+    lv_label_set_text(label2, "Debug");
     
-    lv_obj_del(label2);
+    lv_obj_t * label3 = lv_label_create(btn3, NULL);
+    lv_label_set_text(label3, "Conk");
+    
+    lv_obj_t * ddlist = lv_dropdown_create(lv_scr_act(), NULL);
+    lv_dropdown_set_options(ddlist, "Left Side Restrictive\n"
+            "Right Side Restrictive\n"
+            "Left Side Unrestrictive\n"
+            "Right Side Unrestrictive\n"
+            "Skills 1"
+            "Skills 2");
+
+    lv_obj_align(ddlist, NULL, LV_ALIGN_IN_TOP_MID, 0, 20);
+    lv_obj_set_event_cb(ddlist, event_handler);
+    
+//     lv_obj_del(label2);
     
     
     pros::Motor MTR_1(FRONT_LEFT_MOTOR_PORT);
