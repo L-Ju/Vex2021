@@ -181,7 +181,7 @@ void initialize() {
     lv_scr_load(scr);
     
     lv_obj_t * btn1 = lv_btn_create(scr, NULL);
-    lv_btn_set_fit(btn1, false, true); // auto set size according to content
+    lv_btn_set_fit(btn1, true); // auto set size according to content
     lv_obj_set_pos(btn1, 340, 0);
     
     lv_obj_t * btn2 = lv_btn_create(scr, btn1);

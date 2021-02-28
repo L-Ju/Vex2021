@@ -32,7 +32,7 @@ CSRCS += lv_switch.c
 CSRCS += lv_win.c
 CSRCS += lv_objmask.c
 
-DEPPATH += --dep-path $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/lv_widgets
-VPATH += :$(LVGL_DIR)/$(LVGL_DIR_NAME)/src/lv_widgets
+DEPPATH += --dep-path display/lv_widgets
+VPATH += :display/lv_widgets
 
-CFLAGS += "-I$(LVGL_DIR)/$(LVGL_DIR_NAME)/src/lv_widgets"
+CFLAGS += "-Idisplay/lv_widgets"

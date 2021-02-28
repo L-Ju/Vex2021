@@ -16,7 +16,7 @@ CSRCS += lv_printf.c
 CSRCS += lv_bidi.c
 CSRCS += lv_debug.c
 
-DEPPATH += --dep-path $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/lv_misc
-VPATH += :$(LVGL_DIR)/$(LVGL_DIR_NAME)/src/lv_misc
+DEPPATH += --dep-path display/lv_misc
+VPATH += :display/lv_misc
 
-CFLAGS += "-I$(LVGL_DIR)/$(LVGL_DIR_NAME)/src/lv_misc"
+CFLAGS += "-Idisplay/lv_misc"
