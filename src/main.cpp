@@ -171,13 +171,8 @@ void initialize() {
     lv_scr_load(scr);
     
     lv_obj_t * btn1 = lv_btn_create(scr, NULL);
-<<<<<<< HEAD
-    lv_btn_set_fit(btn1, true); // auto set size according to content
-    lv_obj_set_pos(btn1, 340, 0);
-=======
     lv_btn_set_fit(btn1, true, true); // auto set size according to content
-    lv_obj_set_pos(btn1, 60, 40);
->>>>>>> parent of bbdcf2b (new lvgl)
+    lv_obj_set_pos(btn1, 340, 0);
     
     lv_obj_t * btn2 = lv_btn_create(scr, btn1);
     lv_obj_set_pos(btn2, 180, 80);

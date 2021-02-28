@@ -8,14 +8,11 @@ CSRCS += lv_draw_img.c
 CSRCS += lv_draw_arc.c
 CSRCS += lv_draw_triangle.c
 
-<<<<<<< HEAD
 DEPPATH += --dep-path display/lv_draw
 VPATH += :display/lv_draw
 
 CFLAGS += "-Idisplay/lv_draw"
-=======
 DEPPATH += --dep-path $(LVGL_DIR)/lvgl/lv_draw
 VPATH += :$(LVGL_DIR)/lvgl/lv_draw
 
 CFLAGS += "-I$(LVGL_DIR)/lvgl/lv_draw"
->>>>>>> parent of bbdcf2b (new lvgl)
