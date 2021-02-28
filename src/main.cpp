@@ -9,21 +9,21 @@
  */
 
 
-void on_left_button()
-{
-    autoRoutine = 1;
-    pros::lcd::print(2, "LEFT");
-}
-
-void on_middle_button(){
-    autoRoutine = 2;
-    pros::lcd::print(2, "MIDDLE");
-}
-
-void on_right_button(){
-    autoRoutine = 3;
-    pros::lcd::print(2, "RIGHT");
-}
+// void on_left_button()
+// {
+//     autoRoutine = 1;
+//     pros::lcd::print(2, "LEFT");
+// }
+// 
+// void on_middle_button(){
+//     autoRoutine = 2;
+//     pros::lcd::print(2, "MIDDLE");
+// }
+// 
+// void on_right_button(){
+//     autoRoutine = 3;
+//     pros::lcd::print(2, "RIGHT");
+// }
 
 void driveFeet (double distanceInFeet) {
     double distanceInTicks = distanceInFeet * 12 * ticksPerInch;
@@ -159,14 +159,33 @@ void stopIntake() {
  * to keep execution time for this mode under a few seconds.
  */
 void initialize() {
-	pros::lcd::initialize();
-	pros::lcd::set_text(1, "Hello OperationNightFury!");
-    pros::lcd::set_text(2, "RIGHT");
-
-    pros::lcd::register_btn0_cb(on_left_button);
-	pros::lcd::register_btn1_cb(on_middle_button);
-    pros::lcd::register_btn2_cb(on_right_button);
-
+// 	pros::lcd::initialize();
+// 	pros::lcd::set_text(1, "Hello OperationNightFury!");
+//     pros::lcd::set_text(2, "RIGHT");
+// 
+//     pros::lcd::register_btn0_cb(on_left_button);
+// 	pros::lcd::register_btn1_cb(on_middle_button);
+//     pros::lcd::register_btn2_cb(on_right_button);
+    
+    lv_obj_t * scr = lv_obj_create(NULL, NULL);
+    lv_scr_load(scr);
+    
+    lv_obj_t * btn1 = lv_btn_create(scr, NULL);
+    lv_btn_set_fit(btn1, true, true); // auto set size according to content
+    lv_obj_set_pos(btn1, 60, 40);
+    
+    lv_obj_t * btn2 = lv_btn_create(scr, btn1);
+    lv_obj_set_pos(btn2, 180, 80);
+    
+    lv_obj_t * label1 = lv_label_create(btn1, NULL);
+    lv_label_set_text(label1, "Button 1");
+    
+    lv_obj_t * label2 = lv_label_create(btn2, NULL);
+    lv_label_set_text(label2, "Button 2");
+    
+    lv_obj_del(label2);
+    
+    
     pros::Motor MTR_1(FRONT_LEFT_MOTOR_PORT);
     MTR_1.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
     pros::Motor MTR_2(FRONT_RIGHT_MOTOR_PORT);
@@ -203,9 +222,9 @@ void competition_initialize() {
     pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
     MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
     
-    pros::lcd::register_btn0_cb(on_left_button);
-	pros::lcd::register_btn1_cb(on_middle_button);
-    pros::lcd::register_btn2_cb(on_right_button);
+//     pros::lcd::register_btn0_cb(on_left_button);
+// 	pros::lcd::register_btn1_cb(on_middle_button);
+//     pros::lcd::register_btn2_cb(on_right_button);
 }
 
 /**

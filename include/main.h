@@ -40,7 +40,7 @@
  */
 #include "okapi/api.hpp"
 using namespace okapi;
-//#include "pros/api_legacy.h"
+#include "pros/apix.h"
 
 /**
  * If you find doing pros::Motor() to be tedious and you'd prefer just to do

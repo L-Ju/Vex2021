@@ -189,7 +189,7 @@ bin/globals.cpp.o: src/globals.cpp include/main.h include/api.h \
  include/okapi/api/units/QMass.hpp include/okapi/api/units/QJerk.hpp \
  include/okapi/api/units/QPressure.hpp \
  include/okapi/api/units/QTorque.hpp include/okapi/api/units/QVolume.hpp \
- include/okapi/impl/util/rate.hpp
+ include/okapi/impl/util/rate.hpp include/pros/apix.h
 
 include/main.h:
 
@@ -726,3 +726,5 @@ include/okapi/api/units/QTorque.hpp:
 include/okapi/api/units/QVolume.hpp:
 
 include/okapi/impl/util/rate.hpp:
+
+include/pros/apix.h:
