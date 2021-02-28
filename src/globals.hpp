@@ -9,6 +9,12 @@ extern double kI;
 extern double kD;
 extern int autoRoutine;
 
+extern double chassisWidthInch;
+extern double ticksPerInch2;
+extern double gP;
+extern double gI;
+extern double gD;
+
 // drive motors
 extern int FRONT_LEFT_MOTOR_PORT;
 extern int FRONT_RIGHT_MOTOR_PORT;
