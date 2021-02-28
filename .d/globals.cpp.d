@@ -2,172 +2,77 @@ bin/globals.cpp.o: src/globals.cpp include/main.h include/api.h \
  include/pros/adi.h include/pros/colors.h include/pros/distance.h \
  include/pros/ext_adi.h include/pros/adi.h include/pros/adi.h \
  include/pros/imu.h include/pros/llemu.h include/display/lvgl.h \
- include/display/../lvgl.h include/display/../display/lv_misc/lv_log.h \
- include/display/../display/lv_misc/../lv_conf_internal.h \
- include/display/../display/lv_misc/../lv_conf_kconfig.h \
- include/lv_conf.h include/display/../display/lv_misc/lv_task.h \
- include/display/../display/lv_misc/lv_mem.h \
- include/display/../display/lv_misc/lv_log.h \
- include/display/../display/lv_misc/lv_types.h \
- include/display/../display/lv_misc/lv_ll.h \
- include/display/../display/lv_misc/lv_math.h \
- include/display/../display/lv_misc/lv_async.h \
- include/display/../display/lv_misc/lv_task.h \
- include/display/../display/lv_hal/lv_hal.h \
- include/display/../display/lv_hal/lv_hal_disp.h \
- include/display/../display/lv_hal/lv_hal.h \
- include/display/../display/lv_hal/../lv_misc/lv_color.h \
- include/display/../display/lv_hal/../lv_misc/../lv_conf_internal.h \
- include/display/../display/lv_hal/../lv_misc/lv_math.h \
- include/display/../display/lv_hal/../lv_misc/lv_types.h \
- include/display/../display/lv_hal/../lv_misc/lv_area.h \
- include/display/../display/lv_hal/../lv_misc/lv_mem.h \
- include/display/../display/lv_hal/../lv_misc/lv_ll.h \
- include/display/../display/lv_hal/../lv_misc/lv_task.h \
- include/display/../display/lv_hal/lv_hal_indev.h \
- include/display/../display/lv_hal/../lv_conf_internal.h \
- include/display/../display/lv_hal/lv_hal_tick.h \
- include/display/../display/lv_core/lv_obj.h \
- include/display/../display/lv_core/../lv_conf_internal.h \
- include/display/../display/lv_core/lv_style.h \
- include/display/../display/lv_core/../lv_font/lv_font.h \
- include/display/../display/lv_core/../lv_font/../lv_conf_internal.h \
- include/display/../display/lv_core/../lv_font/lv_symbol_def.h \
- include/display/../display/lv_core/../lv_font/../lv_misc/lv_area.h \
- include/display/../display/lv_core/../lv_misc/lv_color.h \
- include/display/../display/lv_core/../lv_misc/lv_area.h \
- include/display/../display/lv_core/../lv_misc/lv_anim.h \
- include/display/../display/lv_core/../lv_misc/../lv_conf_internal.h \
- include/display/../display/lv_core/../lv_misc/lv_mem.h \
- include/display/../display/lv_core/../lv_misc/lv_types.h \
- include/display/../display/lv_core/../lv_misc/lv_debug.h \
- include/display/../display/lv_core/../lv_draw/lv_draw_blend.h \
- include/display/../display/lv_core/../lv_draw/../lv_misc/lv_color.h \
- include/display/../display/lv_core/../lv_draw/../lv_misc/lv_area.h \
- include/display/../display/lv_core/../lv_draw/lv_draw_mask.h \
- include/display/../display/lv_core/../lv_hal/lv_hal.h \
- include/display/../display/lv_core/../lv_draw/lv_draw_rect.h \
- include/display/../display/lv_core/../lv_draw/../lv_core/lv_style.h \
- include/display/../display/lv_core/../lv_draw/lv_draw_label.h \
- include/display/../display/lv_core/../lv_draw/../lv_misc/lv_bidi.h \
- include/display/../display/lv_core/../lv_draw/../lv_misc/../lv_conf_internal.h \
- include/display/../display/lv_core/../lv_draw/../lv_misc/lv_txt.h \
- include/display/../display/lv_core/../lv_draw/../lv_misc/lv_area.h \
- include/display/../display/lv_core/../lv_draw/../lv_misc/../lv_font/lv_font.h \
- include/display/../display/lv_core/../lv_draw/../lv_misc/lv_printf.h \
- include/display/../display/lv_core/../lv_draw/lv_draw_line.h \
- include/display/../display/lv_core/../lv_draw/lv_draw_img.h \
- include/display/../display/lv_core/../lv_draw/lv_img_decoder.h \
- include/display/../display/lv_core/../lv_draw/../lv_conf_internal.h \
- include/display/../display/lv_core/../lv_draw/lv_img_buf.h \
- include/display/../display/lv_core/../lv_draw/../lv_misc/lv_fs.h \
- include/display/../display/lv_core/../lv_draw/../lv_misc/lv_mem.h \
- include/display/../display/lv_core/../lv_draw/../lv_misc/lv_types.h \
- include/display/../display/lv_core/lv_obj_style_dec.h \
- include/display/../display/lv_core/lv_group.h \
- include/display/../display/lv_core/lv_obj.h \
- include/display/../display/lv_core/lv_indev.h \
- include/display/../display/lv_core/../lv_hal/lv_hal_indev.h \
- include/display/../display/lv_core/../lv_core/lv_group.h \
- include/display/../display/lv_core/lv_refr.h \
- include/display/../display/lv_core/lv_disp.h \
- include/display/../display/lv_themes/lv_theme.h \
- include/display/../display/lv_themes/../lv_conf_internal.h \
- include/display/../display/lv_themes/../lv_core/lv_style.h \
- include/display/../display/lv_themes/../lv_core/lv_obj.h \
- include/display/../display/lv_themes/lv_theme_empty.h \
- include/display/../display/lv_themes/lv_theme_template.h \
- include/display/../display/lv_themes/lv_theme_material.h \
- include/display/../display/lv_themes/lv_theme_mono.h \
- include/display/../display/lv_font/lv_font.h \
- include/display/../display/lv_font/lv_font_loader.h \
- include/display/../display/lv_font/lv_font_fmt_txt.h \
- include/display/../display/lv_font/lv_font.h \
- include/display/../display/lv_misc/lv_printf.h \
- include/display/../display/lv_widgets/lv_btn.h \
- include/display/../display/lv_widgets/../lv_conf_internal.h \
- include/display/../display/lv_widgets/lv_cont.h \
- include/display/../display/lv_widgets/../lv_core/lv_obj.h \
- include/display/../display/lv_widgets/../lv_core/lv_indev.h \
- include/display/../display/lv_widgets/lv_imgbtn.h \
- include/display/../display/lv_widgets/lv_btn.h \
- include/display/../display/lv_widgets/../lv_draw/lv_draw_img.h \
- include/display/../display/lv_widgets/lv_img.h \
- include/display/../display/lv_widgets/../lv_misc/lv_fs.h \
- include/display/../display/lv_widgets/lv_label.h \
- include/display/../display/lv_widgets/../lv_font/lv_font.h \
- include/display/../display/lv_widgets/../lv_font/lv_symbol_def.h \
- include/display/../display/lv_widgets/../lv_misc/lv_txt.h \
- include/display/../display/lv_widgets/../lv_draw/lv_draw.h \
- include/display/../display/lv_widgets/../lv_draw/../lv_conf_internal.h \
- include/display/../display/lv_widgets/../lv_draw/../lv_core/lv_style.h \
- include/display/../display/lv_widgets/../lv_draw/../lv_misc/lv_txt.h \
- include/display/../display/lv_widgets/../lv_draw/lv_img_decoder.h \
- include/display/../display/lv_widgets/../lv_draw/lv_draw_rect.h \
- include/display/../display/lv_widgets/../lv_draw/lv_draw_label.h \
- include/display/../display/lv_widgets/../lv_draw/lv_draw_img.h \
- include/display/../display/lv_widgets/../lv_draw/lv_draw_line.h \
- include/display/../display/lv_widgets/../lv_draw/lv_draw_triangle.h \
- include/display/../display/lv_widgets/../lv_draw/lv_draw_arc.h \
- include/display/../display/lv_widgets/../lv_draw/lv_draw_blend.h \
- include/display/../display/lv_widgets/../lv_draw/lv_draw_mask.h \
- include/display/../display/lv_widgets/lv_label.h \
- include/display/../display/lv_widgets/lv_line.h \
- include/display/../display/lv_widgets/lv_page.h \
- include/display/../display/lv_widgets/../lv_misc/lv_anim.h \
- include/display/../display/lv_widgets/lv_cont.h \
- include/display/../display/lv_widgets/lv_list.h \
- include/display/../display/lv_widgets/lv_page.h \
- include/display/../display/lv_widgets/lv_img.h \
- include/display/../display/lv_widgets/lv_chart.h \
- include/display/../display/lv_widgets/lv_line.h \
- include/display/../display/lv_widgets/lv_table.h \
- include/display/../display/lv_widgets/lv_checkbox.h \
- include/display/../display/lv_widgets/lv_cpicker.h \
- include/display/../display/lv_widgets/lv_bar.h \
- include/display/../display/lv_widgets/lv_slider.h \
- include/display/../display/lv_widgets/lv_bar.h \
- include/display/../display/lv_widgets/lv_led.h \
- include/display/../display/lv_widgets/lv_btnmatrix.h \
- include/display/../display/lv_widgets/lv_keyboard.h \
- include/display/../display/lv_widgets/lv_btnmatrix.h \
- include/display/../display/lv_widgets/lv_dropdown.h \
- include/display/../display/lv_widgets/../lv_widgets/lv_page.h \
- include/display/../display/lv_widgets/../lv_widgets/lv_label.h \
- include/display/../display/lv_widgets/lv_roller.h \
- include/display/../display/lv_widgets/lv_textarea.h \
- include/display/../display/lv_widgets/lv_canvas.h \
- include/display/../display/lv_widgets/../lv_widgets/lv_img.h \
- include/display/../display/lv_widgets/lv_win.h \
- include/display/../display/lv_widgets/lv_tabview.h \
- include/display/../display/lv_widgets/../lv_widgets/lv_win.h \
- include/display/../display/lv_widgets/lv_tileview.h \
- include/display/../display/lv_widgets/lv_msgbox.h \
- include/display/../display/lv_widgets/lv_objmask.h \
- include/display/../display/lv_widgets/../lv_widgets/lv_cont.h \
- include/display/../display/lv_widgets/lv_gauge.h \
- include/display/../display/lv_widgets/lv_linemeter.h \
- include/display/../display/lv_widgets/lv_linemeter.h \
- include/display/../display/lv_widgets/lv_switch.h \
- include/display/../display/lv_widgets/lv_arc.h \
- include/display/../display/lv_widgets/lv_spinner.h \
- include/display/../display/lv_widgets/lv_arc.h \
- include/display/../display/lv_widgets/lv_calendar.h \
- include/display/../display/lv_widgets/lv_spinbox.h \
- include/display/../display/lv_widgets/../lv_widgets/lv_textarea.h \
- include/display/../display/lv_draw/lv_img_cache.h \
- include/display/../display/lv_draw/lv_img_decoder.h \
- include/display/../display/lv_api_map.h \
- include/display/../display/../lvgl.h include/pros/misc.h \
- include/pros/motors.h include/pros/optical.h include/api.h \
- include/pros/rtos.h include/pros/rotation.h include/pros/vision.h \
- include/pros/adi.hpp include/pros/distance.hpp include/pros/distance.h \
- include/pros/imu.hpp include/pros/imu.h include/pros/llemu.hpp \
- include/pros/llemu.h include/pros/misc.hpp include/pros/misc.h \
- include/pros/motors.hpp include/pros/motors.h include/pros/optical.hpp \
- include/pros/optical.h include/pros/rotation.hpp include/pros/rotation.h \
- include/pros/rtos.hpp include/pros/rtos.h include/pros/vision.hpp \
- include/pros/vision.h include/okapi/api.hpp \
+ include/display/lv_version.h include/display/lv_misc/lv_log.h \
+ include/display/lv_conf.h include/display/lv_conf_checker.h \
+ include/display/lv_misc/lv_task.h include/display/lv_misc/lv_mem.h \
+ include/display/lv_misc/lv_log.h include/display/lv_misc/lv_ll.h \
+ include/display/lv_hal/lv_hal.h include/display/lv_hal/lv_hal_disp.h \
+ include/display/lv_hal/lv_hal.h include/display/lv_misc/lv_color.h \
+ include/display/lv_misc/lv_area.h include/display/lv_hal/lv_hal_indev.h \
+ include/display/lv_core/lv_obj.h include/display/lv_core/lv_style.h \
+ include/display/lv_misc/lv_font.h \
+ include/display/lv_misc/lv_symbol_def.h \
+ include/display/lv_fonts/lv_font_builtin.h \
+ include/display/lv_misc/lv_anim.h include/display/lv_misc/lv_mem.h \
+ include/display/lv_misc/lv_ll.h include/display/lv_misc/lv_log.h \
+ include/display/lv_hal/lv_hal_tick.h include/display/lv_core/lv_obj.h \
+ include/display/lv_core/lv_group.h include/display/lv_core/lv_obj.h \
+ include/display/lv_core/lv_lang.h include/display/lv_core/lv_vdb.h \
+ include/display/lv_core/lv_refr.h include/display/lv_themes/lv_theme.h \
+ include/display/lv_core/lv_style.h \
+ include/display/lv_themes/lv_theme_templ.h \
+ include/display/lv_themes/lv_theme_default.h \
+ include/display/lv_themes/lv_theme_alien.h \
+ include/display/lv_themes/lv_theme_night.h \
+ include/display/lv_themes/lv_theme_zen.h \
+ include/display/lv_themes/lv_theme_mono.h \
+ include/display/lv_themes/lv_theme_nemo.h \
+ include/display/lv_themes/lv_theme_material.h \
+ include/display/lv_objx/lv_btn.h include/display/lv_objx/lv_cont.h \
+ include/display/lv_core/lv_indev.h include/display/lv_hal/lv_hal_indev.h \
+ include/display/lv_core/lv_group.h include/display/lv_objx/lv_imgbtn.h \
+ include/display/lv_objx/lv_btn.h include/display/lv_draw/lv_draw_img.h \
+ include/display/lv_draw/lv_draw.h include/display/lv_misc/lv_txt.h \
+ include/display/lv_misc/lv_area.h include/display/lv_misc/lv_font.h \
+ include/display/lv_draw/lv_draw_rect.h \
+ include/display/lv_draw/lv_draw_label.h \
+ include/display/lv_draw/lv_draw_img.h \
+ include/display/lv_draw/lv_draw_line.h \
+ include/display/lv_draw/lv_draw_triangle.h \
+ include/display/lv_objx/lv_img.h include/display/lv_misc/lv_fs.h \
+ include/display/lv_misc/lv_symbol_def.h \
+ include/display/lv_objx/lv_label.h include/display/lv_draw/lv_draw.h \
+ include/display/lv_objx/lv_label.h include/display/lv_objx/lv_line.h \
+ include/display/lv_objx/lv_page.h include/display/lv_objx/lv_cont.h \
+ include/display/lv_objx/lv_list.h include/display/lv_objx/lv_page.h \
+ include/display/lv_objx/lv_img.h include/display/lv_objx/lv_chart.h \
+ include/display/lv_objx/lv_line.h include/display/lv_objx/lv_table.h \
+ include/display/lv_objx/lv_cb.h include/display/lv_objx/lv_bar.h \
+ include/display/lv_objx/lv_slider.h include/display/lv_objx/lv_bar.h \
+ include/display/lv_objx/lv_led.h include/display/lv_objx/lv_btnm.h \
+ include/display/lv_objx/lv_kb.h include/display/lv_objx/lv_btnm.h \
+ include/display/lv_objx/lv_ddlist.h include/display/lv_objx/lv_page.h \
+ include/display/lv_objx/lv_label.h include/display/lv_objx/lv_roller.h \
+ include/display/lv_objx/lv_ddlist.h include/display/lv_objx/lv_ta.h \
+ include/display/lv_objx/lv_canvas.h include/display/lv_objx/lv_img.h \
+ include/display/lv_objx/lv_win.h include/display/lv_objx/lv_tabview.h \
+ include/display/lv_objx/lv_win.h include/display/lv_objx/lv_tileview.h \
+ include/display/lv_objx/lv_mbox.h include/display/lv_objx/lv_gauge.h \
+ include/display/lv_objx/lv_lmeter.h include/display/lv_objx/lv_lmeter.h \
+ include/display/lv_objx/lv_sw.h include/display/lv_objx/lv_slider.h \
+ include/display/lv_objx/lv_arc.h include/display/lv_objx/lv_preload.h \
+ include/display/lv_objx/lv_arc.h include/display/lv_objx/lv_calendar.h \
+ include/display/lv_objx/lv_spinbox.h include/display/lv_objx/lv_ta.h \
+ include/pros/misc.h include/pros/motors.h include/pros/optical.h \
+ include/api.h include/pros/rtos.h include/pros/rotation.h \
+ include/pros/vision.h include/pros/adi.hpp include/pros/distance.hpp \
+ include/pros/distance.h include/pros/imu.hpp include/pros/imu.h \
+ include/pros/llemu.hpp include/pros/llemu.h include/pros/misc.hpp \
+ include/pros/misc.h include/pros/motors.hpp include/pros/motors.h \
+ include/pros/optical.hpp include/pros/optical.h \
+ include/pros/rotation.hpp include/pros/rotation.h include/pros/rtos.hpp \
+ include/pros/rtos.h include/pros/vision.hpp include/pros/vision.h \
+ include/okapi/api.hpp \
  include/okapi/api/chassis/controller/chassisControllerIntegrated.hpp \
  include/okapi/api/chassis/controller/chassisController.hpp \
  include/okapi/api/chassis/controller/chassisScales.hpp \
@@ -308,323 +213,213 @@ include/pros/llemu.h:
 
 include/display/lvgl.h:
 
-include/display/../lvgl.h:
+include/display/lv_version.h:
 
-include/display/../display/lv_misc/lv_log.h:
+include/display/lv_misc/lv_log.h:
 
-include/display/../display/lv_misc/../lv_conf_internal.h:
+include/display/lv_conf.h:
 
-include/display/../display/lv_misc/../lv_conf_kconfig.h:
+include/display/lv_conf_checker.h:
 
-include/lv_conf.h:
+include/display/lv_misc/lv_task.h:
 
-include/display/../display/lv_misc/lv_task.h:
+include/display/lv_misc/lv_mem.h:
 
-include/display/../display/lv_misc/lv_mem.h:
+include/display/lv_misc/lv_log.h:
 
-include/display/../display/lv_misc/lv_log.h:
+include/display/lv_misc/lv_ll.h:
 
-include/display/../display/lv_misc/lv_types.h:
+include/display/lv_hal/lv_hal.h:
 
-include/display/../display/lv_misc/lv_ll.h:
+include/display/lv_hal/lv_hal_disp.h:
 
-include/display/../display/lv_misc/lv_math.h:
+include/display/lv_hal/lv_hal.h:
 
-include/display/../display/lv_misc/lv_async.h:
+include/display/lv_misc/lv_color.h:
 
-include/display/../display/lv_misc/lv_task.h:
+include/display/lv_misc/lv_area.h:
 
-include/display/../display/lv_hal/lv_hal.h:
+include/display/lv_hal/lv_hal_indev.h:
 
-include/display/../display/lv_hal/lv_hal_disp.h:
+include/display/lv_core/lv_obj.h:
 
-include/display/../display/lv_hal/lv_hal.h:
+include/display/lv_core/lv_style.h:
 
-include/display/../display/lv_hal/../lv_misc/lv_color.h:
+include/display/lv_misc/lv_font.h:
 
-include/display/../display/lv_hal/../lv_misc/../lv_conf_internal.h:
+include/display/lv_misc/lv_symbol_def.h:
 
-include/display/../display/lv_hal/../lv_misc/lv_math.h:
+include/display/lv_fonts/lv_font_builtin.h:
 
-include/display/../display/lv_hal/../lv_misc/lv_types.h:
+include/display/lv_misc/lv_anim.h:
 
-include/display/../display/lv_hal/../lv_misc/lv_area.h:
+include/display/lv_misc/lv_mem.h:
 
-include/display/../display/lv_hal/../lv_misc/lv_mem.h:
+include/display/lv_misc/lv_ll.h:
 
-include/display/../display/lv_hal/../lv_misc/lv_ll.h:
+include/display/lv_misc/lv_log.h:
 
-include/display/../display/lv_hal/../lv_misc/lv_task.h:
+include/display/lv_hal/lv_hal_tick.h:
 
-include/display/../display/lv_hal/lv_hal_indev.h:
+include/display/lv_core/lv_obj.h:
 
-include/display/../display/lv_hal/../lv_conf_internal.h:
+include/display/lv_core/lv_group.h:
 
-include/display/../display/lv_hal/lv_hal_tick.h:
+include/display/lv_core/lv_obj.h:
 
-include/display/../display/lv_core/lv_obj.h:
+include/display/lv_core/lv_lang.h:
 
-include/display/../display/lv_core/../lv_conf_internal.h:
+include/display/lv_core/lv_vdb.h:
 
-include/display/../display/lv_core/lv_style.h:
+include/display/lv_core/lv_refr.h:
 
-include/display/../display/lv_core/../lv_font/lv_font.h:
+include/display/lv_themes/lv_theme.h:
 
-include/display/../display/lv_core/../lv_font/../lv_conf_internal.h:
+include/display/lv_core/lv_style.h:
 
-include/display/../display/lv_core/../lv_font/lv_symbol_def.h:
+include/display/lv_themes/lv_theme_templ.h:
 
-include/display/../display/lv_core/../lv_font/../lv_misc/lv_area.h:
+include/display/lv_themes/lv_theme_default.h:
 
-include/display/../display/lv_core/../lv_misc/lv_color.h:
+include/display/lv_themes/lv_theme_alien.h:
 
-include/display/../display/lv_core/../lv_misc/lv_area.h:
+include/display/lv_themes/lv_theme_night.h:
 
-include/display/../display/lv_core/../lv_misc/lv_anim.h:
+include/display/lv_themes/lv_theme_zen.h:
 
-include/display/../display/lv_core/../lv_misc/../lv_conf_internal.h:
+include/display/lv_themes/lv_theme_mono.h:
 
-include/display/../display/lv_core/../lv_misc/lv_mem.h:
+include/display/lv_themes/lv_theme_nemo.h:
 
-include/display/../display/lv_core/../lv_misc/lv_types.h:
+include/display/lv_themes/lv_theme_material.h:
 
-include/display/../display/lv_core/../lv_misc/lv_debug.h:
+include/display/lv_objx/lv_btn.h:
 
-include/display/../display/lv_core/../lv_draw/lv_draw_blend.h:
+include/display/lv_objx/lv_cont.h:
 
-include/display/../display/lv_core/../lv_draw/../lv_misc/lv_color.h:
+include/display/lv_core/lv_indev.h:
 
-include/display/../display/lv_core/../lv_draw/../lv_misc/lv_area.h:
+include/display/lv_hal/lv_hal_indev.h:
 
-include/display/../display/lv_core/../lv_draw/lv_draw_mask.h:
+include/display/lv_core/lv_group.h:
 
-include/display/../display/lv_core/../lv_hal/lv_hal.h:
+include/display/lv_objx/lv_imgbtn.h:
 
-include/display/../display/lv_core/../lv_draw/lv_draw_rect.h:
+include/display/lv_objx/lv_btn.h:
 
-include/display/../display/lv_core/../lv_draw/../lv_core/lv_style.h:
+include/display/lv_draw/lv_draw_img.h:
 
-include/display/../display/lv_core/../lv_draw/lv_draw_label.h:
+include/display/lv_draw/lv_draw.h:
 
-include/display/../display/lv_core/../lv_draw/../lv_misc/lv_bidi.h:
+include/display/lv_misc/lv_txt.h:
 
-include/display/../display/lv_core/../lv_draw/../lv_misc/../lv_conf_internal.h:
+include/display/lv_misc/lv_area.h:
 
-include/display/../display/lv_core/../lv_draw/../lv_misc/lv_txt.h:
+include/display/lv_misc/lv_font.h:
 
-include/display/../display/lv_core/../lv_draw/../lv_misc/lv_area.h:
+include/display/lv_draw/lv_draw_rect.h:
 
-include/display/../display/lv_core/../lv_draw/../lv_misc/../lv_font/lv_font.h:
+include/display/lv_draw/lv_draw_label.h:
 
-include/display/../display/lv_core/../lv_draw/../lv_misc/lv_printf.h:
+include/display/lv_draw/lv_draw_img.h:
 
-include/display/../display/lv_core/../lv_draw/lv_draw_line.h:
+include/display/lv_draw/lv_draw_line.h:
 
-include/display/../display/lv_core/../lv_draw/lv_draw_img.h:
+include/display/lv_draw/lv_draw_triangle.h:
 
-include/display/../display/lv_core/../lv_draw/lv_img_decoder.h:
+include/display/lv_objx/lv_img.h:
 
-include/display/../display/lv_core/../lv_draw/../lv_conf_internal.h:
+include/display/lv_misc/lv_fs.h:
 
-include/display/../display/lv_core/../lv_draw/lv_img_buf.h:
+include/display/lv_misc/lv_symbol_def.h:
 
-include/display/../display/lv_core/../lv_draw/../lv_misc/lv_fs.h:
+include/display/lv_objx/lv_label.h:
 
-include/display/../display/lv_core/../lv_draw/../lv_misc/lv_mem.h:
+include/display/lv_draw/lv_draw.h:
 
-include/display/../display/lv_core/../lv_draw/../lv_misc/lv_types.h:
+include/display/lv_objx/lv_label.h:
 
-include/display/../display/lv_core/lv_obj_style_dec.h:
+include/display/lv_objx/lv_line.h:
 
-include/display/../display/lv_core/lv_group.h:
+include/display/lv_objx/lv_page.h:
 
-include/display/../display/lv_core/lv_obj.h:
+include/display/lv_objx/lv_cont.h:
 
-include/display/../display/lv_core/lv_indev.h:
+include/display/lv_objx/lv_list.h:
 
-include/display/../display/lv_core/../lv_hal/lv_hal_indev.h:
+include/display/lv_objx/lv_page.h:
 
-include/display/../display/lv_core/../lv_core/lv_group.h:
+include/display/lv_objx/lv_img.h:
 
-include/display/../display/lv_core/lv_refr.h:
+include/display/lv_objx/lv_chart.h:
 
-include/display/../display/lv_core/lv_disp.h:
+include/display/lv_objx/lv_line.h:
 
-include/display/../display/lv_themes/lv_theme.h:
+include/display/lv_objx/lv_table.h:
 
-include/display/../display/lv_themes/../lv_conf_internal.h:
+include/display/lv_objx/lv_cb.h:
 
-include/display/../display/lv_themes/../lv_core/lv_style.h:
+include/display/lv_objx/lv_bar.h:
 
-include/display/../display/lv_themes/../lv_core/lv_obj.h:
+include/display/lv_objx/lv_slider.h:
 
-include/display/../display/lv_themes/lv_theme_empty.h:
+include/display/lv_objx/lv_bar.h:
 
-include/display/../display/lv_themes/lv_theme_template.h:
+include/display/lv_objx/lv_led.h:
 
-include/display/../display/lv_themes/lv_theme_material.h:
+include/display/lv_objx/lv_btnm.h:
 
-include/display/../display/lv_themes/lv_theme_mono.h:
+include/display/lv_objx/lv_kb.h:
 
-include/display/../display/lv_font/lv_font.h:
+include/display/lv_objx/lv_btnm.h:
 
-include/display/../display/lv_font/lv_font_loader.h:
+include/display/lv_objx/lv_ddlist.h:
 
-include/display/../display/lv_font/lv_font_fmt_txt.h:
+include/display/lv_objx/lv_page.h:
 
-include/display/../display/lv_font/lv_font.h:
+include/display/lv_objx/lv_label.h:
 
-include/display/../display/lv_misc/lv_printf.h:
+include/display/lv_objx/lv_roller.h:
 
-include/display/../display/lv_widgets/lv_btn.h:
+include/display/lv_objx/lv_ddlist.h:
 
-include/display/../display/lv_widgets/../lv_conf_internal.h:
+include/display/lv_objx/lv_ta.h:
 
-include/display/../display/lv_widgets/lv_cont.h:
+include/display/lv_objx/lv_canvas.h:
 
-include/display/../display/lv_widgets/../lv_core/lv_obj.h:
+include/display/lv_objx/lv_img.h:
 
-include/display/../display/lv_widgets/../lv_core/lv_indev.h:
+include/display/lv_objx/lv_win.h:
 
-include/display/../display/lv_widgets/lv_imgbtn.h:
+include/display/lv_objx/lv_tabview.h:
 
-include/display/../display/lv_widgets/lv_btn.h:
+include/display/lv_objx/lv_win.h:
 
-include/display/../display/lv_widgets/../lv_draw/lv_draw_img.h:
+include/display/lv_objx/lv_tileview.h:
 
-include/display/../display/lv_widgets/lv_img.h:
+include/display/lv_objx/lv_mbox.h:
 
-include/display/../display/lv_widgets/../lv_misc/lv_fs.h:
+include/display/lv_objx/lv_gauge.h:
 
-include/display/../display/lv_widgets/lv_label.h:
+include/display/lv_objx/lv_lmeter.h:
 
-include/display/../display/lv_widgets/../lv_font/lv_font.h:
+include/display/lv_objx/lv_lmeter.h:
 
-include/display/../display/lv_widgets/../lv_font/lv_symbol_def.h:
+include/display/lv_objx/lv_sw.h:
 
-include/display/../display/lv_widgets/../lv_misc/lv_txt.h:
+include/display/lv_objx/lv_slider.h:
 
-include/display/../display/lv_widgets/../lv_draw/lv_draw.h:
+include/display/lv_objx/lv_arc.h:
 
-include/display/../display/lv_widgets/../lv_draw/../lv_conf_internal.h:
+include/display/lv_objx/lv_preload.h:
 
-include/display/../display/lv_widgets/../lv_draw/../lv_core/lv_style.h:
+include/display/lv_objx/lv_arc.h:
 
-include/display/../display/lv_widgets/../lv_draw/../lv_misc/lv_txt.h:
+include/display/lv_objx/lv_calendar.h:
 
-include/display/../display/lv_widgets/../lv_draw/lv_img_decoder.h:
+include/display/lv_objx/lv_spinbox.h:
 
-include/display/../display/lv_widgets/../lv_draw/lv_draw_rect.h:
-
-include/display/../display/lv_widgets/../lv_draw/lv_draw_label.h:
-
-include/display/../display/lv_widgets/../lv_draw/lv_draw_img.h:
-
-include/display/../display/lv_widgets/../lv_draw/lv_draw_line.h:
-
-include/display/../display/lv_widgets/../lv_draw/lv_draw_triangle.h:
-
-include/display/../display/lv_widgets/../lv_draw/lv_draw_arc.h:
-
-include/display/../display/lv_widgets/../lv_draw/lv_draw_blend.h:
-
-include/display/../display/lv_widgets/../lv_draw/lv_draw_mask.h:
-
-include/display/../display/lv_widgets/lv_label.h:
-
-include/display/../display/lv_widgets/lv_line.h:
-
-include/display/../display/lv_widgets/lv_page.h:
-
-include/display/../display/lv_widgets/../lv_misc/lv_anim.h:
-
-include/display/../display/lv_widgets/lv_cont.h:
-
-include/display/../display/lv_widgets/lv_list.h:
-
-include/display/../display/lv_widgets/lv_page.h:
-
-include/display/../display/lv_widgets/lv_img.h:
-
-include/display/../display/lv_widgets/lv_chart.h:
-
-include/display/../display/lv_widgets/lv_line.h:
-
-include/display/../display/lv_widgets/lv_table.h:
-
-include/display/../display/lv_widgets/lv_checkbox.h:
-
-include/display/../display/lv_widgets/lv_cpicker.h:
-
-include/display/../display/lv_widgets/lv_bar.h:
-
-include/display/../display/lv_widgets/lv_slider.h:
-
-include/display/../display/lv_widgets/lv_bar.h:
-
-include/display/../display/lv_widgets/lv_led.h:
-
-include/display/../display/lv_widgets/lv_btnmatrix.h:
-
-include/display/../display/lv_widgets/lv_keyboard.h:
-
-include/display/../display/lv_widgets/lv_btnmatrix.h:
-
-include/display/../display/lv_widgets/lv_dropdown.h:
-
-include/display/../display/lv_widgets/../lv_widgets/lv_page.h:
-
-include/display/../display/lv_widgets/../lv_widgets/lv_label.h:
-
-include/display/../display/lv_widgets/lv_roller.h:
-
-include/display/../display/lv_widgets/lv_textarea.h:
-
-include/display/../display/lv_widgets/lv_canvas.h:
-
-include/display/../display/lv_widgets/../lv_widgets/lv_img.h:
-
-include/display/../display/lv_widgets/lv_win.h:
-
-include/display/../display/lv_widgets/lv_tabview.h:
-
-include/display/../display/lv_widgets/../lv_widgets/lv_win.h:
-
-include/display/../display/lv_widgets/lv_tileview.h:
-
-include/display/../display/lv_widgets/lv_msgbox.h:
-
-include/display/../display/lv_widgets/lv_objmask.h:
-
-include/display/../display/lv_widgets/../lv_widgets/lv_cont.h:
-
-include/display/../display/lv_widgets/lv_gauge.h:
-
-include/display/../display/lv_widgets/lv_linemeter.h:
-
-include/display/../display/lv_widgets/lv_linemeter.h:
-
-include/display/../display/lv_widgets/lv_switch.h:
-
-include/display/../display/lv_widgets/lv_arc.h:
-
-include/display/../display/lv_widgets/lv_spinner.h:
-
-include/display/../display/lv_widgets/lv_arc.h:
-
-include/display/../display/lv_widgets/lv_calendar.h:
-
-include/display/../display/lv_widgets/lv_spinbox.h:
-
-include/display/../display/lv_widgets/../lv_widgets/lv_textarea.h:
-
-include/display/../display/lv_draw/lv_img_cache.h:
-
-include/display/../display/lv_draw/lv_img_decoder.h:
-
-include/display/../display/lv_api_map.h:
-
-include/display/../display/../lvgl.h:
+include/display/lv_objx/lv_ta.h:
 
 include/pros/misc.h:
 

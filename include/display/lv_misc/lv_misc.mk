@@ -1,3 +1,5 @@
+CSRCS += lv_font.c
+CSRCS += lv_circ.c
 CSRCS += lv_area.c
 CSRCS += lv_task.c
 CSRCS += lv_fs.c
@@ -6,17 +8,19 @@ CSRCS += lv_mem.c
 CSRCS += lv_ll.c
 CSRCS += lv_color.c
 CSRCS += lv_txt.c
-CSRCS += lv_txt_ap.c
+CSRCS += lv_ufs.c
 CSRCS += lv_math.c
 CSRCS += lv_log.c
 CSRCS += lv_gc.c
-CSRCS += lv_utils.c
-CSRCS += lv_async.c
-CSRCS += lv_printf.c
-CSRCS += lv_bidi.c
-CSRCS += lv_debug.c
 
+<<<<<<< HEAD
 DEPPATH += --dep-path display/lv_misc
 VPATH += :display/lv_misc
 
 CFLAGS += "-Idisplay/lv_misc"
+=======
+DEPPATH += --dep-path $(LVGL_DIR)/lvgl/lv_misc
+VPATH += :$(LVGL_DIR)/lvgl/lv_misc
+
+CFLAGS += "-I$(LVGL_DIR)/lvgl/lv_misc"
+>>>>>>> parent of bbdcf2b (new lvgl)
