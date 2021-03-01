@@ -152,6 +152,19 @@ void stopIntake() {
     MTR_rollerRight.moveVelocity(0);
     MTR_pushup.moveVelocity(0);
 }
+
+// LVGL FUNCTIONS
+
+static lv_res_t teamAction(lv_obj_t * ddlist){
+    uint8_t id = lv_obj_get_free_num(ddlist);
+    
+    char sel_str[32];
+    lv_ddlist_get_selected_str(ddlist, sel_str);
+    std::cout << "ddlist: " << sel_str << std::endl;
+    
+    return LV_RES_OK;
+}
+
 /**
  * Runs initialization code. This occurs as soon as the program is started.
  *
@@ -169,13 +182,18 @@ void initialize() {
     
     lv_obj_t * scr = lv_obj_create(NULL, NULL);
     lv_scr_load(scr);
+
     
+    // sidebar buttons
     lv_obj_t * btn1 = lv_btn_create(scr, NULL);
-    lv_btn_set_fit(btn1, true, true); // auto set size according to content
-    lv_obj_set_pos(btn1, 340, 0);
-    
+    lv_obj_set_size(btn1, 140, 50);
+    lv_obj_align(btn1, NULL, LV_ALIGN_IN_TOP_RIGHT, 0, 10);
+
     lv_obj_t * btn2 = lv_btn_create(scr, btn1);
-    lv_obj_set_pos(btn2, 180, 80);
+    lv_obj_align(btn2, NULL, LV_ALIGN_IN_RIGHT_MID, 0, 0);
+    
+    lv_obj_t * btn3 = lv_btn_create(scr, btn1);
+    lv_obj_align(btn3, NULL, LV_ALIGN_IN_BOTTOM_RIGHT, 0, -10);
     
     lv_obj_t * label1 = lv_label_create(btn1, NULL);
     lv_label_set_text(label1, "Button 1");
@@ -183,8 +201,37 @@ void initialize() {
     lv_obj_t * label2 = lv_label_create(btn2, NULL);
     lv_label_set_text(label2, "Button 2");
     
-    lv_obj_del(label2);
+    lv_obj_t * label3 = lv_label_create(btn3, NULL);
+    lv_label_set_text(label3, "Button 3");
     
+    
+    // dropdown auto selector
+    lv_obj_t * dropdownTeam = lv_ddlist_create(lv_scr_act(), NULL);
+    lv_ddlist_set_options(dropdownTeam, "Red\n" "Blue");
+    lv_ddlist_set_hor_fit(dropdownTeam, false);
+    lv_obj_set_width(dropdownTeam, 160);
+    lv_obj_align(dropdownTeam, NULL, LV_ALIGN_IN_TOP_LEFT, 10, 10);
+    lv_ddlist_set_draw_arrow(dropdownTeam, true);
+    lv_ddlist_set_action(dropdownTeam, teamAction);
+    
+    
+    // dropdown side selector
+    lv_obj_t * dropdownSide = lv_ddlist_create(lv_scr_act(), NULL);
+    lv_ddlist_set_options(dropdownSide, "Left\n" "Right");
+    lv_ddlist_set_hor_fit(dropdownSide, false);
+    lv_obj_set_width(dropdownSide, 160);
+    lv_obj_align(dropdownSide, NULL, LV_ALIGN_IN_LEFT_MID, 10, 0);
+    lv_ddlist_set_draw_arrow(dropdownSide, true);
+    lv_ddlist_set_action(dropdownSide, teamAction);
+    
+    // dropdown restriction seelctor
+    lv_obj_t * dropdownRestrict = lv_ddlist_create(lv_scr_act(), NULL);
+    lv_ddlist_set_options(dropdownRestrict, "Restricted\n" "Unrestricted");
+    lv_ddlist_set_hor_fit(dropdownRestrict, false);
+    lv_obj_set_width(dropdownRestrict, 160);
+    lv_obj_align(dropdownRestrict, NULL, LV_ALIGN_IN_BOTTOM_LEFT, 10, -10);
+    lv_ddlist_set_draw_arrow(dropdownRestrict, true);
+    lv_ddlist_set_action(dropdownRestrict, teamAction);
     
     pros::Motor MTR_1(FRONT_LEFT_MOTOR_PORT);
     MTR_1.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
