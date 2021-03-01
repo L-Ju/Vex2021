@@ -171,17 +171,13 @@ void driveFeet (double distanceInFeet) {
     MTR_backLeft.tarePosition();
     MTR_backRight.tarePosition();
 
-//     std::cout << "FrontLeft: " << MTR_frontLeft.getPosition() << std::endl;
-//     std::cout << "BackLeft: " << MTR_backLeft.getPosition() << std::endl;
-//     std::cout << "FrontRight: " << MTR_frontRight.getPosition() << std::endl;
-//     std::cout << "BackRight: " << MTR_backRight.getPosition() << std::endl;
     double error = 0;
     double lastError = 0;
     double integral = 0;
     double derivative = 0;
     if (distanceInTicks > 0){
-        double leftVelocity = 100;
-        double rightVelocity = 100;
+        double leftVelocity = 185;
+        double rightVelocity = 185;
 
         MTR_frontLeft.moveVelocity(leftVelocity);
         MTR_frontRight.moveVelocity(rightVelocity);
@@ -189,11 +185,34 @@ void driveFeet (double distanceInFeet) {
         MTR_backRight.moveVelocity(rightVelocity);
 
         while ( MTR_frontLeft.getPosition() + MTR_backLeft.getPosition() < distanceInTicks*2) {
+            error = (MTR_frontLeft.getPosition() + MTR_backLeft.getPosition()) - (MTR_frontRight.getPosition()*-1 + MTR_backRight.getPosition()*-1);
+            integral = integral + error;
+            derivative = error - lastError;
 
-//         std::cout << "FrontLeft: " << MTR_frontLeft.getPosition() << std::endl;
-//         std::cout << "BackLeft: " << MTR_backLeft.getPosition() << std::endl;
-//         std::cout << "FrontRight: " << MTR_frontRight.getPosition() << std::endl;
-//         std::cout << "BackRight: " << MTR_backRight.getPosition() << std::endl;
+            rightVelocity = leftVelocity + (error * kP)
+                                        + (integral * kI)
+                                        + (derivative * kD);
+
+            MTR_frontRight.moveVelocity(-rightVelocity);
+            MTR_backRight.moveVelocity(-rightVelocity);
+
+            pros::delay(20);
+        }
+        MTR_frontLeft.moveVelocity(0);
+        MTR_frontRight.moveVelocity(0);
+        MTR_backLeft.moveVelocity(0);
+        MTR_backRight.moveVelocity(0);
+    } 
+    else if (distanceInTicks < 0) {
+        double leftVelocity = -100;
+        double rightVelocity = -100;
+
+        MTR_frontLeft.moveVelocity(leftVelocity);
+        MTR_frontRight.moveVelocity(rightVelocity);
+        MTR_backLeft.moveVelocity(leftVelocity);
+        MTR_backRight.moveVelocity(rightVelocity);
+
+        while ( MTR_frontLeft.getPosition() + MTR_backLeft.getPosition() > distanceInTicks*2) {
 
             error = (MTR_frontLeft.getPosition() + MTR_backLeft.getPosition()) - (MTR_frontRight.getPosition()*-1 + MTR_backRight.getPosition()*-1);
             integral = integral + error;
@@ -203,72 +222,22 @@ void driveFeet (double distanceInFeet) {
                                         + (integral * kI)
                                         + (derivative * kD);
 
-    //         std::cout << "right " << rightVelocity << std::endl;
-    //         std::cout << "left " << leftVelocity << std::endl;
             MTR_frontRight.moveVelocity(-rightVelocity);
             MTR_backRight.moveVelocity(-rightVelocity);
 
 
-            // FOR TUNING THE P LOOP
-    //         std::cout << error << ",";
-
             pros::delay(20);
         }
-//     std::cout << "FrontLeft End: " << MTR_frontLeft.getPosition() << std::endl;
-//     std::cout << "BackLeft End: " << MTR_backLeft.getPosition() << std::endl;
-//     std::cout << "FrontRight End: " << MTR_frontRight.getPosition() << std::endl;
-//     std::cout << "BackRight End: " << MTR_backRight.getPosition() << std::endl;
         MTR_frontLeft.moveVelocity(0);
         MTR_frontRight.moveVelocity(0);
         MTR_backLeft.moveVelocity(0);
         MTR_backRight.moveVelocity(0);
-    } 
-//     else if (distanceInTicks < 0) {
-//         double leftVelocity = -100;
-//         double rightVelocity = -100;
-
-//         MTR_frontLeft.moveVelocity(leftVelocity);
-//         MTR_frontRight.moveVelocity(rightVelocity);
-//         MTR_backLeft.moveVelocity(leftVelocity);
-//         MTR_backRight.moveVelocity(rightVelocity);
-
-//         while ( MTR_frontLeft.getPosition() + MTR_backLeft.getPosition() > distanceInTicks*2) {
-
-// //         std::cout << "FrontLeft: " << MTR_frontLeft.getPosition() << std::endl;
-// //         std::cout << "BackLeft: " << MTR_backLeft.getPosition() << std::endl;
-// //         std::cout << "FrontRight: " << MTR_frontRight.getPosition() << std::endl;
-// //         std::cout << "BackRight: " << MTR_backRight.getPosition() << std::endl;
-
-//             error = (MTR_frontLeft.getPosition() + MTR_backLeft.getPosition()) - (MTR_frontRight.getPosition()*-1 + MTR_backRight.getPosition()*-1);
-//             integral = integral + error;
-//             derivative = error - lastError;
-
-//             rightVelocity = leftVelocity + (error * kP)
-//                                         + (integral * kI)
-//                                         + (derivative * kD);
-
-//     //         std::cout << "right " << rightVelocity << std::endl;
-//     //         std::cout << "left " << leftVelocity << std::endl;
-//             MTR_frontRight.moveVelocity(-rightVelocity);
-//             MTR_backRight.moveVelocity(-rightVelocity);
-
-
-//             // FOR TUNING THE P LOOP
-//     //         std::cout << error << ",";
-
-//             pros::delay(20);
-//         }
-//     //     std::cout << "FrontLeft End: " << MTR_frontLeft.getPosition() << std::endl;
-//     //     std::cout << "BackLeft End: " << MTR_backLeft.getPosition() << std::endl;
-//     //     std::cout << "FrontRight End: " << MTR_frontRight.getPosition() << std::endl;
-//     //     std::cout << "BackRight End: " << MTR_backRight.getPosition() << std::endl;
-//         MTR_frontLeft.moveVelocity(0);
-//         MTR_frontRight.moveVelocity(0);
-//         MTR_backLeft.moveVelocity(0);
-//         MTR_backRight.moveVelocity(0);
-//     }
+    }
 }
 
+void driveInches (double distanceInInches) {
+    driveFeet(distanceInInches/12);
+}
 
 void pickUpBalls() {
     MTR_rollerLeft.moveVelocity(-600);
@@ -355,7 +324,6 @@ void competition_initialize() {
  * from where it left off.
  */
 void autonomous() {
-    driveFeet(2);
     
 /* our regional's auto
 pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
@@ -377,30 +345,32 @@ MTR_pushup.moveVelocity(0);
 drive->moveDistance(-27.3_in);
 */
 
-//     pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
-//     MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-//    MTR_shooter.moveVelocity(600);
-//     drive->setMaxVelocity(200);
-//     pickUpBalls();
-//     drive->moveDistance(55_in);
-//     pros::delay(600);
-//     stopIntake();
-//     turnAngleRIGHT(135);
-
-/*
-    drive->moveDistance(49.5_in);
+    pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
+    MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+    MTR_shooter.moveVelocity(600);
+    pickUpBalls();
+    driveInches(52);
+    pros::delay(600);
+    stopIntake();
+    turnAngleRIGHT(135);
+    driveInches(46);
     turnAngleRIGHT(45);
-    drive->moveDistance(20_in);
+    driveInches(16);
     pickUpBalls();
     MTR_pushup.moveVelocity(-600);
     MTR_shooter.moveVelocity(-600);
-    pros::delay(1200);
+    pros::delay(1600);
     MTR_rollerLeft.moveVelocity(0);
     MTR_rollerRight.moveVelocity(0);
-    pros::delay(2000);
+    pros::delay(1000);
     MTR_shooter.moveVelocity(0);
     MTR_pushup.moveVelocity(0);
-  */
+    MTR_rollerLeft.moveVelocity(100);
+    MTR_rollerRight.moveVelocity(100);
+    pros::delay(200);
+    driveFeet(-2);
+    MTR_rollerLeft.moveVelocity(0);
+    MTR_rollerRight.moveVelocity(0);
 }
 
 /**
