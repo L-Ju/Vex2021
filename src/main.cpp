@@ -355,6 +355,8 @@ void competition_initialize() {
  * from where it left off.
  */
 void autonomous() {
+    driveFeet(2);
+    
 /* our regional's auto
 pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
 MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
@@ -374,15 +376,17 @@ MTR_shooter.moveVelocity(0);
 MTR_pushup.moveVelocity(0);
 drive->moveDistance(-27.3_in);
 */
-    pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
-    MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+
+//     pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
+//     MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 //    MTR_shooter.moveVelocity(600);
-    drive->setMaxVelocity(200);
-    pickUpBalls();
-    drive->moveDistance(55_in);
-    pros::delay(600);
-    stopIntake();
-    turnAngleRIGHT(135);
+//     drive->setMaxVelocity(200);
+//     pickUpBalls();
+//     drive->moveDistance(55_in);
+//     pros::delay(600);
+//     stopIntake();
+//     turnAngleRIGHT(135);
+
 /*
     drive->moveDistance(49.5_in);
     turnAngleRIGHT(45);
