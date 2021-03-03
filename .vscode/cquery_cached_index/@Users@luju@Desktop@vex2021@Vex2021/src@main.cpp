@@ -388,7 +388,7 @@ void opcontrol() {
                 MTR_shooter.moveVelocity(600);
             }else if (controller.getDigital(okapi::ControllerDigital::L1)) {
                 MTR_shooter.moveVelocity(-600);
-                MTR_pushup.moveVelocity(-600);
+                MTR_pushup.moveVelocity(-500);
             }else {
                 MTR_shooter.moveVelocity(0);
             }
