@@ -24,71 +24,17 @@ void on_right_button(){
     pros::lcd::print(2, "RIGHT");
 }
 
-//turn right *NO neagtive angle values
-/*
-void turnAngleRIGHT(double angleInRadians){
-    MTR_frontLeft.tarePosition();
-    MTR_frontRight.tarePosition();
-    MTR_backLeft.tarePosition();
-    MTR_backRight.tarePosition();
-
-    double newAngle = 0;
-    double lastLeftInch = 0;
-    double lastRightInch = 0;
-    double error = 0;
-    double lastError = 0;
-    double integral = 0;
-    double derivative = 0;
-
-    while(newAngle < angleInRadians){
-      double allVelocity;
-      double newLeftInch = MTR_frontLeft.getPosition() * ticksPerInch2;
-      double newRightInch = MTR_frontRight.getPosition() * ticksPerInch2;
-
-      double dLeftInch = newLeftInch - lastLeftInch;
-      double dRightInch = newRightInch - lastRightInch;
-
-      lastLeftInch = newLeftInch;
-      lastRightInch = newRightInch;
-
-      double dAngle =  (dLeftInch - dRightInch) / chassisWidthInch;
-      newAngle += dAngle;
-
-      std::cout << "FrontLeft: " << dLeftInch << std::endl;
-      std::cout << "BackRight: " << dRightInch << std::endl;
-
-      std::cout << "dAngle = " << dAngle << std::endl;
-      std::cout << "newAngle = " << newAngle << std::endl;
-
-      error = angleInRadians - newAngle;
-      integral = integral + error;
-      derivative = error - lastError;
-
-       allVelocity = (error * gP)
-                     +(integral * gI)
-                     +(derivative * gD);
-
-      std::cout << "allVelocity = " << allVelocity << ' ';
-
-      MTR_frontLeft.moveVelocity(allVelocity);
-      MTR_frontRight.moveVelocity(allVelocity);
-      MTR_backLeft.moveVelocity(allVelocity);
-      MTR_backRight.moveVelocity(allVelocity);
-      pros::delay(500);
-    }
-    MTR_frontLeft.moveVelocity(0);
-    MTR_frontRight.moveVelocity(0);
-    MTR_backLeft.moveVelocity(0);
-    MTR_backRight.moveVelocity(0);
-}
-*/
-
-//turn right *NO neagtive angle values
+//turn right *NO neagtive angle values *somehow only works within the range of 0 < x <= 180
 void turnAngleRIGHT(double angleInDegrees){
     MTR_frontLeft.tarePosition();
     MTR_frontRight.tarePosition();
     MTR_backLeft.tarePosition();
     MTR_backRight.tarePosition();
+
+    if(angleInDegrees == 180){
+      double temp = ( (44.5/360.0)*angleInDegrees ) / 2.0;
+      angleInDegrees = angleInDegrees + temp;
+    }
 
     double angleinTicks = 0;
     double error = 0;
@@ -101,13 +47,13 @@ void turnAngleRIGHT(double angleInDegrees){
       double circleticks = MTR_frontLeft.getPosition() + MTR_backLeft.getPosition() + MTR_frontRight.getPosition() + MTR_backRight.getPosition();
       circleticks  =  circleticks / 4.0;
 
-      angleinTicks = circleticks /8.547499;
+      angleinTicks = circleticks /6.843738; //8.547499
 
       error = angleInDegrees - angleinTicks;
       integral = integral + error;
       derivative = error - lastError;
 
-       allVelocity = (error * gP)
+       allVelocity = 190 + (error * gP)
                      +(integral * gI)
                      +(derivative * gD);
 
@@ -123,11 +69,17 @@ void turnAngleRIGHT(double angleInDegrees){
     MTR_backRight.moveVelocity(0);
 }
 
+//*NO neagtive angle values *somehow only works within the range of 0 < x <= 180
 void turnAngleLEFT(double angleInDegrees){
     MTR_frontLeft.tarePosition();
     MTR_frontRight.tarePosition();
     MTR_backLeft.tarePosition();
     MTR_backRight.tarePosition();
+
+    if(angleInDegrees == 180){
+      double temp = ( (44.5/360.0)*angleInDegrees ) / 2.0;
+      angleInDegrees = angleInDegrees + temp;
+    }
 
     double angleinTicks = 0;
     double error = 0;
@@ -136,17 +88,17 @@ void turnAngleLEFT(double angleInDegrees){
     double derivative = 0;
 
     while(angleinTicks < angleInDegrees){
-      double allVelocity;
+      double allVelocity = 0;
       double circleticks = MTR_frontLeft.getPosition() + MTR_backLeft.getPosition() + MTR_frontRight.getPosition() + MTR_backRight.getPosition();
       circleticks  =  circleticks / 4.0;
 
-      angleinTicks = circleticks /8.547499;
+      angleinTicks = - 1 * (circleticks/6.843738); //7.7891
 
       error = angleInDegrees - angleinTicks;
       integral = integral + error;
       derivative = error - lastError;
 
-       allVelocity = (error * gP)
+      allVelocity = 190 + (error * gP)
                      +(integral * gI)
                      +(derivative * gD);
 
@@ -202,7 +154,7 @@ void driveFeet (double distanceInFeet) {
         MTR_frontRight.moveVelocity(0);
         MTR_backLeft.moveVelocity(0);
         MTR_backRight.moveVelocity(0);
-    } 
+    }
     else if (distanceInTicks < 0) {
         double leftVelocity = -100;
         double rightVelocity = -100;
@@ -308,7 +260,7 @@ void competition_initialize() {
     MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 
     pros::lcd::register_btn0_cb(on_left_button);
-	pros::lcd::register_btn1_cb(on_middle_button);
+	  pros::lcd::register_btn1_cb(on_middle_button);
     pros::lcd::register_btn2_cb(on_right_button);
 }
 
@@ -324,7 +276,7 @@ void competition_initialize() {
  * from where it left off.
  */
 void autonomous() {
-    
+
 /* our regional's auto
 pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
 MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
@@ -457,6 +409,6 @@ void opcontrol() {
             pros::delay(10);
         }
     }
-	
+
 
 }
