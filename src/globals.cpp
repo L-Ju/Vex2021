@@ -1,13 +1,18 @@
  #include "main.h"
- 
+
 // controllers
 Controller controller;
 
-double ticksPerInch = 86; // final tuned value = 86
+double ticksPerInch = 87.7604166667; // final tuned value = 86
 double kP = 0.09; // final tuned value = 0.09
 double kI = 0;
 double kD = 0;
-int autoRoutine = 3;
+int autoRoutine = 1;
+
+double gP = 0.9; 
+double gI = 0.0042;
+double gD = 0.00001;
+
 // drive motors
 int FRONT_LEFT_MOTOR_PORT  =  13;
 int FRONT_RIGHT_MOTOR_PORT  =  20;

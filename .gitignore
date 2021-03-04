@@ -1,3 +1,4 @@
+bin/*
 
 *.json
 *.bin
@@ -11,6 +12,7 @@ bin/hot.package.elf
 bin/main.cpp.o
 *.elf
 bin/*
+bin/
 
 .d/
 
