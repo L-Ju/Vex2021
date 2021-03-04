@@ -1,5 +1,6 @@
 #include "main.h"
 #include "globals.hpp"
+#include <string>
 
 /**
  * A callback function for LLEMU's center button.
@@ -8,21 +9,24 @@
  * "I was pressed!" and nothing.
  */
 
-void on_left_button()
-{
-    autoRoutine = 1;
-    pros::lcd::print(2, "LEFT");
-}
+// void on_middle_button(){
 
-void on_middle_button(){
-    autoRoutine = 2;
-    pros::lcd::print(2, "MIDDLE");
-}
+// void on_left_button()
+// {
+//     autoRoutine = 1;
+//     pros::lcd::print(2, "LEFT");
+// }
+//
+// void on_middle_button(){
+//     autoRoutine = 2;
+//     pros::lcd::print(2, "MIDDLE");
+// }
+//
+// void on_right_button(){
+//     autoRoutine = 3;
+//     pros::lcd::print(2, "RIGHT");
+// }
 
-void on_right_button(){
-    autoRoutine = 3;
-    pros::lcd::print(2, "RIGHT");
-}
 
 //turn right *NO neagtive angle values *somehow only works within the range of 0 < x <= 180
 void turnAngleRIGHT(double angleInDegrees){
@@ -208,6 +212,64 @@ void stopIntake() {
     MTR_rollerRight.moveVelocity(0);
     MTR_pushup.moveVelocity(0);
 }
+
+// LVGL FUNCTIONS
+
+static lv_res_t teamAction(lv_obj_t * ddlist){
+    uint8_t id = lv_obj_get_free_num(ddlist);
+
+    char sel_str[32];
+    lv_ddlist_get_selected_str(ddlist, sel_str);
+    std::cout << "ddlist: " << sel_str << std::endl;
+
+    if (std::string(sel_str) == "Red"){
+        team = false;
+        std::cout << "Team: " << team << std::endl;
+    } else if (std::string(sel_str) == "Blue"){
+        team = true;
+        std::cout << "Team: " << team << std::endl;
+    }
+
+
+    return LV_RES_OK;
+}
+
+static lv_res_t sideAction(lv_obj_t * ddlist){
+    uint8_t id = lv_obj_get_free_num(ddlist);
+
+    char sel_str[32];
+    lv_ddlist_get_selected_str(ddlist, sel_str);
+    std::cout << "ddlist: " << sel_str << std::endl;
+
+    if (std::string(sel_str) == "Left"){
+        side = false;
+    } else if (std::string(sel_str) == "Right"){
+        side = true;
+    }
+
+    std::cout << "Side: " << side << std::endl;
+
+    return LV_RES_OK;
+}
+
+static lv_res_t restrictionAction(lv_obj_t * ddlist){
+    uint8_t id = lv_obj_get_free_num(ddlist);
+
+    char sel_str[32];
+    lv_ddlist_get_selected_str(ddlist, sel_str);
+    std::cout << "ddlist: " << sel_str << std::endl;
+
+    if (std::string(sel_str) == "Restricted"){
+        restricted = true;
+    } else if (std::string(sel_str) == "Unrestricted"){
+        restricted = false;
+    }
+
+    std::cout << "Restricted: " << restricted << std::endl;
+
+    return LV_RES_OK;
+}
+
 /**
  * Runs initialization code. This occurs as soon as the program is started.
  *
@@ -215,13 +277,66 @@ void stopIntake() {
  * to keep execution time for this mode under a few seconds.
  */
 void initialize() {
-	  pros::lcd::initialize();
-	  pros::lcd::set_text(1, "Hello OperationNightFury!");
-    pros::lcd::set_text(2, "RIGHT");
+// 	pros::lcd::initialize();
+// 	pros::lcd::set_text(1, "Hello OperationNightFury!");
+//     pros::lcd::set_text(2, "RIGHT");
+//
+//     pros::lcd::register_btn0_cb(on_left_button);
+// 	pros::lcd::register_btn1_cb(on_middle_button);
+//     pros::lcd::register_btn2_cb(on_right_button);
 
-    pros::lcd::register_btn0_cb(on_left_button);
-	  pros::lcd::register_btn1_cb(on_middle_button);
-    pros::lcd::register_btn2_cb(on_right_button);
+    lv_obj_t * scr = lv_obj_create(NULL, NULL);
+    lv_scr_load(scr);
+
+
+    // sidebar buttons
+    lv_obj_t * btn1 = lv_btn_create(scr, NULL);
+    lv_obj_set_size(btn1, 140, 50);
+    lv_obj_align(btn1, NULL, LV_ALIGN_IN_TOP_RIGHT, 0, 10);
+
+    lv_obj_t * btn2 = lv_btn_create(scr, btn1);
+    lv_obj_align(btn2, NULL, LV_ALIGN_IN_RIGHT_MID, 0, 0);
+
+    lv_obj_t * btn3 = lv_btn_create(scr, btn1);
+    lv_obj_align(btn3, NULL, LV_ALIGN_IN_BOTTOM_RIGHT, 0, -10);
+
+    lv_obj_t * label1 = lv_label_create(btn1, NULL);
+    lv_label_set_text(label1, "Button 1");
+
+    lv_obj_t * label2 = lv_label_create(btn2, NULL);
+    lv_label_set_text(label2, "Button 2");
+
+    lv_obj_t * label3 = lv_label_create(btn3, NULL);
+    lv_label_set_text(label3, "Button 3");
+
+
+    // dropdown auto selector
+    lv_obj_t * dropdownTeam = lv_ddlist_create(lv_scr_act(), NULL);
+    lv_ddlist_set_options(dropdownTeam, "Red\n" "Blue");
+    lv_ddlist_set_hor_fit(dropdownTeam, false);
+    lv_obj_set_width(dropdownTeam, 160);
+    lv_obj_align(dropdownTeam, NULL, LV_ALIGN_IN_TOP_LEFT, 10, 10);
+    lv_ddlist_set_draw_arrow(dropdownTeam, true);
+    lv_ddlist_set_action(dropdownTeam, teamAction);
+
+
+    // dropdown side selector
+    lv_obj_t * dropdownSide = lv_ddlist_create(lv_scr_act(), NULL);
+    lv_ddlist_set_options(dropdownSide, "Left\n" "Right");
+    lv_ddlist_set_hor_fit(dropdownSide, false);
+    lv_obj_set_width(dropdownSide, 160);
+    lv_obj_align(dropdownSide, NULL, LV_ALIGN_IN_LEFT_MID, 10, 20);
+    lv_ddlist_set_draw_arrow(dropdownSide, true);
+    lv_ddlist_set_action(dropdownSide, sideAction);
+
+    // dropdown restriction seelctor
+    lv_obj_t * dropdownRestrict = lv_ddlist_create(lv_scr_act(), NULL);
+    lv_ddlist_set_options(dropdownRestrict, "Restricted\n" "Unrestricted");
+    lv_ddlist_set_hor_fit(dropdownRestrict, false);
+    lv_obj_set_width(dropdownRestrict, 160);
+    lv_obj_align(dropdownRestrict, NULL, LV_ALIGN_IN_TOP_MID, 15, 10);
+    lv_ddlist_set_draw_arrow(dropdownRestrict, true);
+    lv_ddlist_set_action(dropdownRestrict, restrictionAction);
 
     pros::Motor MTR_1(FRONT_LEFT_MOTOR_PORT);
     MTR_1.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
@@ -259,9 +374,9 @@ void competition_initialize() {
     pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
     MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 
-    pros::lcd::register_btn0_cb(on_left_button);
-	  pros::lcd::register_btn1_cb(on_middle_button);
-    pros::lcd::register_btn2_cb(on_right_button);
+//     pros::lcd::register_btn0_cb(on_left_button);
+// 	pros::lcd::register_btn1_cb(on_middle_button);
+//     pros::lcd::register_btn2_cb(on_right_button);
 }
 
 /**
@@ -297,32 +412,47 @@ MTR_pushup.moveVelocity(0);
 drive->moveDistance(-27.3_in);
 */
 
-    pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
-    MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-    MTR_shooter.moveVelocity(600);
-    pickUpBalls();
-    driveInches(52);
-    pros::delay(600);
-    stopIntake();
-    turnAngleRIGHT(135);
-    driveInches(46);
-    turnAngleRIGHT(45);
-    driveInches(16);
-    pickUpBalls();
-    MTR_pushup.moveVelocity(-600);
-    MTR_shooter.moveVelocity(-600);
-    pros::delay(1600);
-    MTR_rollerLeft.moveVelocity(0);
-    MTR_rollerRight.moveVelocity(0);
-    pros::delay(1000);
-    MTR_shooter.moveVelocity(0);
-    MTR_pushup.moveVelocity(0);
-    MTR_rollerLeft.moveVelocity(100);
-    MTR_rollerRight.moveVelocity(100);
-    pros::delay(200);
-    driveFeet(-2);
-    MTR_rollerLeft.moveVelocity(0);
-    MTR_rollerRight.moveVelocity(0);
+    if (side == false) { // left side
+        pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
+        MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+        MTR_shooter.moveVelocity(600);
+        pickUpBalls();
+        driveInches(52.8);
+        pros::delay(600);
+        turnAngleRIGHT(135);
+        stopIntake();
+        pros::delay(5);
+        driveInches(46);
+        pros::delay(5);
+        turnAngleRIGHT(46);
+        pros::delay(5);
+        driveInches(16.5);
+        pickUpBalls();
+        MTR_pushup.moveVelocity(-600);
+        MTR_shooter.moveVelocity(-600);
+        pros::delay(1600);
+        MTR_rollerLeft.moveVelocity(0);
+        MTR_rollerRight.moveVelocity(0);
+        pros::delay(1000);
+        MTR_shooter.moveVelocity(0);
+        MTR_pushup.moveVelocity(0);
+        MTR_rollerLeft.moveVelocity(100);
+        MTR_rollerRight.moveVelocity(100);
+        pros::delay(200);
+        driveFeet(-2);
+        MTR_rollerLeft.moveVelocity(0);
+        MTR_rollerRight.moveVelocity(0);
+        turnAngleRIGHT(60);
+        pros::delay(5);
+        driveInches(63);
+
+    } else if (side == true) { // right side
+        pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
+        MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+        MTR_shooter.moveVelocity(600);
+    } else {
+        std::cout << "wtf bro" << std::endl;
+    }
 }
 
 /**
