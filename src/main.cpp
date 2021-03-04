@@ -1,5 +1,6 @@
 #include "main.h"
 #include "globals.hpp"
+#include <string>
 
 /**
  * A callback function for LLEMU's center button.
@@ -221,6 +222,51 @@ static lv_res_t teamAction(lv_obj_t * ddlist){
     lv_ddlist_get_selected_str(ddlist, sel_str);
     std::cout << "ddlist: " << sel_str << std::endl;
     
+    if (std::string(sel_str) == "Red"){
+        team = false;
+        std::cout << "Team: " << team << std::endl;
+    } else if (std::string(sel_str) == "Blue"){
+        team = true;
+        std::cout << "Team: " << team << std::endl;
+    }
+    
+    
+    return LV_RES_OK;
+}
+
+static lv_res_t sideAction(lv_obj_t * ddlist){
+    uint8_t id = lv_obj_get_free_num(ddlist);
+    
+    char sel_str[32];
+    lv_ddlist_get_selected_str(ddlist, sel_str);
+    std::cout << "ddlist: " << sel_str << std::endl;
+    
+    if (std::string(sel_str) == "Left"){
+        side = false;
+    } else if (std::string(sel_str) == "Right"){
+        side = true;
+    }
+    
+    std::cout << "Side: " << side << std::endl;
+    
+    return LV_RES_OK;
+}
+
+static lv_res_t restrictionAction(lv_obj_t * ddlist){
+    uint8_t id = lv_obj_get_free_num(ddlist);
+    
+    char sel_str[32];
+    lv_ddlist_get_selected_str(ddlist, sel_str);
+    std::cout << "ddlist: " << sel_str << std::endl;
+    
+    if (std::string(sel_str) == "Restricted"){
+        restricted = true;
+    } else if (std::string(sel_str) == "Unrestricted"){
+        restricted = false;
+    }
+    
+    std::cout << "Restricted: " << restricted << std::endl;
+    
     return LV_RES_OK;
 }
 
@@ -279,18 +325,18 @@ void initialize() {
     lv_ddlist_set_options(dropdownSide, "Left\n" "Right");
     lv_ddlist_set_hor_fit(dropdownSide, false);
     lv_obj_set_width(dropdownSide, 160);
-    lv_obj_align(dropdownSide, NULL, LV_ALIGN_IN_LEFT_MID, 10, 0);
+    lv_obj_align(dropdownSide, NULL, LV_ALIGN_IN_LEFT_MID, 10, 20);
     lv_ddlist_set_draw_arrow(dropdownSide, true);
-    lv_ddlist_set_action(dropdownSide, teamAction);
+    lv_ddlist_set_action(dropdownSide, sideAction);
     
     // dropdown restriction seelctor
     lv_obj_t * dropdownRestrict = lv_ddlist_create(lv_scr_act(), NULL);
     lv_ddlist_set_options(dropdownRestrict, "Restricted\n" "Unrestricted");
     lv_ddlist_set_hor_fit(dropdownRestrict, false);
     lv_obj_set_width(dropdownRestrict, 160);
-    lv_obj_align(dropdownRestrict, NULL, LV_ALIGN_IN_BOTTOM_LEFT, 10, -10);
+    lv_obj_align(dropdownRestrict, NULL, LV_ALIGN_IN_TOP_MID, 15, 10);
     lv_ddlist_set_draw_arrow(dropdownRestrict, true);
-    lv_ddlist_set_action(dropdownRestrict, teamAction);
+    lv_ddlist_set_action(dropdownRestrict, restrictionAction);
     
     pros::Motor MTR_1(FRONT_LEFT_MOTOR_PORT);
     MTR_1.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
@@ -366,32 +412,40 @@ MTR_pushup.moveVelocity(0);
 drive->moveDistance(-27.3_in);
 */
 
-    pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
-    MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-    MTR_shooter.moveVelocity(600);
-    pickUpBalls();
-    driveInches(52);
-    pros::delay(600);
-    stopIntake();
-    turnAngleRIGHT(135);
-    driveInches(46);
-    turnAngleRIGHT(45);
-    driveInches(16);
-    pickUpBalls();
-    MTR_pushup.moveVelocity(-600);
-    MTR_shooter.moveVelocity(-600);
-    pros::delay(1600);
-    MTR_rollerLeft.moveVelocity(0);
-    MTR_rollerRight.moveVelocity(0);
-    pros::delay(1000);
-    MTR_shooter.moveVelocity(0);
-    MTR_pushup.moveVelocity(0);
-    MTR_rollerLeft.moveVelocity(100);
-    MTR_rollerRight.moveVelocity(100);
-    pros::delay(200);
-    driveFeet(-2);
-    MTR_rollerLeft.moveVelocity(0);
-    MTR_rollerRight.moveVelocity(0);
+    if (side == false) { // left side
+        pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
+        MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+        MTR_shooter.moveVelocity(600);
+        pickUpBalls();
+        driveInches(52);
+        pros::delay(600);
+        stopIntake();
+        turnAngleRIGHT(135);
+        driveInches(46);
+        turnAngleRIGHT(45);
+        driveInches(16);
+        pickUpBalls();
+        MTR_pushup.moveVelocity(-600);
+        MTR_shooter.moveVelocity(-600);
+        pros::delay(1600);
+        MTR_rollerLeft.moveVelocity(0);
+        MTR_rollerRight.moveVelocity(0);
+        pros::delay(1000);
+        MTR_shooter.moveVelocity(0);
+        MTR_pushup.moveVelocity(0);
+        MTR_rollerLeft.moveVelocity(100);
+        MTR_rollerRight.moveVelocity(100);
+        pros::delay(200);
+        driveFeet(-2);
+        MTR_rollerLeft.moveVelocity(0);
+        MTR_rollerRight.moveVelocity(0);
+    } else if (side == true) { // right side
+        pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
+        MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+        MTR_shooter.moveVelocity(600);
+    } else {
+        std::cout << "wtf bro" << std::endl;
+    }
 }
 
 /**
