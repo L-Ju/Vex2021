@@ -196,14 +196,14 @@ void driveInches (double distanceInInches) {
 }
 
 void pickUpBalls() {
-    MTR_rollerLeft.moveVelocity(-600);
-    MTR_rollerRight.moveVelocity(600);
+    MTR_rollerLeft.moveVelocity(-200);
+    MTR_rollerRight.moveVelocity(200);
     MTR_pushup.moveVelocity(-600);
 }
 
 void ejectBalls() {
-    MTR_rollerLeft.moveVelocity(600);
-    MTR_rollerRight.moveVelocity(-600);
+    MTR_rollerLeft.moveVelocity(200);
+    MTR_rollerRight.moveVelocity(-200);
     MTR_pushup.moveVelocity(600);
 }
 
@@ -417,16 +417,53 @@ drive->moveDistance(-27.3_in);
         MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
         MTR_shooter.moveVelocity(600);
         pickUpBalls();
-        driveInches(52.8);
+        driveInches(54);
         pros::delay(600);
         turnAngleRIGHT(135);
         stopIntake();
         pros::delay(5);
         driveInches(46);
         pros::delay(5);
-        turnAngleRIGHT(46);
+        turnAngleRIGHT(50);
         pros::delay(5);
-        driveInches(16.5);
+        driveInches(20);
+        pickUpBalls();
+        MTR_pushup.moveVelocity(-400);
+        MTR_shooter.moveVelocity(-600);
+        pros::delay(1600);
+        MTR_rollerLeft.moveVelocity(0);
+        MTR_rollerRight.moveVelocity(0);
+        pros::delay(1000);
+        MTR_shooter.moveVelocity(0);
+        MTR_pushup.moveVelocity(0);
+        MTR_rollerLeft.moveVelocity(100);
+        MTR_rollerRight.moveVelocity(100);
+        pros::delay(200);
+        driveFeet(-2);
+        MTR_rollerLeft.moveVelocity(0);
+        MTR_rollerRight.moveVelocity(0);
+        turnAngleRIGHT(60);
+        pros::delay(5);
+        driveInches(63);
+
+    } 
+    // testing rn ignore this true 
+    else if (side == true) { // right side
+   /*     pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
+        MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+        MTR_shooter.moveVelocity(600);
+    */
+        pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
+        MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+        MTR_shooter.moveVelocity(600);
+        pickUpBalls();
+        driveInches(54);
+        pros::delay(650);
+        turnAngleRIGHT(160);
+        pros::delay(5);
+        stopIntake();
+        driveInches(64);
+        pros::delay(5);
         pickUpBalls();
         MTR_pushup.moveVelocity(-600);
         MTR_shooter.moveVelocity(-600);
@@ -446,10 +483,6 @@ drive->moveDistance(-27.3_in);
         pros::delay(5);
         driveInches(63);
 
-    } else if (side == true) { // right side
-        pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
-        MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-        MTR_shooter.moveVelocity(600);
     } else {
         std::cout << "wtf bro" << std::endl;
     }
@@ -516,18 +549,18 @@ void opcontrol() {
                 MTR_shooter.moveVelocity(-600);
             } else if (controller.getDigital(okapi::ControllerDigital::L2)) {
                 MTR_shooter.moveVelocity(600);
-            }else if (controller.getDigital(okapi::ControllerDigital::L1)) {
+            } else if (controller.getDigital(okapi::ControllerDigital::L1)) {
                 MTR_shooter.moveVelocity(-600);
-                MTR_pushup.moveVelocity(-500);
-            }else {
+                MTR_pushup.moveVelocity(-400);
+            } else {
                 MTR_shooter.moveVelocity(0);
             }
 
             if (controller.getDigital(okapi::ControllerDigital::R1)) {
                 pickUpBalls();
             } else if (controller.getDigital(okapi::ControllerDigital::R2)) {
-                MTR_rollerLeft.moveVelocity(600);
-                MTR_rollerRight.moveVelocity(-600);
+                MTR_rollerLeft.moveVelocity(200);
+                MTR_rollerRight.moveVelocity(-200);
             } else {
                 MTR_rollerLeft.moveVelocity(0);
                 MTR_rollerRight.moveVelocity(0) ;
