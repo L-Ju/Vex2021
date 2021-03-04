@@ -39,6 +39,8 @@ TEMPLATE_FILES=$(INCDIR)/**/*.h $(INCDIR)/**/*.hpp
 
 .DEFAULT_GOAL=quick
 
+include include/lvgl.mk
+
 ################################################################################
 ################################################################################
 ########## Nothing below this line should be edited by typical users ###########

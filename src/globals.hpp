@@ -3,6 +3,10 @@
 // controllers
 extern Controller controller;
 
+extern bool team;
+extern bool side;
+extern bool restricted;
+
 extern double ticksPerInch;
 extern double kP;
 extern double kI;

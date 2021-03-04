@@ -6,6 +6,11 @@ CSRCS += lv_style.c
 CSRCS += lv_vdb.c
 CSRCS += lv_lang.c
 
+DEPPATH += --dep-path ../lv_core
+VPATH += :../lv_core
+
+CFLAGS += "-I../lv_core"
+
 DEPPATH += --dep-path $(LVGL_DIR)/lvgl/lv_core
 VPATH += :$(LVGL_DIR)/lvgl/lv_core
 

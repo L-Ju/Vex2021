@@ -13,6 +13,10 @@ CSRCS += lv_math.c
 CSRCS += lv_log.c
 CSRCS += lv_gc.c
 
+DEPPATH += --dep-path display/lv_misc
+VPATH += :display/lv_misc
+
+CFLAGS += "-Idisplay/lv_misc"
 DEPPATH += --dep-path $(LVGL_DIR)/lvgl/lv_misc
 VPATH += :$(LVGL_DIR)/lvgl/lv_misc
 

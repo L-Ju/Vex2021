@@ -3,6 +3,10 @@
 // controllers
 Controller controller;
 
+bool team = true; // true = blue
+bool side = false; // false = left
+bool restricted = true; // true = can't go over the line
+
 double ticksPerInch = 87.7604166667; // final tuned value = 86
 double kP = 0.09; // final tuned value = 0.09
 double kI = 0;

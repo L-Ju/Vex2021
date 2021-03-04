@@ -8,6 +8,10 @@ CSRCS += lv_theme_material.c
 CSRCS += lv_theme_nemo.c
 CSRCS += lv_theme_mono.c
 
+DEPPATH += --dep-path display/lv_themes
+VPATH += :display/lv_themes
+
+CFLAGS += "-Idisplay/lv_themes"
 DEPPATH += --dep-path $(LVGL_DIR)/lvgl/lv_themes
 VPATH += :$(LVGL_DIR)/lvgl/lv_themes
 

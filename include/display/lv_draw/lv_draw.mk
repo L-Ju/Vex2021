@@ -8,6 +8,10 @@ CSRCS += lv_draw_img.c
 CSRCS += lv_draw_arc.c
 CSRCS += lv_draw_triangle.c
 
+DEPPATH += --dep-path display/lv_draw
+VPATH += :display/lv_draw
+
+CFLAGS += "-Idisplay/lv_draw"
 DEPPATH += --dep-path $(LVGL_DIR)/lvgl/lv_draw
 VPATH += :$(LVGL_DIR)/lvgl/lv_draw
 
