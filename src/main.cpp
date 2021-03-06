@@ -406,12 +406,13 @@ void autonomous() {
         pros::delay(5);
         stopIntake();
         pros::delay(5);
-        driveFeet(6);
+//         driveFeet(6);
+        driveFeet(3.8333);
 //         driveInches(46);
         pros::delay(5);
-//         turnAngleRIGHT(60);
-//         pros::delay(5);
-//         driveFeet(2);
+        turnAngleRIGHT(45);
+        pros::delay(5);
+        driveFeet(2);
 //         driveInches(20);
         pickUpBalls();
         MTR_pushup.moveVelocity(-400);
@@ -452,18 +453,21 @@ void autonomous() {
         pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
         MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
         MTR_shooter.moveVelocity(600);
+        pros::delay(500);
+        MTR_shooter.moveVelocity(0);
+        
         drive->setMaxVelocity(150);
         // drive->moveDistance(23.5_in);
         driveInches(20);
         // drive->turnAngle(-141_deg);
-        turnAngleRIGHT(145);
+        turnAngleLEFT(145);
         pros::delay(10);
         pickUpBalls();
         // drive->moveDistance(27.3_in);
         driveInches(30);
         MTR_pushup.moveVelocity(-400);
         MTR_shooter.moveVelocity(-600);
-        pros::delay(1900);
+        pros::delay(2100);
         MTR_rollerLeft.moveVelocity(0);
         MTR_rollerRight.moveVelocity(0);
         pros::delay(1000);
@@ -472,6 +476,8 @@ void autonomous() {
         MTR_rollerLeft.moveVelocity(100);
         MTR_rollerRight.moveVelocity(-100);
         pros::delay(200);
+        MTR_rollerLeft.moveVelocity(0);
+        MTR_rollerRight.moveVelocity(0);
 /*
         MTR_pushup.moveVelocity(-600);
         MTR_shooter.moveVelocity(-600);
