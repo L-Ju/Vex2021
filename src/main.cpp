@@ -57,7 +57,7 @@ void turnAngleRIGHT(double angleInDegrees){
       integral = integral + error;
       derivative = error - lastError;
 
-       allVelocity = 190 + (error * gP)
+       allVelocity = 185 + (error * gP)
                      +(integral * gI)
                      +(derivative * gD);
 
@@ -396,21 +396,27 @@ void autonomous() {
         pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
         MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
         MTR_shooter.moveVelocity(600);
+        pros::delay(500);
+        MTR_shooter.moveVelocity(0);
         pickUpBalls();
-        driveInches(56);
+        driveFeet(4.666666666666666);
+//         driveInches(56);
         pros::delay(600);
         turnAngleRIGHT(135);
+        pros::delay(5);
         stopIntake();
         pros::delay(5);
-        driveInches(46);
+        driveFeet(6);
+//         driveInches(46);
         pros::delay(5);
-        turnAngleRIGHT(50);
-        pros::delay(5);
-        driveInches(20);
+//         turnAngleRIGHT(60);
+//         pros::delay(5);
+//         driveFeet(2);
+//         driveInches(20);
         pickUpBalls();
         MTR_pushup.moveVelocity(-400);
         MTR_shooter.moveVelocity(-600);
-        pros::delay(1600);
+        pros::delay(1650);
         MTR_rollerLeft.moveVelocity(0);
         MTR_rollerRight.moveVelocity(0);
         pros::delay(1000);
@@ -425,21 +431,21 @@ void autonomous() {
 
         // new code
         turnAngleRIGHT(60);
-        pros::delay(5);
-        pickUpBalls();
-        driveInches(63);
-        MTR_pushup.moveVelocity(-400);
-        MTR_shooter.moveVelocity(-600);
-        pros::delay(1600);
-        MTR_rollerLeft.moveVelocity(0);
-        MTR_rollerRight.moveVelocity(0);
-        pros::delay(1000);
-        MTR_shooter.moveVelocity(0);
-        MTR_pushup.moveVelocity(0);
-        MTR_rollerLeft.moveVelocity(150);
-        MTR_rollerRight.moveVelocity(-150);
-        pros::delay(200);
-        driveFeet(-2);
+//         pros::delay(5);
+//         pickUpBalls();
+//         driveInches(63);
+//         MTR_pushup.moveVelocity(-400);
+//         MTR_shooter.moveVelocity(-600);
+//         pros::delay(1600);
+//         MTR_rollerLeft.moveVelocity(0);
+//         MTR_rollerRight.moveVelocity(0);
+//         pros::delay(1000);
+//         MTR_shooter.moveVelocity(0);
+//         MTR_pushup.moveVelocity(0);
+//         MTR_rollerLeft.moveVelocity(150);
+//         MTR_rollerRight.moveVelocity(-150);
+//         pros::delay(200);
+//         driveFeet(-2);
     }
 
     else if (side == true) { // right side // regionals
