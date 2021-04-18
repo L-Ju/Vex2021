@@ -57,7 +57,7 @@ void turnAngleRIGHT(double angleInDegrees){
       integral = integral + error;
       derivative = error - lastError;
 
-       allVelocity = 190 + (error * gP)
+       allVelocity = 185 + (error * gP)
                      +(integral * gI)
                      +(derivative * gD);
 
@@ -396,21 +396,28 @@ void autonomous() {
         pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
         MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
         MTR_shooter.moveVelocity(600);
+        pros::delay(500);
+        MTR_shooter.moveVelocity(0);
         pickUpBalls();
-        driveInches(56);
+        driveFeet(4.666666666666666);
+//         driveInches(56);
         pros::delay(600);
         turnAngleRIGHT(135);
+        pros::delay(5);
         stopIntake();
         pros::delay(5);
-        driveInches(46);
+//         driveFeet(6);
+        driveFeet(3.8333);
+//         driveInches(46);
         pros::delay(5);
-        turnAngleRIGHT(50);
+        turnAngleRIGHT(45);
         pros::delay(5);
-        driveInches(20);
+        driveFeet(2);
+//         driveInches(20);
         pickUpBalls();
         MTR_pushup.moveVelocity(-400);
         MTR_shooter.moveVelocity(-600);
-        pros::delay(1600);
+        pros::delay(1650);
         MTR_rollerLeft.moveVelocity(0);
         MTR_rollerRight.moveVelocity(0);
         pros::delay(1000);
@@ -425,39 +432,44 @@ void autonomous() {
 
         // new code
         turnAngleRIGHT(60);
-        pros::delay(5);
-        pickUpBalls();
-        driveInches(63);
-        MTR_pushup.moveVelocity(-400);
-        MTR_shooter.moveVelocity(-600);
-        pros::delay(1600);
-        MTR_rollerLeft.moveVelocity(0);
-        MTR_rollerRight.moveVelocity(0);
-        pros::delay(1000);
-        MTR_shooter.moveVelocity(0);
-        MTR_pushup.moveVelocity(0);
-        MTR_rollerLeft.moveVelocity(150);
-        MTR_rollerRight.moveVelocity(-150);
-        pros::delay(200);
-        driveFeet(-2);
+//         pros::delay(5);
+//         pickUpBalls();
+//         driveInches(63);
+//         MTR_pushup.moveVelocity(-400);
+//         MTR_shooter.moveVelocity(-600);
+//         pros::delay(1600);
+//         MTR_rollerLeft.moveVelocity(0);
+//         MTR_rollerRight.moveVelocity(0);
+//         pros::delay(1000);
+//         MTR_shooter.moveVelocity(0);
+//         MTR_pushup.moveVelocity(0);
+//         MTR_rollerLeft.moveVelocity(150);
+//         MTR_rollerRight.moveVelocity(-150);
+//         pros::delay(200);
+//         driveFeet(-2);
     }
 
     else if (side == true) { // right side // regionals
         pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
         MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
         MTR_shooter.moveVelocity(600);
-        drive->setMaxVelocity(150);
+        pros::delay(500);
+        MTR_shooter.moveVelocity(0);
+
+        drive->setMaxVelocity(400);
         // drive->moveDistance(23.5_in);
-        driveInches(20);
+        // driveInches(20);
+        drive->moveDistance(20_in);
         // drive->turnAngle(-141_deg);
-        turnAngleRIGHT(145);
+        // turnAngleLEFT(145);
+        drive->turnAngle(145_deg);
         pros::delay(10);
         pickUpBalls();
         // drive->moveDistance(27.3_in);
-        driveInches(30);
+        drive->moveDistance(30_in);
         MTR_pushup.moveVelocity(-400);
         MTR_shooter.moveVelocity(-600);
-        pros::delay(1900);
+        pros::delay(2100);
         MTR_rollerLeft.moveVelocity(0);
         MTR_rollerRight.moveVelocity(0);
         pros::delay(1000);
@@ -466,6 +478,8 @@ void autonomous() {
         MTR_rollerLeft.moveVelocity(100);
         MTR_rollerRight.moveVelocity(-100);
         pros::delay(200);
+        MTR_rollerLeft.moveVelocity(0);
+        MTR_rollerRight.moveVelocity(0);
 /*
         MTR_pushup.moveVelocity(-600);
         MTR_shooter.moveVelocity(-600);
@@ -477,7 +491,7 @@ void autonomous() {
         MTR_pushup.moveVelocity(0);
 */
       //  drive->moveDistance(-27.3_in);
-        driveInches(-27.3);
+        drive->moveDistance(-27.3_in);
 
     } else { // Lu's testing
 /*
@@ -578,7 +592,6 @@ void opcontrol() {
             std::cout << MTR_frontRight.getPosition() << std::endl;
             std::cout << MTR_backLeft.getPosition() << std::endl;
             std::cout << MTR_backRight.getPosition() << std::endl;
-
         }
     } else {
         while(1){

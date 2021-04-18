@@ -13,7 +13,7 @@ double kI = 0;
 double kD = 0;
 int autoRoutine = 1;
 
-double gP = 0.9; 
+double gP = 0.9;
 double gI = 0.0042;
 double gD = 0.00001;
 
@@ -45,4 +45,4 @@ Motor MTR_pushup(PUSHUP_MOTOR_PORT);
 std::shared_ptr<ChassisController> drive =
 ChassisControllerBuilder()
   .withMotors({FRONT_LEFT_MOTOR_PORT, BACK_LEFT_MOTOR_PORT},{-FRONT_RIGHT_MOTOR_PORT, -BACK_RIGHT_MOTOR_PORT})
-  .withDimensions(AbstractMotor::gearset::blue, {{3.25_in, 10_in}, imev5GBlueTPR}).build();
+  .withDimensions(AbstractMotor::gearset::blue, {{3.25_in, 10_in}, imev5BlueTPR}).build();

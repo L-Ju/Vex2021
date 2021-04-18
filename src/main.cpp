@@ -455,16 +455,18 @@ void autonomous() {
         MTR_shooter.moveVelocity(600);
         pros::delay(500);
         MTR_shooter.moveVelocity(0);
-        
-        drive->setMaxVelocity(150);
+
+        drive->setMaxVelocity(400);
         // drive->moveDistance(23.5_in);
-        driveInches(20);
+        // driveInches(20);
+        drive->moveDistance(20_in);
         // drive->turnAngle(-141_deg);
-        turnAngleLEFT(145);
+        // turnAngleLEFT(145);
+        drive->turnAngle(145_deg);
         pros::delay(10);
         pickUpBalls();
         // drive->moveDistance(27.3_in);
-        driveInches(30);
+        drive->moveDistance(30_in);
         MTR_pushup.moveVelocity(-400);
         MTR_shooter.moveVelocity(-600);
         pros::delay(2100);
@@ -489,7 +491,7 @@ void autonomous() {
         MTR_pushup.moveVelocity(0);
 */
       //  drive->moveDistance(-27.3_in);
-        driveInches(-27.3);
+        drive->moveDistance(-27.3_in);
 
     } else { // Lu's testing
 /*
@@ -590,7 +592,6 @@ void opcontrol() {
             std::cout << MTR_frontRight.getPosition() << std::endl;
             std::cout << MTR_backLeft.getPosition() << std::endl;
             std::cout << MTR_backRight.getPosition() << std::endl;
-
         }
     } else {
         while(1){
