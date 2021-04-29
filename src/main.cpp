@@ -197,8 +197,11 @@ void driveInches (double distanceInInches) {
 
 void pickUpBalls() {
     MTR_rollerLeft.moveVelocity(-200);
+    std::cout << -200 << ' ';
     MTR_rollerRight.moveVelocity(200);
+    std::cout << 200 << ' ';
     MTR_pushup.moveVelocity(-600);
+    std::cout << -600 << ' ';
 }
 
 void ejectBalls() {
@@ -391,156 +394,22 @@ void competition_initialize() {
  * from where it left off.
  */
 void autonomous() {
-
-    if (side == false) { // left side
-        pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
-        MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-        MTR_shooter.moveVelocity(600);
-        pros::delay(500);
-        MTR_shooter.moveVelocity(0);
-        pickUpBalls();
-        driveFeet(4.666666666666666);
-//         driveInches(56);
-        pros::delay(600);
-        turnAngleRIGHT(135);
-        pros::delay(5);
-        stopIntake();
-        pros::delay(5);
-//         driveFeet(6);
-        driveFeet(3.8333);
-//         driveInches(46);
-        pros::delay(5);
-        turnAngleRIGHT(45);
-        pros::delay(5);
-        driveFeet(2);
-//         driveInches(20);
-        pickUpBalls();
-        MTR_pushup.moveVelocity(-400);
-        MTR_shooter.moveVelocity(-600);
-        pros::delay(1650);
-        MTR_rollerLeft.moveVelocity(0);
-        MTR_rollerRight.moveVelocity(0);
-        pros::delay(1000);
-        MTR_shooter.moveVelocity(0);
-        MTR_pushup.moveVelocity(0);
-        MTR_rollerLeft.moveVelocity(150);
-        MTR_rollerRight.moveVelocity(-150);
-        pros::delay(200);
-        driveFeet(-2);
-        MTR_rollerLeft.moveVelocity(0);
-        MTR_rollerRight.moveVelocity(0);
-
-        // new code
-        turnAngleRIGHT(60);
-//         pros::delay(5);
-//         pickUpBalls();
-//         driveInches(63);
-//         MTR_pushup.moveVelocity(-400);
-//         MTR_shooter.moveVelocity(-600);
-//         pros::delay(1600);
-//         MTR_rollerLeft.moveVelocity(0);
-//         MTR_rollerRight.moveVelocity(0);
-//         pros::delay(1000);
-//         MTR_shooter.moveVelocity(0);
-//         MTR_pushup.moveVelocity(0);
-//         MTR_rollerLeft.moveVelocity(150);
-//         MTR_rollerRight.moveVelocity(-150);
-//         pros::delay(200);
-//         driveFeet(-2);
-    }
-
-    else if (side == true) { // right side // regionals
-        pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
-        MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-        MTR_shooter.moveVelocity(600);
-        pros::delay(500);
-        MTR_shooter.moveVelocity(0);
-
-        drive->setMaxVelocity(400);
-        // drive->moveDistance(23.5_in);
-        // driveInches(20);
-        drive->moveDistance(20_in);
-        // drive->turnAngle(-141_deg);
-        // turnAngleLEFT(145);
-        drive->turnAngle(145_deg);
-        pros::delay(10);
-        pickUpBalls();
-        // drive->moveDistance(27.3_in);
-        drive->moveDistance(30_in);
-        MTR_pushup.moveVelocity(-400);
-        MTR_shooter.moveVelocity(-600);
-        pros::delay(2100);
-        MTR_rollerLeft.moveVelocity(0);
-        MTR_rollerRight.moveVelocity(0);
-        pros::delay(1000);
-        MTR_shooter.moveVelocity(0);
-        MTR_pushup.moveVelocity(0);
-        MTR_rollerLeft.moveVelocity(100);
-        MTR_rollerRight.moveVelocity(-100);
-        pros::delay(200);
-        MTR_rollerLeft.moveVelocity(0);
-        MTR_rollerRight.moveVelocity(0);
-/*
-        MTR_pushup.moveVelocity(-600);
-        MTR_shooter.moveVelocity(-600);
-        pros::delay(400);
-        MTR_rollerLeft.moveVelocity(0);
-        MTR_rollerRight.moveVelocity(0);
-        pros::delay(2000);
-        MTR_shooter.moveVelocity(0);
-        MTR_pushup.moveVelocity(0);
-*/
-      //  drive->moveDistance(-27.3_in);
-        drive->moveDistance(-27.3_in);
-
-    } else { // Lu's testing
-/*
-           pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
-           MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-           MTR_shooter.moveVelocity(600);
-           pickUpBalls();
-           driveInches(54.5);
-           pros::delay(650);
-           turnAngleRIGHT(151);
-           pros::delay(5);
-           stopIntake();
-           driveInches(66);
-           pros::delay(5);
-           pickUpBalls();
-           MTR_pushup.moveVelocity(-600);
-           MTR_shooter.moveVelocity(-600);
-           pros::delay(1600);
-           MTR_rollerLeft.moveVelocity(0);
-           MTR_rollerRight.moveVelocity(0);
-           pros::delay(1000);
-           MTR_shooter.moveVelocity(0);
-           MTR_pushup.moveVelocity(0);
-           MTR_rollerLeft.moveVelocity(100);
-           MTR_rollerRight.moveVelocity(100);
-           pros::delay(200);
-           driveFeet(-2);
-           MTR_rollerLeft.moveVelocity(0);
-           MTR_rollerRight.moveVelocity(0);
-           turnAngleRIGHT(62);
-           pros::delay(5);
-           pickUpBalls();
-           driveInches(63);
-
-           MTR_pushup.moveVelocity(-600);
-           MTR_shooter.moveVelocity(-600);
-           pros::delay(1600);
-           MTR_rollerLeft.moveVelocity(0);
-           MTR_rollerRight.moveVelocity(0);
-           pros::delay(1000);
-           MTR_shooter.moveVelocity(0);
-           MTR_pushup.moveVelocity(0);
-           MTR_rollerLeft.moveVelocity(100);
-           MTR_rollerRight.moveVelocity(100);
-           pros::delay(200);
-           driveFeet(-2);
-*/
-        std::cout << "wtf bro" << std::endl;
-    }
+       freopen("auto.txt", "r", stdin);
+       while(1){
+         //leftY, rightY, shooter, pushup, rollerleft, rollerright, pushup, delay;
+        double leftY, rightY;
+        int shooter, pushup, rollerleft, rollerright,delay;
+        std::cin >> leftY >> rightY >> shooter >> pushup >> rollerleft >> rollerright;
+        drive -> getModel() -> tank(leftY,
+                                    rightY);
+        MTR_shooter.moveVelocity(shooter);
+        MTR_pushup.moveVelocity(pushup);
+        MTR_rollerLeft.moveVelocity(rollerleft);
+        MTR_rollerRight.moveVelocity(rollerright);
+        std::cin >> pushup >> delay;
+        MTR_pushup.moveVelocity(pushup);
+        pros::delay(delay);
+       }
 }
 
 /**
@@ -559,73 +428,60 @@ void autonomous() {
 
 
 void opcontrol() {
-  /*
-    double Pi = 3.14159265358979323846;
-    turnAngleRIGHT(3.14);
-    pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
-    MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
-    drive->setMaxVelocity(200);
-
-    MTR_frontLeft.tarePosition();
-    MTR_frontRight.tarePosition();
-    MTR_backLeft.tarePosition();
-    MTR_backRight.tarePosition();
-
-    drive->turnAngle(360_deg);
-
-    std::cout << "Frontleft =" <<  MTR_frontLeft.getPosition() << std::endl;
-    std::cout << "frontRight =" << MTR_frontRight.getPosition() << std::endl;
-    std::cout << "backLeft =" <<  MTR_backLeft.getPosition() << std::endl;
-    std::cout << "backRight =" <<  MTR_backRight.getPosition() << std::endl;
-  */
-    int testing = 0;
-    if (testing) {
-        MTR_frontLeft.tarePosition();
-        MTR_frontRight.tarePosition();
-        MTR_backLeft.tarePosition();
-        MTR_backRight.tarePosition();
-
-        while (1){
-            drive -> getModel() -> tank(controller.getAnalog(ControllerAnalog::leftY)/2,
-                                        controller.getAnalog(ControllerAnalog::rightY)/2);
-            std::cout << MTR_frontLeft.getPosition() << std::endl;
-            std::cout << MTR_frontRight.getPosition() << std::endl;
-            std::cout << MTR_backLeft.getPosition() << std::endl;
-            std::cout << MTR_backRight.getPosition() << std::endl;
-        }
-    } else {
-        while(1){
+      while(1){
+        // leftY, rightY, shooter, pushup, rollerleft, rollerright, pushup, delay
 
     //tank drive
             drive -> getModel() -> tank(controller.getAnalog(ControllerAnalog::leftY),
                                         controller.getAnalog(ControllerAnalog::rightY));
+
+            std::cout << controller.getAnalog(ControllerAnalog::leftY) << ' ' <<  controller.getAnalog(ControllerAnalog::rightY) << ' ';
             if (controller.getDigital(okapi::ControllerDigital::X))  {
                 MTR_shooter.moveVelocity(-600);
+                std::cout << -600 << ' ';
+                std::cout << 0 << ' ';
             } else if (controller.getDigital(okapi::ControllerDigital::L2)) {
                 MTR_shooter.moveVelocity(600);
+                std::cout << 600 << ' ';
+                std::cout << 0 << ' ';
             } else if (controller.getDigital(okapi::ControllerDigital::L1)) {
                 MTR_shooter.moveVelocity(-600);
+                std::cout << -600 << ' ';
                 MTR_pushup.moveVelocity(-400);
+                std::cout << -400 << ' ';
             } else {
                 MTR_shooter.moveVelocity(0);
+                std::cout << 0 << ' ';
+                std::cout << 0 << ' ';
             }
 
             if (controller.getDigital(okapi::ControllerDigital::R1)) {
                 pickUpBalls();
             } else if (controller.getDigital(okapi::ControllerDigital::R2)) {
                 MTR_rollerLeft.moveVelocity(200);
+                std::cout << 200 << ' ';
                 MTR_rollerRight.moveVelocity(-200);
+                std::cout << -200 << ' ';
+                if(controller.getDigital(okapi::ControllerDigital::L1)){
+                    std::cout << -400 << ' ';
+                }
+                else{
+                    std::cout << 0 << ' ';
+                }
             } else {
                 MTR_rollerLeft.moveVelocity(0);
+                std::cout << 0 << ' ';
                 MTR_rollerRight.moveVelocity(0) ;
+                std::cout << 0 << ' ';
                 if(!controller.getDigital(okapi::ControllerDigital::L1)){
                     MTR_pushup.moveVelocity(0);
+                    std::cout << 0 << ' ';
+                }
+                else{
+                    std::cout << -400 << ' ';
                 }
             }
-
+            std::cout << 10 << ' ';
             pros::delay(10);
         }
-    }
-
-
 }
