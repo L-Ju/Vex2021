@@ -416,25 +416,27 @@ void autonomous() {
           while(1){
             //leftY, rightY, shooter, pushup, rollerleft, rollerright, pushup, delay;
             double leftY[1], rightY[1];
-            int shooter[1], pushup[1], rollerleft[1], rollerright[1], delay[1];
+            int shooter[1], pushup[1], rollerleft[1], rollerright[1], delay1[1],delay2[1];
             //std::cin >> leftY >> rightY >> shooter >> pushup >> rollerleft >> rollerright;
             fscanf(usd_file_read, "%lf", leftY);
             fscanf(usd_file_read, "%lf", rightY);
             fscanf(usd_file_read, "%d", shooter);
+            fscanf(usd_file_read, "%d", delay1);
             fscanf(usd_file_read, "%d", pushup);
             fscanf(usd_file_read, "%d", rollerleft);
             fscanf(usd_file_read, "%d", rollerright);
 
             drive -> getModel() -> tank(leftY[0], rightY[0]);
             MTR_shooter.moveVelocity(shooter[0]);
+            pros::delay(delay1[0]);
             MTR_pushup.moveVelocity(pushup[0]);
             MTR_rollerLeft.moveVelocity(rollerleft[0]);
             MTR_rollerRight.moveVelocity(rollerright[0]);
             //std::cin >> pushup >> delay;
             fscanf(usd_file_read, "%d", pushup);
-            fscanf(usd_file_read, "%d", delay);
+            fscanf(usd_file_read, "%d", delay2);
             MTR_pushup.moveVelocity(pushup[0]);
-            pros::delay(delay[0]);
+            pros::delay(delay2[0]);
           }
           fclose(usd_file_read);
 }
@@ -466,17 +468,22 @@ void opcontrol() {
                 MTR_shooter.moveVelocity(-600);
                 std::cout << -600 << ' ';
                 std::cout << 0 << ' ';
+                std::cout << 0 << ' ';
             } else if (controller.getDigital(okapi::ControllerDigital::L2)) {
                 MTR_shooter.moveVelocity(600);
                 std::cout << 600 << ' ';
                 std::cout << 0 << ' ';
+                std::cout << 0 << ' ';
             } else if (controller.getDigital(okapi::ControllerDigital::L1)) {
                 MTR_shooter.moveVelocity(-600);
                 std::cout << -600 << ' ';
+                pros::delay(10);
+                std::cout << 10 << ' ';
                 MTR_pushup.moveVelocity(-400);
                 std::cout << -400 << ' ';
             } else {
                 MTR_shooter.moveVelocity(0);
+                std::cout << 0 << ' ';
                 std::cout << 0 << ' ';
                 std::cout << 0 << ' ';
             }
