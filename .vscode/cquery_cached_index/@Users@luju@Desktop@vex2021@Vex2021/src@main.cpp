@@ -1,6 +1,8 @@
 #include "main.h"
 #include "globals.hpp"
 #include <string>
+#include <iostream>
+#include <stdio.h>
 
 /**
  * A callback function for LLEMU's center button.
@@ -342,16 +344,23 @@ void initialize() {
     lv_ddlist_set_action(dropdownRestrict, restrictionAction);
 
     pros::Motor MTR_1(FRONT_LEFT_MOTOR_PORT);
-    MTR_1.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    //MTR_1.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    MTR_1.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
     pros::Motor MTR_2(FRONT_RIGHT_MOTOR_PORT);
-    MTR_2.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    //MTR_2.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    MTR_2.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
     pros::Motor MTR_3(BACK_LEFT_MOTOR_PORT);
-    MTR_3.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    //MTR_3.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    MTR_3.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
     pros::Motor MTR_4(BACK_RIGHT_MOTOR_PORT);
-    MTR_4.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    //MTR_4.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    MTR_4.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 
     pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
     MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+
+    pros::Motor MTR_6(PUSHUP_MOTOR_PORT);
+    MTR_6.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 }
 
 /**
@@ -393,23 +402,41 @@ void competition_initialize() {
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
+
 void autonomous() {
-       freopen("auto.txt", "r", stdin);
-       while(1){
-         //leftY, rightY, shooter, pushup, rollerleft, rollerright, pushup, delay;
-        double leftY, rightY;
-        int shooter, pushup, rollerleft, rollerright,delay;
-        std::cin >> leftY >> rightY >> shooter >> pushup >> rollerleft >> rollerright;
-        drive -> getModel() -> tank(leftY,
-                                    rightY);
-        MTR_shooter.moveVelocity(shooter);
-        MTR_pushup.moveVelocity(pushup);
-        MTR_rollerLeft.moveVelocity(rollerleft);
-        MTR_rollerRight.moveVelocity(rollerright);
-        std::cin >> pushup >> delay;
-        MTR_pushup.moveVelocity(pushup);
-        pros::delay(delay);
-       }
+          FILE* usd_file_read = fopen("/usd/auto.txt", "r");
+
+          /*
+          double test[1];
+          fscanf(usd_file_read, "%lf", test);
+          std::cout << test[0] << std::endl;
+          drive -> getModel() -> tank(test[0], test[0]);
+          */
+
+          while(1){
+            //leftY, rightY, shooter, pushup, rollerleft, rollerright, pushup, delay;
+            double leftY[1], rightY[1];
+            int shooter[1], pushup[1], rollerleft[1], rollerright[1], delay[1];
+            //std::cin >> leftY >> rightY >> shooter >> pushup >> rollerleft >> rollerright;
+            fscanf(usd_file_read, "%lf", leftY);
+            fscanf(usd_file_read, "%lf", rightY);
+            fscanf(usd_file_read, "%d", shooter);
+            fscanf(usd_file_read, "%d", pushup);
+            fscanf(usd_file_read, "%d", rollerleft);
+            fscanf(usd_file_read, "%d", rollerright);
+
+            drive -> getModel() -> tank(leftY[0], rightY[0]);
+            MTR_shooter.moveVelocity(shooter[0]);
+            MTR_pushup.moveVelocity(pushup[0]);
+            MTR_rollerLeft.moveVelocity(rollerleft[0]);
+            MTR_rollerRight.moveVelocity(rollerright[0]);
+            //std::cin >> pushup >> delay;
+            fscanf(usd_file_read, "%d", pushup);
+            fscanf(usd_file_read, "%d", delay);
+            MTR_pushup.moveVelocity(pushup[0]);
+            pros::delay(delay[0]);
+          }
+          fclose(usd_file_read);
 }
 
 /**
@@ -426,12 +453,11 @@ void autonomous() {
  * task, not resume it from where it left off.
  */
 
-
 void opcontrol() {
       while(1){
-        // leftY, rightY, shooter, pushup, rollerleft, rollerright, pushup, delay
+         // leftY, rightY, shooter, pushup, rollerleft, rollerright, pushup, delay
 
-    //tank drive
+        //tank drive
             drive -> getModel() -> tank(controller.getAnalog(ControllerAnalog::leftY),
                                         controller.getAnalog(ControllerAnalog::rightY));
 
