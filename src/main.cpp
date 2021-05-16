@@ -233,6 +233,8 @@ void autonomous() {
     MTR_shooter.moveVelocity(600);
     pros::delay(500);
     MTR_shooter.moveVelocity(0);
+    pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
+    MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
     drive->moveDistance(80_in);
 }
 
