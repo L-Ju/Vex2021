@@ -348,7 +348,7 @@ void initialize() {
     MTR_4.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
 
     pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
-    MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+    MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
 }
 
 /**
@@ -372,7 +372,7 @@ void disabled() {
  */
 void competition_initialize() {
     pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
-    MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+    MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 
 //     pros::lcd::register_btn0_cb(on_left_button);
 // 	pros::lcd::register_btn1_cb(on_middle_button);
