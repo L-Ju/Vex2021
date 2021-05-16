@@ -344,20 +344,20 @@ void initialize() {
     lv_ddlist_set_action(dropdownRestrict, restrictionAction);
 
     pros::Motor MTR_1(FRONT_LEFT_MOTOR_PORT);
-    MTR_1.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-    // MTR_1.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+    //MTR_1.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    MTR_1.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
     pros::Motor MTR_2(FRONT_RIGHT_MOTOR_PORT);
-    MTR_2.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-    // MTR_2.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+    //MTR_2.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    MTR_2.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
     pros::Motor MTR_3(BACK_LEFT_MOTOR_PORT);
-    MTR_3.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-    // MTR_3.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+    //MTR_3.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    MTR_3.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
     pros::Motor MTR_4(BACK_RIGHT_MOTOR_PORT);
-    MTR_4.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-    // MTR_4.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+    //MTR_4.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    MTR_4.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 
     pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
-    MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 
     pros::Motor MTR_6(PUSHUP_MOTOR_PORT);
     MTR_6.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
@@ -404,6 +404,7 @@ void competition_initialize() {
  */
 
 void autonomous() {
+<<<<<<< HEAD
 
         pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
         MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
@@ -434,6 +435,43 @@ void autonomous() {
         MTR_rollerLeft.moveVelocity(0);
         MTR_rollerRight.moveVelocity(0);
 
+=======
+          FILE* usd_file_read = fopen("/usd/auto.txt", "r");
+
+          /*
+          double test[1];
+          fscanf(usd_file_read, "%lf", test);
+          std::cout << test[0] << std::endl;
+          drive -> getModel() -> tank(test[0], test[0]);
+          */
+
+          while(1){
+            //leftY, rightY, shooter, pushup, rollerleft, rollerright, pushup, delay;
+            double leftY[1], rightY[1];
+            int shooter[1], pushup[1], rollerleft[1], rollerright[1], delay1[1],delay2[1];
+            //std::cin >> leftY >> rightY >> shooter >> pushup >> rollerleft >> rollerright;
+            fscanf(usd_file_read, "%lf", leftY);
+            fscanf(usd_file_read, "%lf", rightY);
+            fscanf(usd_file_read, "%d", shooter);
+            fscanf(usd_file_read, "%d", delay1);
+            fscanf(usd_file_read, "%d", pushup);
+            fscanf(usd_file_read, "%d", rollerleft);
+            fscanf(usd_file_read, "%d", rollerright);
+
+            drive -> getModel() -> tank(leftY[0], rightY[0]);
+            MTR_shooter.moveVelocity(shooter[0]);
+            pros::delay(delay1[0]);
+            MTR_pushup.moveVelocity(pushup[0]);
+            MTR_rollerLeft.moveVelocity(rollerleft[0]);
+            MTR_rollerRight.moveVelocity(rollerright[0]);
+            //std::cin >> pushup >> delay;
+            fscanf(usd_file_read, "%d", pushup);
+            fscanf(usd_file_read, "%d", delay2);
+            MTR_pushup.moveVelocity(pushup[0]);
+            pros::delay(delay2[0]);
+          }
+          fclose(usd_file_read);
+>>>>>>> parent of 7e376a6 (Wed Lunchtime&Lesson 5 version)
 }
 
 /**
@@ -461,6 +499,7 @@ void opcontrol() {
             std::cout << controller.getAnalog(ControllerAnalog::leftY) << ' ' <<  controller.getAnalog(ControllerAnalog::rightY) << ' ';
             if (controller.getDigital(okapi::ControllerDigital::X))  {
                 MTR_shooter.moveVelocity(-600);
+<<<<<<< HEAD
             } else if (controller.getDigital(okapi::ControllerDigital::L2)) {
                 MTR_shooter.moveVelocity(600);
             } else if (controller.getDigital(okapi::ControllerDigital::L1)) {
@@ -468,6 +507,28 @@ void opcontrol() {
                 MTR_pushup.moveVelocity(-500);
             } else {
                 MTR_shooter.moveVelocity(0);
+=======
+                std::cout << -600 << ' ';
+                std::cout << 0 << ' ';
+                std::cout << 0 << ' ';
+            } else if (controller.getDigital(okapi::ControllerDigital::L2)) {
+                MTR_shooter.moveVelocity(600);
+                std::cout << 600 << ' ';
+                std::cout << 0 << ' ';
+                std::cout << 0 << ' ';
+            } else if (controller.getDigital(okapi::ControllerDigital::L1)) {
+                MTR_shooter.moveVelocity(-600);
+                std::cout << -600 << ' ';
+                pros::delay(10);
+                std::cout << 10 << ' ';
+                MTR_pushup.moveVelocity(-400);
+                std::cout << -400 << ' ';
+            } else {
+                MTR_shooter.moveVelocity(0);
+                std::cout << 0 << ' ';
+                std::cout << 0 << ' ';
+                std::cout << 0 << ' ';
+>>>>>>> parent of 7e376a6 (Wed Lunchtime&Lesson 5 version)
             }
 
             if (controller.getDigital(okapi::ControllerDigital::R1)) {
@@ -482,6 +543,7 @@ void opcontrol() {
                     MTR_pushup.moveVelocity(0);
                 }
             }
+            std::cout << 10 << ' ';
             pros::delay(10);
         }
 }
