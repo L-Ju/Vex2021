@@ -22,10 +22,10 @@ int FRONT_LEFT_MOTOR_PORT  =  13;
 int FRONT_RIGHT_MOTOR_PORT  =  20;
 int BACK_LEFT_MOTOR_PORT  =  14;
 int BACK_RIGHT_MOTOR_PORT  =  19;
-Motor MTR_frontLeft(FRONT_LEFT_MOTOR_PORT);
-Motor MTR_frontRight(FRONT_RIGHT_MOTOR_PORT);
-Motor MTR_backLeft(BACK_LEFT_MOTOR_PORT);
-Motor MTR_backRight(BACK_RIGHT_MOTOR_PORT);
+Motor MTR_frontLeft(-FRONT_LEFT_MOTOR_PORT);
+Motor MTR_frontRight(-FRONT_RIGHT_MOTOR_PORT);
+Motor MTR_backLeft(-BACK_LEFT_MOTOR_PORT);
+Motor MTR_backRight(-BACK_RIGHT_MOTOR_PORT);
 
 // roller motors
 int LEFT_ROLLER_MOTOR_PORT = 3;
@@ -45,4 +45,4 @@ Motor MTR_pushup(PUSHUP_MOTOR_PORT);
 std::shared_ptr<ChassisController> drive =
 ChassisControllerBuilder()
   .withMotors({FRONT_LEFT_MOTOR_PORT, BACK_LEFT_MOTOR_PORT},{-FRONT_RIGHT_MOTOR_PORT, -BACK_RIGHT_MOTOR_PORT})
-  .withDimensions(AbstractMotor::gearset::green, {{3.25_in, 10_in}, imev5GreenTPR}).build();
+  .withDimensions({AbstractMotor::gearset::blue, 5.0/3.0}, {{3.25_in, 10_in}, imev5BlueTPR}).build();
