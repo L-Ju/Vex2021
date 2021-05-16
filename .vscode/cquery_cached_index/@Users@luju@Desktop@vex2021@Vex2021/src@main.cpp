@@ -528,6 +528,9 @@ void opcontrol() {
                 std::cout << 0 << ' ';
                 std::cout << 0 << ' ';
                 std::cout << 0 << ' ';
+<<<<<<< HEAD
+>>>>>>> parent of 7e376a6 (Wed Lunchtime&Lesson 5 version)
+=======
 >>>>>>> parent of 7e376a6 (Wed Lunchtime&Lesson 5 version)
             }
 
