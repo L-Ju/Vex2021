@@ -372,7 +372,7 @@ void disabled() {
  */
 void competition_initialize() {
     pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
-    MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+    MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 
 //     pros::lcd::register_btn0_cb(on_left_button);
 // 	pros::lcd::register_btn1_cb(on_middle_button);

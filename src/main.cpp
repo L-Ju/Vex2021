@@ -396,7 +396,7 @@ void autonomous() {
     MTR_shooter.moveVelocity(600);
     pros::delay(500);
     MTR_shooter.moveVelocity(0);
-    drive->moveDistance(20_in);  
+    drive->moveDistance(20_in);
 }
 
 /**
