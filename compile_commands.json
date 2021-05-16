@@ -27,7 +27,7 @@
             "-funwind-tables",
             "--std=gnu++17",
             "-o",
-            "bin/globals.cpp.o",
+            "/var/folders/m3/yyr2bxvj4yd5kj5nf_sj4bcr0000gn/T/tmp1yqh3zwa/globals.cpp.o",
             "src/globals.cpp"
         ],
         "directory": "/Users/luju/Desktop/vex2021/Vex2021",
@@ -61,7 +61,7 @@
             "-funwind-tables",
             "--std=gnu++17",
             "-o",
-            "bin/main.cpp.o",
+            "/var/folders/m3/yyr2bxvj4yd5kj5nf_sj4bcr0000gn/T/tmp1yqh3zwa/main.cpp.o",
             "src/main.cpp"
         ],
         "directory": "/Users/luju/Desktop/vex2021/Vex2021",
