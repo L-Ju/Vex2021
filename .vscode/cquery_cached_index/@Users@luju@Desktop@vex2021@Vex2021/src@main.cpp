@@ -28,172 +28,7 @@
 // }
 
 
-//turn right *NO neagtive angle values *somehow only works within the range of 0 < x <= 180
-void turnAngleRIGHT(double angleInDegrees){
-    MTR_frontLeft.tarePosition();
-    MTR_frontRight.tarePosition();
-    MTR_backLeft.tarePosition();
-    MTR_backRight.tarePosition();
 
-    if(angleInDegrees == 180){
-      double temp = ( (44.5/360.0)*angleInDegrees ) / 2.0;
-      angleInDegrees = angleInDegrees + temp;
-    }
-
-    double angleinTicks = 0;
-    double error = 0;
-    double lastError = 0;
-    double integral = 0;
-    double derivative = 0;
-
-    while(angleinTicks < angleInDegrees){
-      double allVelocity;
-      double circleticks = MTR_frontLeft.getPosition() + MTR_backLeft.getPosition() + MTR_frontRight.getPosition() + MTR_backRight.getPosition();
-      circleticks  =  circleticks / 4.0;
-
-      angleinTicks = circleticks /6.843738; //8.547499
-
-      error = angleInDegrees - angleinTicks;
-      integral = integral + error;
-      derivative = error - lastError;
-
-       allVelocity = 185 + (error * gP)
-                     +(integral * gI)
-                     +(derivative * gD);
-
-      MTR_frontLeft.moveVelocity(allVelocity);
-      MTR_frontRight.moveVelocity(allVelocity);
-      MTR_backLeft.moveVelocity(allVelocity);
-      MTR_backRight.moveVelocity(allVelocity);
-      pros::delay(20);
-    }
-    MTR_frontLeft.moveVelocity(0);
-    MTR_frontRight.moveVelocity(0);
-    MTR_backLeft.moveVelocity(0);
-    MTR_backRight.moveVelocity(0);
-}
-
-//*NO neagtive angle values *somehow only works within the range of 0 < x <= 180
-void turnAngleLEFT(double angleInDegrees){
-    MTR_frontLeft.tarePosition();
-    MTR_frontRight.tarePosition();
-    MTR_backLeft.tarePosition();
-    MTR_backRight.tarePosition();
-
-    if(angleInDegrees == 180){
-      double temp = ( (44.5/360.0)*angleInDegrees ) / 2.0;
-      angleInDegrees = angleInDegrees + temp;
-    }
-
-    double angleinTicks = 0;
-    double error = 0;
-    double lastError = 0;
-    double integral = 0;
-    double derivative = 0;
-
-    while(angleinTicks < angleInDegrees){
-      double allVelocity = 0;
-      double circleticks = MTR_frontLeft.getPosition() + MTR_backLeft.getPosition() + MTR_frontRight.getPosition() + MTR_backRight.getPosition();
-      circleticks  =  circleticks / 4.0;
-
-      angleinTicks = - 1 * (circleticks/6.843738); //7.7891
-
-      error = angleInDegrees - angleinTicks;
-      integral = integral + error;
-      derivative = error - lastError;
-
-      allVelocity = 190 + (error * gP)
-                     +(integral * gI)
-                     +(derivative * gD);
-
-      MTR_frontLeft.moveVelocity(-allVelocity);
-      MTR_frontRight.moveVelocity(-allVelocity);
-      MTR_backLeft.moveVelocity(-allVelocity);
-      MTR_backRight.moveVelocity(-allVelocity);
-      pros::delay(20);
-    }
-    MTR_frontLeft.moveVelocity(0);
-    MTR_frontRight.moveVelocity(0);
-    MTR_backLeft.moveVelocity(0);
-    MTR_backRight.moveVelocity(0);
-}
-
-
-void driveFeet (double distanceInFeet) {
-    double distanceInTicks = distanceInFeet * 12 * ticksPerInch;
-
-    MTR_frontLeft.tarePosition();
-    MTR_frontRight.tarePosition();
-    MTR_backLeft.tarePosition();
-    MTR_backRight.tarePosition();
-
-    double error = 0;
-    double lastError = 0;
-    double integral = 0;
-    double derivative = 0;
-    if (distanceInTicks > 0){
-        double leftVelocity = 185;
-        double rightVelocity = 185;
-
-        MTR_frontLeft.moveVelocity(leftVelocity);
-        MTR_frontRight.moveVelocity(rightVelocity);
-        MTR_backLeft.moveVelocity(leftVelocity);
-        MTR_backRight.moveVelocity(rightVelocity);
-
-        while ( MTR_frontLeft.getPosition() + MTR_backLeft.getPosition() < distanceInTicks*2) {
-            error = (MTR_frontLeft.getPosition() + MTR_backLeft.getPosition()) - (MTR_frontRight.getPosition()*-1 + MTR_backRight.getPosition()*-1);
-            integral = integral + error;
-            derivative = error - lastError;
-
-            rightVelocity = leftVelocity + (error * kP)
-                                        + (integral * kI)
-                                        + (derivative * kD);
-
-            MTR_frontRight.moveVelocity(-rightVelocity);
-            MTR_backRight.moveVelocity(-rightVelocity);
-
-            pros::delay(20);
-        }
-        MTR_frontLeft.moveVelocity(0);
-        MTR_frontRight.moveVelocity(0);
-        MTR_backLeft.moveVelocity(0);
-        MTR_backRight.moveVelocity(0);
-    }
-    else if (distanceInTicks < 0) {
-        double leftVelocity = -100;
-        double rightVelocity = -100;
-
-        MTR_frontLeft.moveVelocity(leftVelocity);
-        MTR_frontRight.moveVelocity(rightVelocity);
-        MTR_backLeft.moveVelocity(leftVelocity);
-        MTR_backRight.moveVelocity(rightVelocity);
-
-        while ( MTR_frontLeft.getPosition() + MTR_backLeft.getPosition() > distanceInTicks*2) {
-
-            error = (MTR_frontLeft.getPosition() + MTR_backLeft.getPosition()) - (MTR_frontRight.getPosition()*-1 + MTR_backRight.getPosition()*-1);
-            integral = integral + error;
-            derivative = error - lastError;
-
-            rightVelocity = leftVelocity + (error * kP)
-                                        + (integral * kI)
-                                        + (derivative * kD);
-
-            MTR_frontRight.moveVelocity(-rightVelocity);
-            MTR_backRight.moveVelocity(-rightVelocity);
-
-
-            pros::delay(20);
-        }
-        MTR_frontLeft.moveVelocity(0);
-        MTR_frontRight.moveVelocity(0);
-        MTR_backLeft.moveVelocity(0);
-        MTR_backRight.moveVelocity(0);
-    }
-}
-
-void driveInches (double distanceInInches) {
-    driveFeet(distanceInInches/12);
-}
 
 void pickUpBalls() {
     MTR_rollerLeft.moveVelocity(-200);
@@ -393,10 +228,12 @@ void competition_initialize() {
 void autonomous() {
     pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
     MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+
+    drive->setMaxVelocity(200);
     MTR_shooter.moveVelocity(600);
     pros::delay(500);
     MTR_shooter.moveVelocity(0);
-    drive->moveDistance(20_in);  
+    drive->moveDistance(80_in);
 }
 
 /**
@@ -462,6 +299,7 @@ void opcontrol() {
                 MTR_shooter.moveVelocity(600);
             } else if (controller.getDigital(okapi::ControllerDigital::L1)) {
                 MTR_shooter.moveVelocity(-600);
+                pros::delay(10);
                 MTR_pushup.moveVelocity(-400);
             } else {
                 MTR_shooter.moveVelocity(0);

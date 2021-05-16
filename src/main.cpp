@@ -233,7 +233,7 @@ void autonomous() {
     MTR_shooter.moveVelocity(600);
     pros::delay(500);
     MTR_shooter.moveVelocity(0);
-    drive->moveDistance(20_in);
+    drive->moveDistance(80_in);
 }
 
 /**
@@ -299,6 +299,7 @@ void opcontrol() {
                 MTR_shooter.moveVelocity(600);
             } else if (controller.getDigital(okapi::ControllerDigital::L1)) {
                 MTR_shooter.moveVelocity(-600);
+                pros::delay(10);
                 MTR_pushup.moveVelocity(-400);
             } else {
                 MTR_shooter.moveVelocity(0);
