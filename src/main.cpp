@@ -404,40 +404,7 @@ void competition_initialize() {
  */
 
 void autonomous() {
-          FILE* usd_file_read = fopen("/usd/auto.txt", "r");
 
-          /*
-          double test[1];
-          fscanf(usd_file_read, "%lf", test);
-          std::cout << test[0] << std::endl;
-          drive -> getModel() -> tank(test[0], test[0]);
-          */
-
-          while(1){
-            //leftY, rightY, shooter, pushup, rollerleft, rollerright, pushup, delay;
-            double leftY[1], rightY[1];
-            int shooter[1], pushup[1], rollerleft[1], rollerright[1], delay[1];
-            //std::cin >> leftY >> rightY >> shooter >> pushup >> rollerleft >> rollerright;
-            fscanf(usd_file_read, "%lf", leftY);
-            fscanf(usd_file_read, "%lf", rightY);
-            drive -> getModel() -> tank(leftY[0], rightY[0]);
-
-            fscanf(usd_file_read, "%d", shooter);
-            fscanf(usd_file_read, "%d", pushup);
-            MTR_shooter.moveVelocity(shooter[0]);
-            MTR_pushup.moveVelocity(pushup[0]);
-
-            fscanf(usd_file_read, "%d", rollerleft);
-            fscanf(usd_file_read, "%d", rollerright);
-            MTR_rollerLeft.moveVelocity(rollerleft[0]);
-            MTR_rollerRight.moveVelocity(rollerright[0]);
-            //std::cin >> pushup >> delay;
-
-            fscanf(usd_file_read, "%d", pushup);
-            MTR_pushup.moveVelocity(pushup[0]);
-            pros::delay(10);
-          }
-          fclose(usd_file_read);
 }
 
 /**
@@ -465,47 +432,25 @@ void opcontrol() {
             std::cout << controller.getAnalog(ControllerAnalog::leftY) << ' ' <<  controller.getAnalog(ControllerAnalog::rightY) << ' ';
             if (controller.getDigital(okapi::ControllerDigital::X))  {
                 MTR_shooter.moveVelocity(-600);
-                std::cout << -600 << ' ';
-                std::cout << 0 << ' ';
             } else if (controller.getDigital(okapi::ControllerDigital::L2)) {
                 MTR_shooter.moveVelocity(600);
-                std::cout << 600 << ' ';
-                std::cout << 0 << ' ';
             } else if (controller.getDigital(okapi::ControllerDigital::L1)) {
                 MTR_shooter.moveVelocity(-600);
-                std::cout << -600 << ' ';
-                MTR_pushup.moveVelocity(-400);
-                std::cout << -400 << ' ';
+                MTR_pushup.moveVelocity(-500);
             } else {
                 MTR_shooter.moveVelocity(0);
-                std::cout << 0 << ' ';
-                std::cout << 0 << ' ';
             }
 
             if (controller.getDigital(okapi::ControllerDigital::R1)) {
                 pickUpBalls();
             } else if (controller.getDigital(okapi::ControllerDigital::R2)) {
                 MTR_rollerLeft.moveVelocity(200);
-                std::cout << 200 << ' ';
                 MTR_rollerRight.moveVelocity(-200);
-                std::cout << -200 << ' ';
-                if(controller.getDigital(okapi::ControllerDigital::L1)){
-                    std::cout << -400 << ' ';
-                }
-                else{
-                    std::cout << 0 << ' ';
-                }
             } else {
                 MTR_rollerLeft.moveVelocity(0);
-                std::cout << 0 << ' ';
                 MTR_rollerRight.moveVelocity(0) ;
-                std::cout << 0 << ' ';
                 if(!controller.getDigital(okapi::ControllerDigital::L1)){
                     MTR_pushup.moveVelocity(0);
-                    std::cout << 0 << ' ';
-                }
-                else{
-                    std::cout << -400 << ' ';
                 }
             }
             pros::delay(10);
