@@ -404,6 +404,26 @@ void competition_initialize() {
  */
 
 void autonomous() {
+  /*
+    pros::Motor MTR_1(FRONT_LEFT_MOTOR_PORT);
+    MTR_1.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+    pros::Motor MTR_2(FRONT_RIGHT_MOTOR_PORT);
+    MTR_2.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+    pros::Motor MTR_3(BACK_LEFT_MOTOR_PORT);
+    MTR_3.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+    pros::Motor MTR_4(BACK_RIGHT_MOTOR_PORT);
+    MTR_4.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+  */
+
+    pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
+    MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+    MTR_shooter.moveVelocity(600);
+    pros::delay(500);
+    MTR_shooter.moveVelocity(0);
+
+    drive->setMaxVelocity(600);
+    //drive->moveDistance(40_in);
+    // drive->turnAngle(_deg);
 
 }
 
