@@ -48,6 +48,23 @@ void stopIntake() {
     MTR_pushup.moveVelocity(0);
 }
 
+void shoot() {
+    MTR_shooter.moveVelocity(-600);
+    pros::delay(10);
+    MTR_pushup.moveVelocity(-400);
+}
+
+void justShoot() {
+    MTR_shooter.moveVelocity(-600);
+}
+
+void afterShoot() {
+    MTR_rollerLeft.moveVelocity(100);
+    MTR_rollerRight.moveVelocity(-100);
+    MTR_pushup.moveVelocity(0);
+    MTR_shooter.moveVelocity(0);
+}
+
 // LVGL FUNCTIONS
 
 static lv_res_t teamAction(lv_obj_t * ddlist){
@@ -228,14 +245,110 @@ void competition_initialize() {
 void autonomous() {
     pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
     MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-
-    drive->setMaxVelocity(200);
     MTR_shooter.moveVelocity(600);
-    pros::delay(500);
+    pros::delay(200);
     MTR_shooter.moveVelocity(0);
-    pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
+
     MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
-    drive->moveDistance(80_in);
+
+    // OLD
+
+    // profileController->generatePath(
+    //     {
+    //     {0_ft, 0_ft, 0_deg},  // Profile starting position, this will normally be (0, 0, 0)
+    //     {2.5_ft, 0_ft, 0_deg}
+    //     },
+    //     "A" // Profile name
+    // ); profileController->setTarget("A"); profileController->waitUntilSettled();
+
+    
+    // drive->turnAngle(135_deg);
+    // MTR_pushup.moveVelocity(-400);
+    // pickUpBalls();
+
+
+    // profileController->generatePath(
+    //     {
+    //     {0_ft, 0_ft, 0_deg},  // Profile starting position, this will normally be (0, 0, 0)
+    //     {3.5_ft, 0_ft, 0_deg}
+    //     },
+    //     "A" // Profile name
+    // ); profileController->setTarget("A"); profileController->waitUntilSettled();
+    
+    // pros::delay(300);
+    // stopIntake();
+    // pros::delay(200);
+    // shoot();
+    // pros::delay(400);
+    // afterShoot();
+    // pros::delay(200);
+    // drive->setMaxVelocity(400);
+    // drive->moveDistance(-2_ft);
+    // drive->setMaxVelocity(600);
+    // stopIntake();
+    
+    // drive->turnAngle(135_deg);
+    // MTR_shooter.moveVelocity(200);
+    // profileController->generatePath(
+    //     {
+    //     {0_ft, 0_ft, 0_deg},  // Profile starting position, this will normally be (0, 0, 0)
+    //     {3.5_ft, 0_ft, 0_deg}
+    //     },
+    //     "A" // Profile name
+    // ); profileController->setTarget("A"); profileController->waitUntilSettled();
+
+    // drive->setMaxVelocity(400);
+    // drive->turnAngle(-90_deg);
+
+    // drive->moveDistance(2_ft);
+    // shoot();
+    // pros::delay(600);
+    // afterShoot();
+    // pros::delay(200);
+    
+    // drive->moveDistance(-2_ft);
+    // drive->setMaxVelocity(600);
+    // stopIntake();
+
+    // OLD
+
+    drive->setMaxVelocity(400);
+
+    pickUpBalls();
+    drive->moveDistance(1.5_ft);
+    pros::delay(100);
+    stopIntake();
+    drive->turnAngle(35_deg);
+    drive->moveDistance(1_ft);
+    shoot();
+    pros::delay(300);
+    afterShoot();
+
+    drive->moveDistance(-3_ft);
+    drive->turnAngle(135_deg);
+
+
+    drive->moveDistance(2.5_ft);
+    drive->turnAngle(-93_deg);
+    drive->moveDistance(3.5_ft);
+    shoot();
+    pros::delay(300);
+    afterShoot();
+
+    drive->moveDistance(-2_ft);
+    drive->turnAngle(85_deg);
+
+    pickUpBalls();
+    drive->moveDistance(6_ft);
+    drive->turnAngle(-45_deg);
+    drive->moveDistance(2_ft);
+
+    shoot();
+    pros::delay(300);
+    afterShoot();
+
+    drive->moveDistance(-2_ft);
+    
 }
 
 /**
@@ -291,6 +404,7 @@ void opcontrol() {
         }
     } else {
         while(1){
+            MTR_shooter.setBrakeMode(okapi::AbstractMotor::brakeMode::hold);
 
     //tank drive
             drive -> getModel() -> tank(controller.getAnalog(ControllerAnalog::leftY),
