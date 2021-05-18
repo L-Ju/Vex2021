@@ -243,13 +243,20 @@ void competition_initialize() {
  * from where it left off.
  */
 void autonomous() {
+    pros::Motor MTR_1(FRONT_LEFT_MOTOR_PORT);
+    MTR_1.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    pros::Motor MTR_2(FRONT_RIGHT_MOTOR_PORT);
+    MTR_2.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    pros::Motor MTR_3(BACK_LEFT_MOTOR_PORT);
+    MTR_3.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    pros::Motor MTR_4(BACK_RIGHT_MOTOR_PORT);
+    MTR_4.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+
     pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
-    MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-    MTR_shooter.moveVelocity(600);
+    MTR_shooter.moveVelocity(200);
     pros::delay(200);
     MTR_shooter.moveVelocity(0);
-
-    MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+    pros::delay(600);
 
     // OLD
 
@@ -312,42 +319,55 @@ void autonomous() {
 
     // OLD
 
-    drive->setMaxVelocity(400);
+    drive->setMaxVelocity(300);
 
-    pickUpBalls();
+
+    
+    // pick up
+    MTR_rollerLeft.moveVelocity(-200);
+    MTR_rollerRight.moveVelocity(200);
+    MTR_pushup.moveVelocity(-300);
+
+    pros::delay(10);
     drive->moveDistance(1.5_ft);
     pros::delay(100);
     stopIntake();
-    drive->turnAngle(35_deg);
-    drive->moveDistance(1_ft);
+    drive->turnAngle(25_deg);
+    pros::delay(10);
+    drive->setMaxVelocity(200);
+    drive->moveDistance(0.6_ft);
+    drive->setMaxVelocity(300);
     shoot();
     pros::delay(300);
     afterShoot();
-
+    
     drive->moveDistance(-3_ft);
+    stopIntake();
     drive->turnAngle(135_deg);
 
 
-    drive->moveDistance(2.5_ft);
-    drive->turnAngle(-93_deg);
     drive->moveDistance(3.5_ft);
+    drive->turnAngle(-90_deg);
+    drive->setMaxVelocity(150);
+    drive->moveDistance(1.35_ft);
     shoot();
     pros::delay(300);
     afterShoot();
 
-    drive->moveDistance(-2_ft);
-    drive->turnAngle(85_deg);
+    drive->moveDistance(-1_ft);
+    drive->turnAngle(90_deg);
+    stopIntake();
 
-    pickUpBalls();
-    drive->moveDistance(6_ft);
-    drive->turnAngle(-45_deg);
-    drive->moveDistance(2_ft);
+    // pickUpBalls();
+    // drive->moveDistance(4.5_ft);
+    // drive->turnAngle(-45_deg);
+    // drive->moveDistance(2_ft);
 
-    shoot();
-    pros::delay(300);
-    afterShoot();
+    // shoot();
+    // pros::delay(300);
+    // afterShoot();
 
-    drive->moveDistance(-2_ft);
+    // drive->moveDistance(-2_ft);
     
 }
 
@@ -367,6 +387,15 @@ void autonomous() {
 
 
 void opcontrol() {
+
+    pros::Motor MTR_1(FRONT_LEFT_MOTOR_PORT);
+    MTR_1.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    pros::Motor MTR_2(FRONT_RIGHT_MOTOR_PORT);
+    MTR_2.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    pros::Motor MTR_3(BACK_LEFT_MOTOR_PORT);
+    MTR_3.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    pros::Motor MTR_4(BACK_RIGHT_MOTOR_PORT);
+    MTR_4.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
   /*
     double Pi = 3.14159265358979323846;
     turnAngleRIGHT(3.14);
@@ -415,9 +444,14 @@ void opcontrol() {
                 MTR_shooter.moveVelocity(600);
             } else if (controller.getDigital(okapi::ControllerDigital::L1)) {
                 MTR_shooter.moveVelocity(-600);
-                pros::delay(10);
+                pros::delay(100);
                 MTR_pushup.moveVelocity(-400);
-            } else {
+            } else if (controller.getDigital(okapi::ControllerDigital::Y)) {
+                MTR_shooter.moveVelocity(600);
+                MTR_pushup.moveVelocity(400);
+                MTR_rollerLeft.moveVelocity(200);
+                MTR_rollerRight.moveVelocity(-200);
+            }  else {
                 MTR_shooter.moveVelocity(0);
             }
 
@@ -427,10 +461,12 @@ void opcontrol() {
                 MTR_rollerLeft.moveVelocity(200);
                 MTR_rollerRight.moveVelocity(-200);
             } else {
-                MTR_rollerLeft.moveVelocity(0);
-                MTR_rollerRight.moveVelocity(0) ;
-                if(!controller.getDigital(okapi::ControllerDigital::L1)){
-                    MTR_pushup.moveVelocity(0);
+                if(!controller.getDigital(okapi::ControllerDigital::Y)){
+                    MTR_rollerLeft.moveVelocity(0);
+                    MTR_rollerRight.moveVelocity(0) ;
+                    if(!controller.getDigital(okapi::ControllerDigital::L1)){
+                        MTR_pushup.moveVelocity(0);
+                    }
                 }
             }
 
