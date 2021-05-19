@@ -190,14 +190,10 @@ void initialize() {
     lv_ddlist_set_draw_arrow(dropdownRestrict, true);
     lv_ddlist_set_action(dropdownRestrict, restrictionAction);
 
-    pros::Motor MTR_1(FRONT_LEFT_MOTOR_PORT);
-    MTR_1.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-    pros::Motor MTR_2(FRONT_RIGHT_MOTOR_PORT);
-    MTR_2.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-    pros::Motor MTR_3(BACK_LEFT_MOTOR_PORT);
-    MTR_3.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-    pros::Motor MTR_4(BACK_RIGHT_MOTOR_PORT);
-    MTR_4.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    MTR_backRight.setBrakeMode(okapi::AbstractMotor::brakeMode::brake);
+    MTR_backLeft.setBrakeMode(okapi::AbstractMotor::brakeMode::brake);
+    MTR_frontRight.setBrakeMode(okapi::AbstractMotor::brakeMode::brake);
+    MTR_frontLeft.setBrakeMode(okapi::AbstractMotor::brakeMode::brake);
 
     pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
     MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
@@ -243,14 +239,11 @@ void competition_initialize() {
  * from where it left off.
  */
 void autonomous() {
-    pros::Motor MTR_1(FRONT_LEFT_MOTOR_PORT);
-    MTR_1.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-    pros::Motor MTR_2(FRONT_RIGHT_MOTOR_PORT);
-    MTR_2.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-    pros::Motor MTR_3(BACK_LEFT_MOTOR_PORT);
-    MTR_3.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-    pros::Motor MTR_4(BACK_RIGHT_MOTOR_PORT);
-    MTR_4.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    MTR_backRight.setBrakeMode(okapi::AbstractMotor::brakeMode::brake);
+    MTR_backLeft.setBrakeMode(okapi::AbstractMotor::brakeMode::brake);
+    MTR_frontRight.setBrakeMode(okapi::AbstractMotor::brakeMode::brake);
+    MTR_frontLeft.setBrakeMode(okapi::AbstractMotor::brakeMode::brake);
+
 
     pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
     MTR_shooter.moveVelocity(200);
@@ -346,10 +339,10 @@ void autonomous() {
     drive->turnAngle(135_deg);
 
 
-    drive->moveDistance(3.5_ft);
+    drive->moveDistance(3.4_ft);
     drive->turnAngle(-90_deg);
     drive->setMaxVelocity(150);
-    drive->moveDistance(1.35_ft);
+    drive->moveDistance(1.25_ft);
     shoot();
     pros::delay(300);
     afterShoot();
