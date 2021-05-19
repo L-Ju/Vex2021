@@ -190,14 +190,10 @@ void initialize() {
     lv_ddlist_set_draw_arrow(dropdownRestrict, true);
     lv_ddlist_set_action(dropdownRestrict, restrictionAction);
 
-    pros::Motor MTR_1(FRONT_LEFT_MOTOR_PORT);
-    MTR_1.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
-    pros::Motor MTR_2(FRONT_RIGHT_MOTOR_PORT);
-    MTR_2.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
-    pros::Motor MTR_3(BACK_LEFT_MOTOR_PORT);
-    MTR_3.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
-    pros::Motor MTR_4(BACK_RIGHT_MOTOR_PORT);
-    MTR_4.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+    MTR_backRight.setBrakeMode(okapi::AbstractMotor::brakeMode::brake);
+    MTR_backLeft.setBrakeMode(okapi::AbstractMotor::brakeMode::brake);
+    MTR_frontRight.setBrakeMode(okapi::AbstractMotor::brakeMode::brake);
+    MTR_frontLeft.setBrakeMode(okapi::AbstractMotor::brakeMode::brake);
 
     pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
     MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
@@ -244,6 +240,11 @@ void competition_initialize() {
  */
 void autonomous() {
 
+    MTR_backRight.setBrakeMode(okapi::AbstractMotor::brakeMode::brake);
+    MTR_backLeft.setBrakeMode(okapi::AbstractMotor::brakeMode::brake);
+    MTR_frontRight.setBrakeMode(okapi::AbstractMotor::brakeMode::brake);
+    MTR_frontLeft.setBrakeMode(okapi::AbstractMotor::brakeMode::brake);
+
     pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
     MTR_shooter.moveVelocity(200);
     pros::delay(200);
@@ -256,7 +257,7 @@ void autonomous() {
     profileController->generatePath(
         {
         {0_ft, 0_ft, 0_deg},  // Profile starting position, this will normally be (0, 0, 0)
-        {2_ft, -2_ft, 0_deg}
+        {2_ft, -2_ft, 45_deg}
         },
         "A" // Profile name
     ); profileController->setTarget("A"); profileController->waitUntilSettled();
@@ -281,14 +282,10 @@ void autonomous() {
 
 void opcontrol() {
 
-    pros::Motor MTR_1(FRONT_LEFT_MOTOR_PORT);
-    MTR_1.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-    pros::Motor MTR_2(FRONT_RIGHT_MOTOR_PORT);
-    MTR_2.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-    pros::Motor MTR_3(BACK_LEFT_MOTOR_PORT);
-    MTR_3.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-    pros::Motor MTR_4(BACK_RIGHT_MOTOR_PORT);
-    MTR_4.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    MTR_backRight.setBrakeMode(okapi::AbstractMotor::brakeMode::brake);
+    MTR_backLeft.setBrakeMode(okapi::AbstractMotor::brakeMode::brake);
+    MTR_frontRight.setBrakeMode(okapi::AbstractMotor::brakeMode::brake);
+    MTR_frontLeft.setBrakeMode(okapi::AbstractMotor::brakeMode::brake);
   /*
     double Pi = 3.14159265358979323846;
     turnAngleRIGHT(3.14);
