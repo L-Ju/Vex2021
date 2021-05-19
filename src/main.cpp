@@ -191,13 +191,13 @@ void initialize() {
     lv_ddlist_set_action(dropdownRestrict, restrictionAction);
 
     pros::Motor MTR_1(FRONT_LEFT_MOTOR_PORT);
-    MTR_1.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    MTR_1.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
     pros::Motor MTR_2(FRONT_RIGHT_MOTOR_PORT);
-    MTR_2.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    MTR_2.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
     pros::Motor MTR_3(BACK_LEFT_MOTOR_PORT);
-    MTR_3.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    MTR_3.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
     pros::Motor MTR_4(BACK_RIGHT_MOTOR_PORT);
-    MTR_4.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    MTR_4.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 
     pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
     MTR_5.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
@@ -243,14 +243,6 @@ void competition_initialize() {
  * from where it left off.
  */
 void autonomous() {
-    pros::Motor MTR_1(FRONT_LEFT_MOTOR_PORT);
-    MTR_1.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-    pros::Motor MTR_2(FRONT_RIGHT_MOTOR_PORT);
-    MTR_2.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-    pros::Motor MTR_3(BACK_LEFT_MOTOR_PORT);
-    MTR_3.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-    pros::Motor MTR_4(BACK_RIGHT_MOTOR_PORT);
-    MTR_4.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
 
     pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
     MTR_shooter.moveVelocity(200);
@@ -258,117 +250,18 @@ void autonomous() {
     MTR_shooter.moveVelocity(0);
     pros::delay(600);
 
+    std::cout << "cock" << std::endl;
     // OLD
 
-    // profileController->generatePath(
-    //     {
-    //     {0_ft, 0_ft, 0_deg},  // Profile starting position, this will normally be (0, 0, 0)
-    //     {2.5_ft, 0_ft, 0_deg}
-    //     },
-    //     "A" // Profile name
-    // ); profileController->setTarget("A"); profileController->waitUntilSettled();
+    profileController->generatePath(
+        {
+        {0_ft, 0_ft, 0_deg},  // Profile starting position, this will normally be (0, 0, 0)
+        {2_ft, -2_ft, 0_deg}
+        },
+        "A" // Profile name
+    ); profileController->setTarget("A"); profileController->waitUntilSettled();
 
-    
-    // drive->turnAngle(135_deg);
-    // MTR_pushup.moveVelocity(-400);
-    // pickUpBalls();
-
-
-    // profileController->generatePath(
-    //     {
-    //     {0_ft, 0_ft, 0_deg},  // Profile starting position, this will normally be (0, 0, 0)
-    //     {3.5_ft, 0_ft, 0_deg}
-    //     },
-    //     "A" // Profile name
-    // ); profileController->setTarget("A"); profileController->waitUntilSettled();
-    
-    // pros::delay(300);
-    // stopIntake();
-    // pros::delay(200);
-    // shoot();
-    // pros::delay(400);
-    // afterShoot();
-    // pros::delay(200);
-    // drive->setMaxVelocity(400);
-    // drive->moveDistance(-2_ft);
-    // drive->setMaxVelocity(600);
-    // stopIntake();
-    
-    // drive->turnAngle(135_deg);
-    // MTR_shooter.moveVelocity(200);
-    // profileController->generatePath(
-    //     {
-    //     {0_ft, 0_ft, 0_deg},  // Profile starting position, this will normally be (0, 0, 0)
-    //     {3.5_ft, 0_ft, 0_deg}
-    //     },
-    //     "A" // Profile name
-    // ); profileController->setTarget("A"); profileController->waitUntilSettled();
-
-    // drive->setMaxVelocity(400);
-    // drive->turnAngle(-90_deg);
-
-    // drive->moveDistance(2_ft);
-    // shoot();
-    // pros::delay(600);
-    // afterShoot();
-    // pros::delay(200);
-    
-    // drive->moveDistance(-2_ft);
-    // drive->setMaxVelocity(600);
-    // stopIntake();
-
-    // OLD
-
-    drive->setMaxVelocity(300);
-
-
-    
-    // pick up
-    MTR_rollerLeft.moveVelocity(-200);
-    MTR_rollerRight.moveVelocity(200);
-    MTR_pushup.moveVelocity(-300);
-
-    pros::delay(10);
-    drive->moveDistance(1.5_ft);
-    pros::delay(100);
-    stopIntake();
-    drive->turnAngle(25_deg);
-    pros::delay(10);
-    drive->setMaxVelocity(200);
-    drive->moveDistance(0.6_ft);
-    drive->setMaxVelocity(300);
-    shoot();
-    pros::delay(300);
-    afterShoot();
-    
-    drive->moveDistance(-3_ft);
-    stopIntake();
-    drive->turnAngle(135_deg);
-
-
-    drive->moveDistance(3.5_ft);
-    drive->turnAngle(-90_deg);
-    drive->setMaxVelocity(150);
-    drive->moveDistance(1.35_ft);
-    shoot();
-    pros::delay(300);
-    afterShoot();
-
-    drive->moveDistance(-1_ft);
-    drive->turnAngle(90_deg);
-    stopIntake();
-
-    // pickUpBalls();
-    // drive->moveDistance(4.5_ft);
-    // drive->turnAngle(-45_deg);
-    // drive->moveDistance(2_ft);
-
-    // shoot();
-    // pros::delay(300);
-    // afterShoot();
-
-    // drive->moveDistance(-2_ft);
-    
+    std::cout << "cock2" << std::endl;    
 }
 
 /**

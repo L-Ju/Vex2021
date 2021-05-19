@@ -27,6 +27,8 @@ Motor MTR_frontRight(FRONT_RIGHT_MOTOR_PORT);
 Motor MTR_backLeft(BACK_LEFT_MOTOR_PORT);
 Motor MTR_backRight(BACK_RIGHT_MOTOR_PORT);
 
+
+
 // roller motors
 int LEFT_ROLLER_MOTOR_PORT = 3;
 int RIGHT_ROLLER_MOTOR_PORT = 9;
@@ -50,8 +52,8 @@ ChassisControllerBuilder()
 std::shared_ptr<AsyncMotionProfileController> profileController =
   AsyncMotionProfileControllerBuilder()
     .withLimits({
-      1.0, // Maximum linear velocity of the Chassis in m/s
-      2.5, // Maximum linear acceleration of the Chassis in m/s/s
+      0.5, // Maximum linear velocity of the Chassis in m/s
+      1.0, // Maximum linear acceleration of the Chassis in m/s/s
       20.0 // Maximum linear jerk of the Chassis in m/s/s/s
     })
     .withOutput(drive)
