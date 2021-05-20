@@ -59,9 +59,9 @@ void justShoot() {
 }
 
 void afterShoot() {
-    MTR_rollerLeft.moveVelocity(100);
-    MTR_rollerRight.moveVelocity(-100);
-    MTR_pushup.moveVelocity(0);
+    MTR_rollerLeft.moveVelocity(85);
+    MTR_rollerRight.moveVelocity(-85);
+    MTR_pushup.moveVelocity(-40);
     MTR_shooter.moveVelocity(0);
 }
 
@@ -282,14 +282,16 @@ void autonomous() {
     ); profileController->setTarget("A"); profileController->waitUntilSettled();
 
     shoot();
-    pros::delay(300);
+    pros::delay(400);
     afterShoot();
     
+    drive->setMaxVelocity(400);
+
     drive->moveDistance(-2_ft);
     stopIntake();
     drive->setMaxVelocity(200);
     
-    drive->turnAngle(150_deg);
+    drive->turnAngle(146_deg);
 
     drive->setMaxVelocity(600);
 
@@ -317,7 +319,7 @@ void autonomous() {
     ); profileController->setTarget("A"); profileController->waitUntilSettled();
 
     shoot();
-    pros::delay(300);
+    pros::delay(600);
     afterShoot();
 
     drive->moveDistance(-2_ft);
