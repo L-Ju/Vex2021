@@ -246,7 +246,7 @@ void autonomous() {
     MTR_frontLeft.setBrakeMode(okapi::AbstractMotor::brakeMode::brake);
 
     pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
-    MTR_shooter.moveVelocity(200);
+    MTR_shooter.moveVelocity(300);
     pros::delay(200);
     MTR_shooter.moveVelocity(0);
     pros::delay(600);
@@ -254,13 +254,85 @@ void autonomous() {
     std::cout << "cock" << std::endl;
     // OLD
 
+    
+
+    MTR_rollerLeft.moveVelocity(-300);
+    MTR_rollerRight.moveVelocity(300);
+    MTR_pushup.moveVelocity(-400);
+
+    pros::delay(10);
     profileController->generatePath(
         {
         {0_ft, 0_ft, 0_deg},  // Profile starting position, this will normally be (0, 0, 0)
-        {2_ft, -2_ft, 45_deg}
+        {1.5_ft, -0.1_ft, 135_deg}
         },
         "A" // Profile name
     ); profileController->setTarget("A"); profileController->waitUntilSettled();
+    
+    pros::delay(150);
+    stopIntake();
+    pros::delay(10);
+    
+    profileController->generatePath(
+        {
+        {0_ft, 0_ft, 0_deg},  // Profile starting position, this will normally be (0, 0, 0)
+        {0.6_ft, 0_ft, 0_deg}
+        },
+        "A" // Profile name
+    ); profileController->setTarget("A"); profileController->waitUntilSettled();
+
+    shoot();
+    pros::delay(300);
+    afterShoot();
+    
+    drive->moveDistance(-2_ft);
+    stopIntake();
+    drive->setMaxVelocity(200);
+    
+    drive->turnAngle(135_deg);
+
+    drive->setMaxVelocity(600);
+
+    
+
+
+    profileController->generatePath(
+        {
+        {0_ft, 0_ft, 0_deg},  // Profile starting position, this will normally be (0, 0, 0)
+        {4_ft, 0_ft, 0_deg}
+        },
+        "A" // Profile name
+    ); profileController->setTarget("A"); profileController->waitUntilSettled();
+
+
+    drive->turnAngle(-90_deg);
+    
+    
+    profileController->generatePath(
+        {
+        {0_ft, 0_ft, 0_deg},  // Profile starting position, this will normally be (0, 0, 0)
+        {1.45_ft, 0_ft, 0_deg}
+        },
+        "A" // Profile name
+    ); profileController->setTarget("A"); profileController->waitUntilSettled();
+
+    shoot();
+    pros::delay(300);
+    afterShoot();
+
+    drive->moveDistance(-2_ft);
+    stopIntake();
+
+    drive->turnAngle(45_deg);
+    profileController->generatePath(
+        {
+        {1_ft, 0_ft, 0_deg},  // Profile starting position, this will normally be (0, 0, 0)
+        {0_ft, 0_ft, 0_deg}
+        },
+        "A" // Profile name
+    ); profileController->setTarget("A"); profileController->waitUntilSettled();
+    
+    
 
     std::cout << "cock2" << std::endl;    
 }
