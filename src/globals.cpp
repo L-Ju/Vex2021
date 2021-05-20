@@ -58,3 +58,9 @@ std::shared_ptr<AsyncMotionProfileController> profileController =
     })
     .withOutput(drive)
     .buildMotionProfileController();
+
+
+std::shared_ptr<AsyncVelocityController<double, double>> rollerController = 
+  AsyncVelControllerBuilder()
+    .withMotor({-LEFT_ROLLER_MOTOR_PORT, RIGHT_ROLLER_MOTOR_PORT}) // lift motor port 3
+    .build();

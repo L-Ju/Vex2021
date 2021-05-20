@@ -47,3 +47,4 @@ extern Motor MTR_pushup;
 extern std::shared_ptr<ChassisController> drive;
 
 extern std::shared_ptr<AsyncMotionProfileController> profileController;
+extern std::shared_ptr<AsyncVelocityController<double, double>> rollerController;

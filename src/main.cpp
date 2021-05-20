@@ -289,7 +289,7 @@ void autonomous() {
     stopIntake();
     drive->setMaxVelocity(200);
     
-    drive->turnAngle(135_deg);
+    drive->turnAngle(150_deg);
 
     drive->setMaxVelocity(600);
 
@@ -299,7 +299,7 @@ void autonomous() {
     profileController->generatePath(
         {
         {0_ft, 0_ft, 0_deg},  // Profile starting position, this will normally be (0, 0, 0)
-        {4_ft, 0_ft, 0_deg}
+        {4.2_ft, 0_ft, 0_deg}
         },
         "A" // Profile name
     ); profileController->setTarget("A"); profileController->waitUntilSettled();
