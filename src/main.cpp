@@ -267,7 +267,7 @@ void autonomous() {
     profileController->generatePath(
         {
         {0_ft, 0_ft, 0_deg},  // Profile starting position, this will normally be (0, 0, 0)
-        {1.5_ft, -0.1_ft, 135_deg}
+        {1.4_ft, -0.1_ft, 135_deg}
         },
         "A" // Profile name
     ); profileController->setTarget("A"); 
@@ -281,7 +281,7 @@ void autonomous() {
     profileController->waitUntilSettled();
     
     MTR_shooter.moveVelocity(0);
-    pros::delay(375);
+    pros::delay(450);
     stopIntake();
     pros::delay(10);
     
@@ -311,6 +311,7 @@ void autonomous() {
     profileController->waitUntilSettled();
 
     shoot();
+    MTR_pushup.moveVelocity(-500);
     pros::delay(300);
     afterShoot();
     
@@ -337,12 +338,13 @@ void autonomous() {
     afterShoot();
 
     drive->moveDistance(-2_ft);
-    drive->turnAngle(67_deg);
+    drive->turnAngle(68_deg);
     pickUpBalls();
     
 
     
     shoot();
+    MTR_pushup.moveVelocity(-600);
     profileController->setTarget("D"); 
     
     profileController->waitUntilSettled();
