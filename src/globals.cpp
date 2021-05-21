@@ -52,8 +52,8 @@ ChassisControllerBuilder()
 std::shared_ptr<AsyncMotionProfileController> profileController =
   AsyncMotionProfileControllerBuilder()
     .withLimits({
-      1.7, // Maximum linear velocity of the Chassis in m/s
-      1.6, // Maximum linear acceleration of the Chassis in m/s/s
+      1.8, // Maximum linear velocity of the Chassis in m/s
+      1.65, // Maximum linear acceleration of the Chassis in m/s/s
       30.0 // Maximum linear jerk of the Chassis in m/s/s/s
     })
     .withOutput(drive)

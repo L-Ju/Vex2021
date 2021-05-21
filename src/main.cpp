@@ -300,14 +300,14 @@ void autonomous() {
         {4.4_ft, 0_ft, 0_deg}
         },
         "B" // Profile name
-    ); 
+    );
     profileController->generatePath(
         {
         {0_ft, 0_ft, 0_deg},  // Profile starting position, this will normally be (0, 0, 0)
         {1.45_ft, 0_ft, 0_deg}
         },
         "C" // Profile name
-    ); 
+    );
     profileController->waitUntilSettled();
 
     shoot();
@@ -323,10 +323,6 @@ void autonomous() {
     drive->turnAngle(116_deg);
 
     drive->setMaxVelocity(600);
-
-    
-
-
     
     profileController->setTarget("B"); profileController->waitUntilSettled();
 
@@ -341,7 +337,7 @@ void autonomous() {
     afterShoot();
 
     drive->moveDistance(-2_ft);
-    drive->turnAngle(72_deg);
+    drive->turnAngle(67_deg);
     pickUpBalls();
     
 
