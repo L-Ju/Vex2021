@@ -314,11 +314,10 @@ void autonomous() {
     pros::delay(300);
     afterShoot();
     
-    drive->setMaxVelocity(500);
-
+    drive->setMaxVelocity(300);
+    
     drive->moveDistance(-2_ft);
     stopIntake();
-    drive->setMaxVelocity(300);
     
     drive->turnAngle(116_deg);
 
@@ -326,7 +325,9 @@ void autonomous() {
     
     profileController->setTarget("B"); profileController->waitUntilSettled();
 
+    drive->setMaxVelocity(500);
     drive->turnAngle(-90_deg);
+    drive->setMaxVelocity(600);
 
     
     
@@ -335,7 +336,7 @@ void autonomous() {
     shoot();
     pros::delay(600);
     afterShoot();
-
+    drive->setMaxVelocity(400);
     drive->moveDistance(-2_ft);
     drive->turnAngle(67_deg);
     pickUpBalls();
@@ -343,6 +344,7 @@ void autonomous() {
 
     
     shoot();
+    drive->setMaxVelocity(600);
     profileController->setTarget("D"); 
     
     profileController->waitUntilSettled();
