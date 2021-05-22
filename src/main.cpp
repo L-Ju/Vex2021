@@ -341,7 +341,7 @@ void autonomous() {
     drive->setMaxVelocity(400);
     drive->moveDistance(-2_ft);
     pros::delay(10);
-    drive->turnAngle(79_deg);
+    drive->turnAngle(85_deg);
     
     drive->setMaxVelocity(600);
     profileController->setTarget("D"); 
