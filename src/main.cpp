@@ -247,16 +247,20 @@ void autonomous() {
 
     pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
     
-    drive->setState({10_ft, 1_ft, 90_deg});
+    drive->setMaxVelocity(100);
+
+    drive->setState({10_ft, 1_ft, 0_deg});
 
     MTR_rollerLeft.moveVelocity(-300);
     MTR_rollerRight.moveVelocity(300);
     MTR_pushup.moveVelocity(-400);
     MTR_shooter.moveVelocity(600);
     
+    pros::delay(100);
+    MTR_shooter.moveVelocity(0);
     
     drive->driveToPoint({11_ft,1_ft});
-    MTR_shooter.moveVelocity(0);
+    
     drive->turnToAngle(135_deg);
     
     drive->driveToPoint({11_ft, 1.4_ft});
