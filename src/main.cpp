@@ -250,110 +250,51 @@ void autonomous() {
 
     std::cout << "cock" << std::endl;
 
-    profileController->generatePath(
-        {
-        {0_ft, 0_ft, 0_deg},
-        {5.4_ft, 0_ft, 0_deg}
-        },
-        "D" // Profile name
-    ); 
     // OLD
 
     
 
     
-
+    drive->setMaxVelocity(30);
     pros::delay(10);
-    profileController->generatePath(
-        {
-        {0_ft, 0_ft, 0_deg},  // Profile starting position, this will normally be (0, 0, 0)
-        {1.5_ft, -0.1_ft, 135_deg}
-        },
-        "A" // Profile name
-    ); profileController->setTarget("A"); 
 
     MTR_rollerLeft.moveVelocity(-300);
     MTR_rollerRight.moveVelocity(300);
     MTR_pushup.moveVelocity(-400);
     MTR_shooter.moveVelocity(600);
     pros::delay(50);
-    
-    profileController->waitUntilSettled();
-    
+    drive->moveDistance(1_ft);
     MTR_shooter.moveVelocity(0);
-    pros::delay(375);
+    drive->turnAngle(45_deg);
+    pros::delay(200);
     stopIntake();
-    pros::delay(10);
-    
-    profileController->generatePath(
-        {
-        {0_ft, 0_ft, 0_deg},  // Profile starting position, this will normally be (0, 0, 0)
-        {0.6_ft, 0_ft, 0_deg}
-        },
-        "A" // Profile name
-    ); 
-    
-    profileController->setTarget("A"); 
-    profileController->generatePath(
-        {
-        {0_ft, 0_ft, 0_deg},  // Profile starting position, this will normally be (0, 0, 0)
-        {4.4_ft, 0_ft, 0_deg}
-        },
-        "B" // Profile name
-    );
-    profileController->generatePath(
-        {
-        {0_ft, 0_ft, 0_deg},  // Profile starting position, this will normally be (0, 0, 0)
-        {1.45_ft, 0_ft, 0_deg}
-        },
-        "C" // Profile name
-    );
-    profileController->waitUntilSettled();
-
+    MTR_pushup.moveVelocity(-400);
+    drive->moveDistance(0.5_ft);
     shoot();
-    pros::delay(300);
+    pros::delay(200);
+    
     afterShoot();
-    
-    drive->setMaxVelocity(300);
-    
-    drive->moveDistance(-2_ft);
-    stopIntake();
-    
-    drive->turnAngle(116_deg);
+    drive->moveDistance(-1.4_ft);
+    drive->turnAngle(135_deg);
+    drive->moveDistance(4_ft);
+    afterShoot();
 
-    drive->setMaxVelocity(600);
-    
-    profileController->setTarget("B"); profileController->waitUntilSettled();
-
-    drive->setMaxVelocity(500);
     drive->turnAngle(-90_deg);
-    drive->setMaxVelocity(600);
-
+    drive->moveDistance(1_ft);
     
-    
-    profileController->setTarget("C"); profileController->waitUntilSettled();
-
     shoot();
-    pros::delay(600);
-    afterShoot();
-    drive->setMaxVelocity(400);
-    drive->moveDistance(-2_ft);
-    drive->turnAngle(67_deg);
+    pros::delay(200);
+    drive->moveDistance(-4_ft);
+    pros::delay(50);
+    drive->moveDistance(1_ft);
+    
+    
+    drive->turnAngle(21_deg);
     pickUpBalls();
-    
-
-    
+    drive->moveDistance(6_ft);
+    pros::delay(100);
+    stopIntake();
     shoot();
-    drive->setMaxVelocity(600);
-    profileController->setTarget("D"); 
-    
-    profileController->waitUntilSettled();
-    MTR_rollerLeft.moveVelocity(0);
-    MTR_rollerRight.moveVelocity(0);
-    
-    pros::delay(600);
-    afterShoot();
-     
 }
 
 /**
