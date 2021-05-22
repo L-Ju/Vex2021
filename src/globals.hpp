@@ -44,7 +44,5 @@ extern int PUSHUP_MOTOR_PORT;
 extern Motor MTR_pushup;
 
 // chassis
-extern std::shared_ptr<ChassisController> drive;
-
-extern std::shared_ptr<AsyncMotionProfileController> profileController;
+extern std::shared_ptr<OdomChassisController> drive;
 extern std::shared_ptr<AsyncVelocityController<double, double>> rollerController;

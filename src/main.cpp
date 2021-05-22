@@ -247,112 +247,45 @@ void autonomous() {
 
     pros::Motor MTR_5(SHOOTER_MOTOR_PORT);
     
-
-    std::cout << "cock" << std::endl;
-
-    profileController->generatePath(
-        {
-        {0_ft, 0_ft, 0_deg},
-        {5.4_ft, 0_ft, 0_deg}
-        },
-        "D" // Profile name
-    ); 
-    // OLD
-
-    
-
-    
-
-    pros::delay(10);
-    profileController->generatePath(
-        {
-        {0_ft, 0_ft, 0_deg},  // Profile starting position, this will normally be (0, 0, 0)
-        {1.4_ft, -0.1_ft, 135_deg}
-        },
-        "A" // Profile name
-    ); profileController->setTarget("A"); 
+    drive->setState({10_ft, 1_ft, 90_deg});
 
     MTR_rollerLeft.moveVelocity(-300);
     MTR_rollerRight.moveVelocity(300);
     MTR_pushup.moveVelocity(-400);
     MTR_shooter.moveVelocity(600);
-    pros::delay(50);
     
-    profileController->waitUntilSettled();
     
+    drive->driveToPoint({11_ft,1_ft});
     MTR_shooter.moveVelocity(0);
-    pros::delay(450);
+    drive->turnToAngle(135_deg);
+    
+    drive->driveToPoint({11_ft, 1.4_ft});
     stopIntake();
-    pros::delay(10);
-    
-    profileController->generatePath(
-        {
-        {0_ft, 0_ft, 0_deg},  // Profile starting position, this will normally be (0, 0, 0)
-        {0.6_ft, 0_ft, 0_deg}
-        },
-        "A" // Profile name
-    ); 
-    
-    profileController->setTarget("A"); 
-    profileController->generatePath(
-        {
-        {0_ft, 0_ft, 0_deg},  // Profile starting position, this will normally be (0, 0, 0)
-        {4.4_ft, 0_ft, 0_deg}
-        },
-        "B" // Profile name
-    );
-    profileController->generatePath(
-        {
-        {0_ft, 0_ft, 0_deg},  // Profile starting position, this will normally be (0, 0, 0)
-        {1.45_ft, 0_ft, 0_deg}
-        },
-        "C" // Profile name
-    );
-    profileController->waitUntilSettled();
 
     shoot();
-    MTR_pushup.moveVelocity(-500);
     pros::delay(300);
     afterShoot();
-    
-    drive->setMaxVelocity(500);
-
-    drive->moveDistance(-2_ft);
+    drive->driveToPoint({10_ft, 2_ft});
     stopIntake();
-    drive->setMaxVelocity(300);
-    
-    drive->turnAngle(116_deg);
 
-    drive->setMaxVelocity(600);
-    
-    profileController->setTarget("B"); profileController->waitUntilSettled();
+    drive->turnToAngle(270_deg);
 
-    drive->turnAngle(-90_deg);
-
-    
-    
-    profileController->setTarget("C"); profileController->waitUntilSettled();
-
+    drive->driveToPoint({6_ft, 2_ft});
+    drive->turnToAngle(180_deg);
+    drive->driveToPoint({6_ft, 1_ft});
     shoot();
-    pros::delay(600);
+    pros::delay(300);
     afterShoot();
-
-    drive->moveDistance(-2_ft);
-    drive->turnAngle(68_deg);
+    drive->driveToPoint({6_ft, 4.5_ft});
+    drive->driveToPoint({6_ft, 4_ft});
+    drive->turnToAngle(201_deg);
     pickUpBalls();
-    
+    drive->driveToPoint({1_ft, 1_ft});
+    stopIntake();
+    shoot();
+
 
     
-    shoot();
-    MTR_pushup.moveVelocity(-600);
-    profileController->setTarget("D"); 
-    
-    profileController->waitUntilSettled();
-    MTR_rollerLeft.moveVelocity(0);
-    MTR_rollerRight.moveVelocity(0);
-    
-    pros::delay(600);
-    afterShoot();
      
 }
 
