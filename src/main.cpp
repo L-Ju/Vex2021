@@ -272,8 +272,8 @@ void autonomous() {
         "A" // Profile name
     ); profileController->setTarget("A"); 
 
-    MTR_rollerLeft.moveVelocity(-300);
-    MTR_rollerRight.moveVelocity(300);
+    MTR_rollerLeft.moveVelocity(-400);
+    MTR_rollerRight.moveVelocity(400);
     MTR_pushup.moveVelocity(-400);
     MTR_shooter.moveVelocity(600);
     pros::delay(50);
@@ -304,7 +304,7 @@ void autonomous() {
     profileController->generatePath(
         {
         {0_ft, 0_ft, 0_deg},  // Profile starting position, this will normally be (0, 0, 0)
-        {1.45_ft, 0_ft, 0_deg}
+        {1.6_ft, 0_ft, 0_deg}
         },
         "C" // Profile name
     );
@@ -314,12 +314,13 @@ void autonomous() {
     pros::delay(300);
     afterShoot();
     
-    drive->setMaxVelocity(300);
+    drive->setMaxVelocity(450);
     
     drive->moveDistance(-2_ft);
     stopIntake();
     
-    drive->turnAngle(116_deg);
+    drive->setMaxVelocity(250);
+    drive->turnAngle(131_deg);
 
     drive->setMaxVelocity(600);
     
@@ -336,23 +337,21 @@ void autonomous() {
     shoot();
     pros::delay(600);
     afterShoot();
+    pros::delay(10);
     drive->setMaxVelocity(400);
     drive->moveDistance(-2_ft);
-    drive->turnAngle(67_deg);
-    pickUpBalls();
+    pros::delay(10);
+    drive->turnAngle(79_deg);
     
-
-    
-    shoot();
     drive->setMaxVelocity(600);
     profileController->setTarget("D"); 
     
-    profileController->waitUntilSettled();
-    MTR_rollerLeft.moveVelocity(0);
-    MTR_rollerRight.moveVelocity(0);
+    // profileController->waitUntilSettled();
+    // MTR_rollerLeft.moveVelocity(0);
+    // MTR_rollerRight.moveVelocity(0);
     
-    pros::delay(600);
-    afterShoot();
+    // pros::delay(600);
+    // afterShoot();
      
 }
 
@@ -423,7 +422,7 @@ void opcontrol() {
                 MTR_shooter.moveVelocity(-600);
             } else if (controller.getDigital(okapi::ControllerDigital::L2)) {
                 MTR_shooter.moveVelocity(600);
-            } else if (controller.getDigital(okapi::ControllerDigital::L1)) {
+            } else if (controller.getDigital(okapi::ControllerDigital::L1) && !controller.getDigital(okapi::ControllerDigital::B)) {
                 MTR_shooter.moveVelocity(-600);
                 pros::delay(100);
                 MTR_pushup.moveVelocity(-400);
@@ -432,7 +431,10 @@ void opcontrol() {
                 MTR_pushup.moveVelocity(400);
                 MTR_rollerLeft.moveVelocity(200);
                 MTR_rollerRight.moveVelocity(-200);
-            }  else {
+            } else if (controller.getDigital(okapi::ControllerDigital::B)) {
+                MTR_shooter.moveVelocity(-100);
+                MTR_pushup.moveVelocity(-200);
+            } else {
                 MTR_shooter.moveVelocity(0);
             }
 
@@ -445,7 +447,7 @@ void opcontrol() {
                 if(!controller.getDigital(okapi::ControllerDigital::Y)){
                     MTR_rollerLeft.moveVelocity(0);
                     MTR_rollerRight.moveVelocity(0) ;
-                    if(!controller.getDigital(okapi::ControllerDigital::L1)){
+                    if(!controller.getDigital(okapi::ControllerDigital::B) && !controller.getDigital(okapi::ControllerDigital::L1)){
                         MTR_pushup.moveVelocity(0);
                     }
                 }
