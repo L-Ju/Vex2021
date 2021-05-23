@@ -423,7 +423,7 @@ void opcontrol() {
                 MTR_shooter.moveVelocity(-600);
             } else if (controller.getDigital(okapi::ControllerDigital::L2)) {
                 MTR_shooter.moveVelocity(600);
-            } else if (controller.getDigital(okapi::ControllerDigital::L1)) {
+            } else if (controller.getDigital(okapi::ControllerDigital::L1) && !controller.getDigital(okapi::ControllerDigital::B)) {
                 MTR_shooter.moveVelocity(-600);
                 pros::delay(100);
                 MTR_pushup.moveVelocity(-400);
@@ -432,7 +432,10 @@ void opcontrol() {
                 MTR_pushup.moveVelocity(400);
                 MTR_rollerLeft.moveVelocity(200);
                 MTR_rollerRight.moveVelocity(-200);
-            }  else {
+            } else if (controller.getDigital(okapi::ControllerDigital::B)) {
+                MTR_shooter.moveVelocity(-100);
+                MTR_pushup.moveVelocity(-200);
+            } else {
                 MTR_shooter.moveVelocity(0);
             }
 
@@ -445,7 +448,7 @@ void opcontrol() {
                 if(!controller.getDigital(okapi::ControllerDigital::Y)){
                     MTR_rollerLeft.moveVelocity(0);
                     MTR_rollerRight.moveVelocity(0) ;
-                    if(!controller.getDigital(okapi::ControllerDigital::L1)){
+                    if(!controller.getDigital(okapi::ControllerDigital::B) && !controller.getDigital(okapi::ControllerDigital::L1)){
                         MTR_pushup.moveVelocity(0);
                     }
                 }
